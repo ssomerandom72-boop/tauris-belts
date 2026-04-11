@@ -31,7 +31,7 @@
     .hero-content { position: relative; z-index: 2; max-width: 580px; }
     .hero-label { font-family: 'Cinzel', serif; font-size: 10px; letter-spacing: 0.45em; color: var(--gold); margin-bottom: 22px; display: block; opacity: 0; animation: fadeUp 0.8s 0.3s forwards; }
     .hero-title { font-family: 'Cormorant Garamond', serif; font-size: clamp(52px, 7vw, 96px); font-weight: 300; line-height: 0.95; color: var(--cream); margin-bottom: 30px; opacity: 0; animation: fadeUp 0.8s 0.5s forwards; }
-    .hero-title em { font-style: italic; color: var(--gold); }
+    .hero-title em { font-style: italic; color: va1r(--gold); }
     .hero-sub { font-size: 17px; line-height: 1.85; color: rgba(245,240,232,0.6); margin-bottom: 48px; max-width: 390px; opacity: 0; animation: fadeUp 0.8s 0.7s forwards; }
     .hero-cta { display: inline-flex; align-items: center; gap: 14px; font-family: 'Cinzel', serif; font-size: 10px; letter-spacing: 0.28em; color: var(--cream); text-decoration: none; border-bottom: 1px solid rgba(200,151,42,0.5); padding-bottom: 6px; opacity: 0; animation: fadeUp 0.8s 0.9s forwards; transition: color 0.2s, gap 0.2s; }
     .hero-cta:hover { color: var(--gold); gap: 22px; }
@@ -915,6 +915,35 @@
         if (res.ok) document.getElementById('formSuccess').style.display = 'block'
       })
     }
+    document.addEventListener("DOMContentLoaded", () => {
+  const upload = document.createElement("input");
+  upload.type = "file";
+  upload.accept = "image/*";
+  upload.style.position = "fixed";
+  upload.style.bottom = "20px";
+  upload.style.right = "20px";
+  upload.style.zIndex = "9999";
+
+  upload.onchange = () => {
+    const file = upload.files[0];
+    if (!file) return;
+
+    const reader = new FileReader();
+    reader.onload = (e) => {
+      localStorage.setItem("hero-img", e.target.result);
+      document.querySelector(".hero-bg-img").src = e.target.result;
+    };
+    reader.readAsDataURL(file);
+  };
+
+  document.body.appendChild(upload);
+
+  // load saved image
+  const saved = localStorage.getItem("hero-img");
+  if (saved) {
+    document.querySelector(".hero-bg-img").src = saved;
+  }
+});
   </script>
 </body>
 </html>
