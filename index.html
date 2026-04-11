@@ -490,13 +490,16 @@
         <h1>All Photos</h1>
       </div>
       <div class="photos-upload-zone" id="photos-upload-zone">
-        <p>Drag &amp; drop photos here, or click to select</p>
-        <p style="font-size:13px;color:rgba(245,240,232,0.35);margin-bottom:20px;">You can drop <strong>30–40 at once</strong> — they'll organize automatically</p>
-        <button class="photos-upload-btn" onclick="document.getElementById('photos-file-input').click()">Choose Photos</button>
-        <input type="file" id="photos-file-input" accept="image/*" multiple style="display:none">
+        <p style="color:rgba(245,240,232,0.7);margin-bottom:10px;">Connected to your Cloudinary library</p>
+        <p style="font-size:13px;color:rgba(245,240,232,0.35);margin-bottom:20px;">Upload photos at <strong style="color:var(--gold)">cloudinary.com</strong>, then click sync to pull them in</p>
+        <button class="photos-upload-btn" onclick="syncCloudinary()">⟳ Sync from Cloudinary</button>
+        <div id="sync-status" style="margin-top:14px;font-size:13px;color:rgba(200,151,42,0.7);min-height:18px;"></div>
+        <div id="sync-help" style="display:none;margin-top:16px;font-size:12px;color:rgba(245,240,232,0.4);line-height:1.8;border-top:1px solid rgba(200,151,42,0.15);padding-top:14px;">
+          To enable syncing: in Cloudinary go to <strong style="color:var(--gold)">Settings → Security</strong>, scroll to <strong style="color:var(--gold)">Allowed fetch domains</strong> and make sure it's not blocked. Or paste your photo URLs below manually.
+        </div>
       </div>
       <div class="photos-count" id="photos-count" style="display:none"></div>
-      <div class="photos-empty" id="photos-empty">No photos yet. Login as admin to add photos.</div>
+      <div class="photos-empty" id="photos-empty">No photos yet. Login as admin to sync from Cloudinary.</div>
       <div class="photos-masonry" id="photos-masonry"></div>
     </div>
   </div>
@@ -1106,8 +1109,10 @@
 
     loadSavedImages()
 
-    // PHOTOS PAGE
-    const PHOTOS_KEY = 'tauris-photos-list'
+    // PHOTOS PAGE — Cloudinary
+    const CLOUDINARY_CLOUD = 'dghroermk'
+    const CLOUDINARY_BASE = 'https://res.cloudinary.com/' + CLOUDINARY_CLOUD + '/image/upload/'
+    const PHOTOS_KEY = 'tauris-cloudinary-photos'
 
     function getPhotoList() {
       return JSON.parse(localStorage.getItem(PHOTOS_KEY) || '[]')
@@ -1115,6 +1120,25 @@
 
     function savePhotoList(list) {
       localStorage.setItem(PHOTOS_KEY, JSON.stringify(list))
+    }
+
+    async function syncCloudinary() {
+      const status = document.getElementById('sync-status')
+      status.textContent = 'Syncing...'
+      try {
+        const res = await fetch('https://res.cloudinary.com/' + CLOUDINARY_CLOUD + '/image/list/all.json')
+        if (!res.ok) throw new Error()
+        const data = await res.json()
+        const resources = data.resources || []
+        if (resources.length === 0) { status.textContent = 'No photos found.'; return }
+        const list = resources.map(r => ({ public_id: r.public_id, format: r.format || 'jpg' }))
+        savePhotoList(list)
+        status.textContent = '✓ Synced ' + list.length + ' photo' + (list.length !== 1 ? 's' : '')
+        renderPhotosPage()
+      } catch(e) {
+        status.textContent = 'Could not sync — see instructions below.'
+        document.getElementById('sync-help').style.display = 'block'
+      }
     }
 
     function renderPhotosPage() {
@@ -1132,29 +1156,34 @@
         empty.style.display = 'none'
         countEl.style.display = 'block'
         countEl.textContent = list.length + ' photo' + (list.length !== 1 ? 's' : '')
-        list.forEach(item => addPhotoToGrid(item.key, item.src, false))
+        list.forEach(item => addPhotoToGrid(item))
       }
     }
 
-    function addPhotoToGrid(key, src, prepend) {
+    function cloudinaryUrl(public_id, format, width) {
+      return CLOUDINARY_BASE + 'q_auto,f_auto' + (width ? ',w_' + width : '') + '/' + public_id + '.' + (format || 'jpg')
+    }
+
+    function addPhotoToGrid(item) {
       const grid = document.getElementById('photos-masonry')
       const wrap = document.createElement('div')
       wrap.className = 'photo-wrap'
-      wrap.dataset.key = key
+      const thumb = cloudinaryUrl(item.public_id, item.format, 600)
+      const full = cloudinaryUrl(item.public_id, item.format)
       const img = document.createElement('img')
-      img.src = src
-      img.onclick = () => openLightbox(src)
+      img.src = thumb
+      img.loading = 'lazy'
+      img.onclick = () => openLightbox(full)
       wrap.appendChild(img)
       if (window.adminLoggedIn) {
         const del = document.createElement('button')
         del.className = 'photo-del'
         del.innerHTML = '×'
-        del.title = 'Remove photo'
+        del.title = 'Hide photo'
         del.onclick = e => {
           e.stopPropagation()
-          const list = getPhotoList().filter(p => p.key !== key)
+          const list = getPhotoList().filter(p => p.public_id !== item.public_id)
           savePhotoList(list)
-          localStorage.removeItem(key)
           wrap.remove()
           const countEl = document.getElementById('photos-count')
           const empty = document.getElementById('photos-empty')
@@ -1163,61 +1192,10 @@
         }
         wrap.appendChild(del)
       }
-      if (prepend && grid.firstChild) grid.insertBefore(wrap, grid.firstChild)
-      else grid.appendChild(wrap)
+      grid.appendChild(wrap)
     }
 
-    function processPhotoFiles(files) {
-      const fileArr = Array.from(files).filter(f => f.type.startsWith('image/'))
-      if (!fileArr.length) return
-      let done = 0
-      const countEl = document.getElementById('photos-count')
-      const empty = document.getElementById('photos-empty')
-      empty.style.display = 'none'
-      fileArr.forEach(file => {
-        const reader = new FileReader()
-        reader.onload = evt => {
-          const key = 'tauris-photo-' + Date.now() + '-' + Math.random().toString(36).slice(2)
-          try {
-            localStorage.setItem(key, evt.target.result)
-            const list = getPhotoList()
-            list.push({ key, src: evt.target.result })
-            savePhotoList(list)
-            addPhotoToGrid(key, evt.target.result, true)
-            done++
-            countEl.style.display = 'block'
-            countEl.textContent = getPhotoList().length + ' photo' + (getPhotoList().length !== 1 ? 's' : '')
-          } catch(e) {
-            alert('Storage full — browser localStorage has a ~5MB limit. Try uploading fewer or smaller images.')
-          }
-        }
-        reader.readAsDataURL(file)
-      })
-    }
-
-    document.getElementById('photos-file-input').addEventListener('change', e => {
-      processPhotoFiles(e.target.files)
-      e.target.value = ''
-    })
-
-    const uploadZone = document.getElementById('photos-upload-zone')
-    uploadZone.addEventListener('dragover', e => { e.preventDefault(); uploadZone.classList.add('drag-over') })
-    uploadZone.addEventListener('dragleave', () => uploadZone.classList.remove('drag-over'))
-    uploadZone.addEventListener('drop', e => {
-      e.preventDefault()
-      uploadZone.classList.remove('drag-over')
-      processPhotoFiles(e.dataTransfer.files)
-    })
-
-    document.addEventListener('dragover', e => e.preventDefault())
-    document.addEventListener('drop', e => {
-      if (e.target.closest('#photos-upload-zone')) return
-      const page = document.querySelector('.page.active')
-      if (!page || page.id !== 'page-photos') return
-      if (!window.adminLoggedIn) return
-      e.preventDefault()
-      processPhotoFiles(e.dataTransfer.files)
-    })
+    renderPhotosPage()
     window._origAdminLogin = adminLogin
     async function adminLoginFn() {
       const username = document.getElementById('admin-username').value
