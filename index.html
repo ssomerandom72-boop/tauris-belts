@@ -153,7 +153,9 @@
     </a>
     <div class="nav-links">
       <a href="#" onclick="showPage('home')">Home</a>
+      <a href="#" onclick="showPage('shows')">Shows</a>
       <a href="#" onclick="showPage('gallery')">Gallery</a>
+      <a href="#" onclick="showPage('admin')">Admin</a>
       <a href="#order" onclick="document.getElementById('order').scrollIntoView({behavior:'smooth'})" class="shop-btn">Order Now</a>
     </div>
   </nav>
@@ -320,6 +322,50 @@
         <img src="images/knife-sheath-2.png" alt="carved sheath" onclick="openLightbox(this.src)">
         <img src="images/belts-detail.png" alt="belt detail" onclick="openLightbox(this.src)">
         <img src="images/logo-leather.png" alt="Tauris leather logo" onclick="openLightbox(this.src)">
+      </div>
+    </div>
+  </div>
+
+  <div class="page" id="page-shows">
+    <div class="shows-section">
+      <h2 class="shows-heading">Events & Shows</h2>
+      <div class="shows-tabs">
+        <button class="active" onclick="switchShowsTab('upcoming')">Upcoming</button>
+        <button onclick="switchShowsTab('previous')">Previous</button>
+      </div>
+      <div class="shows-grid" id="upcoming-grid"></div>
+      <div class="shows-grid" id="previous-grid" style="display: none;"></div>
+    </div>
+  </div>
+
+  <div class="page" id="page-admin">
+    <div style="background: var(--darker); min-height: 100vh; padding: 70px 60px;">
+      <div id="login-section" class="admin-login">
+        <div class="login-form">
+          <h2>Admin Access</h2>
+          <div class="login-field">
+            <label>Username</label>
+            <input type="text" id="admin-username" placeholder="Enter username">
+          </div>
+          <div class="login-field">
+            <label>Password</label>
+            <input type="password" id="admin-password" placeholder="Enter password">
+          </div>
+          <button class="login-btn" onclick="adminLogin()">Login</button>
+          <div class="login-error" id="login-error-msg"></div>
+        </div>
+      </div>
+      <div id="admin-section" style="display: none;">
+        <div class="admin-header">
+          <h2>Manage Shows</h2>
+          <button class="logout-btn" onclick="adminLogout()">Logout</button>
+        </div>
+        <div id="success-msg" class="success-msg" style="display: none;"></div>
+        <button class="admin-btn new" onclick="createNewShow()">+ New Show</button>
+        <div class="admin-content">
+          <div class="shows-list" id="admin-shows-list"></div>
+          <div class="edit-form" id="edit-form-container"></div>
+        </div>
       </div>
     </div>
   </div>
