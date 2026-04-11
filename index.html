@@ -107,6 +107,25 @@
     .gallery-3col img { width: 100%; display: block; margin-bottom: 6px; filter: sepia(6%) brightness(0.8); transition: filter 0.3s; cursor: none; }
     .gallery-3col img:hover { filter: sepia(0%) brightness(1); }
 
+    .photos-page { background: var(--darker); min-height: 100vh; padding: 110px 60px 80px; }
+    .photos-header { margin-bottom: 48px; }
+    .photos-header h1 { font-family: 'Cormorant Garamond', serif; font-size: clamp(40px,6vw,72px); font-weight: 300; font-style: italic; color: var(--cream); }
+    .photos-upload-zone { border: 2px dashed rgba(200,151,42,0.35); padding: 40px; text-align: center; margin-bottom: 48px; transition: all 0.3s; display: none; }
+    .photos-upload-zone.drag-over { border-color: var(--gold); background: rgba(200,151,42,0.06); }
+    .photos-upload-zone p { color: rgba(245,240,232,0.5); font-size: 16px; margin-bottom: 16px; }
+    .photos-upload-zone strong { color: var(--gold); }
+    .photos-upload-btn { background: var(--gold); color: var(--darker); border: none; padding: 12px 28px; font-family: 'Cinzel', serif; font-size: 10px; letter-spacing: 0.2em; cursor: pointer; transition: background 0.2s; }
+    .photos-upload-btn:hover { background: var(--warm); }
+    .photos-masonry { columns: 4; gap: 6px; }
+    .photo-wrap { position: relative; display: block; break-inside: avoid; margin-bottom: 6px; }
+    .photo-wrap img { width: 100%; display: block; filter: sepia(6%) brightness(0.8); transition: filter 0.3s; cursor: pointer; }
+    .photo-wrap img:hover { filter: sepia(0%) brightness(1); }
+    .photo-del { position: absolute; top: 6px; right: 6px; background: rgba(255,70,70,0.9); color: white; border: none; width: 26px; height: 26px; border-radius: 50%; font-size: 15px; cursor: pointer; opacity: 0; transition: opacity 0.2s; display: flex; align-items: center; justify-content: center; }
+    .photo-wrap:hover .photo-del { opacity: 1; }
+    .photos-empty { text-align: center; padding: 80px 0; color: rgba(245,240,232,0.3); font-style: italic; font-size: 18px; display: none; }
+    .photos-count { font-family: 'Cinzel', serif; font-size: 10px; letter-spacing: 0.2em; color: rgba(200,151,42,0.6); margin-bottom: 24px; }
+    @media (max-width: 900px) { .photos-masonry { columns: 2; } .photos-page { padding: 90px 20px 60px; } }
+
     footer { background: #060401; padding: 38px 60px; display: flex; align-items: center; justify-content: space-between; border-top: 1px solid rgba(200,151,42,0.1); }
     .footer-logo { font-family: 'Cinzel', serif; font-size: 11px; letter-spacing: 0.12em; color: rgba(245,240,232,0.35); }
     .footer-copy { font-family: 'Cinzel', serif; font-size: 10px; letter-spacing: 0.12em; color: rgba(245,240,232,0.22); }
@@ -236,6 +255,7 @@
       <a href="#" onclick="showPage('home')">Home</a>
       <a href="#" onclick="showPage('shows')">Shows</a>
       <a href="#" onclick="showPage('gallery')">Gallery</a>
+      <a href="#" onclick="showPage('photos')">Photos</a>
       <a href="#" onclick="showPage('admin')">Admin</a>
       <a href="#order" onclick="document.getElementById('order').scrollIntoView({behavior:'smooth'})" class="shop-btn">Order Now</a>
     </div>
@@ -463,6 +483,24 @@
     </div>
   </div>
 
+  <div class="page" id="page-photos">
+    <div class="photos-page">
+      <div class="photos-header">
+        <span class="section-label">Photo Collection</span>
+        <h1>All Photos</h1>
+      </div>
+      <div class="photos-upload-zone" id="photos-upload-zone">
+        <p>Drag &amp; drop photos here, or click to select</p>
+        <p style="font-size:13px;color:rgba(245,240,232,0.35);margin-bottom:20px;">You can drop <strong>30–40 at once</strong> — they'll organize automatically</p>
+        <button class="photos-upload-btn" onclick="document.getElementById('photos-file-input').click()">Choose Photos</button>
+        <input type="file" id="photos-file-input" accept="image/*" multiple style="display:none">
+      </div>
+      <div class="photos-count" id="photos-count" style="display:none"></div>
+      <div class="photos-empty" id="photos-empty">No photos yet. Login as admin to add photos.</div>
+      <div class="photos-masonry" id="photos-masonry"></div>
+    </div>
+  </div>
+
   <footer>
     <div class="footer-logo">Tauris Belts &amp; Custom Leathers</div>
     <div class="footer-copy">© 2026 Tauris Belts and Custom Leathers</div>
@@ -512,6 +550,7 @@
       window.scrollTo(0, 0)
       setTimeout(observeReveal, 100)
       if (name === 'shows') renderShowsDisplay()
+      if (name === 'photos') renderPhotosPage()
       if (name === 'admin') {
         if (!window.adminLoggedIn) {
           document.getElementById('login-section').style.display = 'block'
@@ -1067,7 +1106,118 @@
 
     loadSavedImages()
 
-    const origLogin = adminLogin
+    // PHOTOS PAGE
+    const PHOTOS_KEY = 'tauris-photos-list'
+
+    function getPhotoList() {
+      return JSON.parse(localStorage.getItem(PHOTOS_KEY) || '[]')
+    }
+
+    function savePhotoList(list) {
+      localStorage.setItem(PHOTOS_KEY, JSON.stringify(list))
+    }
+
+    function renderPhotosPage() {
+      const grid = document.getElementById('photos-masonry')
+      const empty = document.getElementById('photos-empty')
+      const countEl = document.getElementById('photos-count')
+      const zone = document.getElementById('photos-upload-zone')
+      zone.style.display = window.adminLoggedIn ? 'block' : 'none'
+      grid.innerHTML = ''
+      const list = getPhotoList()
+      if (list.length === 0) {
+        empty.style.display = 'block'
+        countEl.style.display = 'none'
+      } else {
+        empty.style.display = 'none'
+        countEl.style.display = 'block'
+        countEl.textContent = list.length + ' photo' + (list.length !== 1 ? 's' : '')
+        list.forEach(item => addPhotoToGrid(item.key, item.src, false))
+      }
+    }
+
+    function addPhotoToGrid(key, src, prepend) {
+      const grid = document.getElementById('photos-masonry')
+      const wrap = document.createElement('div')
+      wrap.className = 'photo-wrap'
+      wrap.dataset.key = key
+      const img = document.createElement('img')
+      img.src = src
+      img.onclick = () => openLightbox(src)
+      wrap.appendChild(img)
+      if (window.adminLoggedIn) {
+        const del = document.createElement('button')
+        del.className = 'photo-del'
+        del.innerHTML = '×'
+        del.title = 'Remove photo'
+        del.onclick = e => {
+          e.stopPropagation()
+          const list = getPhotoList().filter(p => p.key !== key)
+          savePhotoList(list)
+          localStorage.removeItem(key)
+          wrap.remove()
+          const countEl = document.getElementById('photos-count')
+          const empty = document.getElementById('photos-empty')
+          if (list.length === 0) { empty.style.display = 'block'; countEl.style.display = 'none' }
+          else countEl.textContent = list.length + ' photo' + (list.length !== 1 ? 's' : '')
+        }
+        wrap.appendChild(del)
+      }
+      if (prepend && grid.firstChild) grid.insertBefore(wrap, grid.firstChild)
+      else grid.appendChild(wrap)
+    }
+
+    function processPhotoFiles(files) {
+      const fileArr = Array.from(files).filter(f => f.type.startsWith('image/'))
+      if (!fileArr.length) return
+      let done = 0
+      const countEl = document.getElementById('photos-count')
+      const empty = document.getElementById('photos-empty')
+      empty.style.display = 'none'
+      fileArr.forEach(file => {
+        const reader = new FileReader()
+        reader.onload = evt => {
+          const key = 'tauris-photo-' + Date.now() + '-' + Math.random().toString(36).slice(2)
+          try {
+            localStorage.setItem(key, evt.target.result)
+            const list = getPhotoList()
+            list.push({ key, src: evt.target.result })
+            savePhotoList(list)
+            addPhotoToGrid(key, evt.target.result, true)
+            done++
+            countEl.style.display = 'block'
+            countEl.textContent = getPhotoList().length + ' photo' + (getPhotoList().length !== 1 ? 's' : '')
+          } catch(e) {
+            alert('Storage full — browser localStorage has a ~5MB limit. Try uploading fewer or smaller images.')
+          }
+        }
+        reader.readAsDataURL(file)
+      })
+    }
+
+    document.getElementById('photos-file-input').addEventListener('change', e => {
+      processPhotoFiles(e.target.files)
+      e.target.value = ''
+    })
+
+    const uploadZone = document.getElementById('photos-upload-zone')
+    uploadZone.addEventListener('dragover', e => { e.preventDefault(); uploadZone.classList.add('drag-over') })
+    uploadZone.addEventListener('dragleave', () => uploadZone.classList.remove('drag-over'))
+    uploadZone.addEventListener('drop', e => {
+      e.preventDefault()
+      uploadZone.classList.remove('drag-over')
+      processPhotoFiles(e.dataTransfer.files)
+    })
+
+    document.addEventListener('dragover', e => e.preventDefault())
+    document.addEventListener('drop', e => {
+      if (e.target.closest('#photos-upload-zone')) return
+      const page = document.querySelector('.page.active')
+      if (!page || page.id !== 'page-photos') return
+      if (!window.adminLoggedIn) return
+      e.preventDefault()
+      processPhotoFiles(e.dataTransfer.files)
+    })
     window._origAdminLogin = adminLogin
     async function adminLoginFn() {
       const username = document.getElementById('admin-username').value
@@ -1084,6 +1234,8 @@
         applyContentChanges(pageContent)
         renderAdminList()
         showEditModeButton()
+        const activePage = document.querySelector('.page.active')
+        if (activePage && activePage.id === 'page-photos') renderPhotosPage()
       } else {
         errorDiv.textContent = 'Invalid credentials'
       }
