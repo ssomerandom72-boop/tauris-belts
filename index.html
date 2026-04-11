@@ -1,675 +1,754 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Tauris Belts & Custom Leathers</title>
-  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Cinzel:wght@400;600&family=EB+Garamond:ital,wght@0,400;1,400&display=swap" rel="stylesheet">
-  <style>
-    *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
-    :root { --dark: #1a1008; --darker: #0f0a03; --gold: #c8972a; --warm: #8b6914; --cream: #f5f0e8; }
-    html { scroll-behavior: smooth; }
-    body { font-family: 'EB Garamond', serif; background: var(--dark); color: var(--cream); cursor: auto; }
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Tauris Belts & Custom Leathers</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Cinzel:wght@400;600&family=EB+Garamond:ital,wght@0,400;1,400&display=swap" rel="stylesheet">
+<style>
+*, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+:root { --dark: #1a1008; --darker: #0f0a03; --gold: #c8972a; --warm: #8b6914; --cream: #f5f0e8; }
+html { scroll-behavior: smooth; }
+body { font-family: 'EB Garamond', serif; background: var(--dark); color: var(--cream); cursor: none; }
 
-    nav { position: fixed; top: 0; left: 0; right: 0; z-index: 100; display: flex; align-items: center; justify-content: space-between; padding: 18px 30px; background: linear-gradient(to bottom, rgba(15,10,3,0.97), transparent); transition: background 0.3s; }
-    nav.scrolled { background: rgba(10,7,2,0.98); border-bottom: 1px solid rgba(200,151,42,0.12); }
-    .nav-logo { display: flex; align-items: center; gap: 14px; text-decoration: none; }
-    .nav-logo-img { width: 40px; height: 40px; border-radius: 50%; object-fit: cover; border: 1px solid rgba(200,151,42,0.35); }
-    .nav-logo-text { font-family: 'Cinzel', serif; font-size: 9px; letter-spacing: 0.1em; color: var(--cream); line-height: 1.4; }
-    .nav-links { display: none; align-items: center; gap: 20px; }
-    .nav-links a { font-family: 'Cinzel', serif; font-size: 10px; letter-spacing: 0.22em; color: var(--cream); text-decoration: none; opacity: 0.7; transition: opacity 0.2s; }
-    .nav-links a:hover { opacity: 1; }
-    .shop-btn { background: var(--gold) !important; color: var(--darker) !important; padding: 10px 20px !important; opacity: 1 !important; font-weight: 600 !important; }
-    .menu-btn { background: none; border: none; color: var(--cream); font-size: 24px; cursor: pointer; }
-    .mobile-menu { display: none; position: fixed; top: 70px; left: 0; right: 0; background: rgba(15,10,3,0.98); border-bottom: 1px solid rgba(200,151,42,0.2); flex-direction: column; gap: 10px; padding: 20px; z-index: 99; }
-    .mobile-menu.active { display: flex; }
-    .mobile-menu a { color: var(--cream); text-decoration: none; padding: 10px; font-family: 'Cinzel', serif; font-size: 11px; letter-spacing: 0.15em; }
+.cursor { width: 12px; height: 12px; background: var(--gold); border-radius: 50%; position: fixed; pointer-events: none; z-index: 9999; transform: translate(-50%,-50%); mix-blend-mode: difference; }
+.cursor-ring { width: 36px; height: 36px; border: 1px solid var(--gold); border-radius: 50%; position: fixed; pointer-events: none; z-index: 9998; opacity: 0.5; transform: translate(-50%,-50%); transition: left 0.08s, top 0.08s; }
 
-    .hero { height: 60vh; position: relative; display: flex; align-items: flex-end; padding: 0 20px 40px; overflow: hidden; }
-    .hero-bg-img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; opacity: 0.32; }
-    .hero-overlay { position: absolute; inset: 0; background: linear-gradient(to right, rgba(10,7,2,0.97) 35%, rgba(10,7,2,0.45) 70%, rgba(10,7,2,0.1)), linear-gradient(to top, rgba(10,7,2,0.6), transparent 50%); }
-    .hero-content { position: relative; z-index: 2; max-width: 100%; }
-    .hero-label { font-family: 'Cinzel', serif; font-size: 9px; letter-spacing: 0.3em; color: var(--gold); margin-bottom: 12px; display: block; }
-    .hero-title { font-family: 'Cormorant Garamond', serif; font-size: clamp(28px, 6vw, 48px); font-weight: 300; line-height: 1; color: var(--cream); margin-bottom: 15px; }
-    .hero-title em { font-style: italic; color: var(--gold); }
-    .hero-sub { font-size: 14px; line-height: 1.6; color: rgba(245,240,232,0.6); margin-bottom: 20px; }
-    .hero-cta { display: inline-flex; align-items: center; gap: 10px; font-family: 'Cinzel', serif; font-size: 9px; letter-spacing: 0.15em; color: var(--cream); text-decoration: none; border-bottom: 1px solid rgba(200,151,42,0.5); padding-bottom: 4px; }
-    .hero-cta:hover { color: var(--gold); }
-    .hero-cta::after { content: '→'; }
+nav { position: fixed; top: 0; left: 0; right: 0; z-index: 100; display: flex; align-items: center; justify-content: space-between; padding: 18px 60px; background: linear-gradient(to bottom, rgba(15,10,3,0.97), transparent); transition: background 0.3s; }
+nav.scrolled { background: rgba(10,7,2,0.98); border-bottom: 1px solid rgba(200,151,42,0.12); }
+.nav-logo { display: flex; align-items: center; gap: 14px; text-decoration: none; }
+.nav-logo-img { width: 50px; height: 50px; border-radius: 50%; object-fit: cover; border: 1px solid rgba(200,151,42,0.35); }
+.nav-logo-text { font-family: 'Cinzel', serif; font-size: 11px; letter-spacing: 0.1em; color: var(--cream); line-height: 1.6; }
+.nav-links { display: flex; align-items: center; gap: 44px; }
+.nav-links a { font-family: 'Cinzel', serif; font-size: 10px; letter-spacing: 0.22em; color: var(--cream); text-decoration: none; opacity: 0.7; transition: opacity 0.2s; }
+.nav-links a:hover { opacity: 1; }
+.shop-btn { background: var(--gold) !important; color: var(--darker) !important; padding: 10px 26px !important; opacity: 1 !important; font-weight: 600 !important; transition: background 0.2s !important; }
+.shop-btn:hover { background: var(--warm) !important; }
 
-    section { padding: 50px 20px; }
-    .section-label { font-family: 'Cinzel', serif; font-size: 9px; letter-spacing: 0.3em; color: var(--gold); margin-bottom: 12px; }
+.hero { height: 100vh; position: relative; display: flex; align-items: flex-end; padding: 0 60px 90px; overflow: hidden; }
+.hero-bg-img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; opacity: 0.32; }
+.hero-overlay { position: absolute; inset: 0; background: linear-gradient(to right, rgba(10,7,2,0.97) 35%, rgba(10,7,2,0.45) 70%, rgba(10,7,2,0.1)), linear-gradient(to top, rgba(10,7,2,0.6), transparent 50%); }
+.hero-content { position: relative; z-index: 2; max-width: 580px; }
+.hero-label { font-family: 'Cinzel', serif; font-size: 10px; letter-spacing: 0.45em; color: var(--gold); margin-bottom: 22px; display: block; opacity: 0; animation: fadeUp 0.8s 0.3s forwards; }
+.hero-title { font-family: 'Cormorant Garamond', serif; font-size: clamp(52px, 7vw, 96px); font-weight: 300; line-height: 0.95; color: var(--cream); margin-bottom: 30px; opacity: 0; animation: fadeUp 0.8s 0.5s forwards; }
+.hero-title em { font-style: italic; color: var(--gold); }
+.hero-sub { font-size: 17px; line-height: 1.85; color: rgba(245,240,232,0.6); margin-bottom: 48px; max-width: 390px; opacity: 0; animation: fadeUp 0.8s 0.7s forwards; }
+.hero-cta { display: inline-flex; align-items: center; gap: 14px; font-family: 'Cinzel', serif; font-size: 10px; letter-spacing: 0.28em; color: var(--cream); text-decoration: none; border-bottom: 1px solid rgba(200,151,42,0.5); padding-bottom: 6px; opacity: 0; animation: fadeUp 0.8s 0.9s forwards; transition: color 0.2s, gap 0.2s; }
+.hero-cta:hover { color: var(--gold); gap: 22px; }
+.hero-cta::after { content: '→'; }
+.hero-year { position: absolute; right: 58px; bottom: 90px; font-family: 'Cinzel', serif; font-size: 10px; letter-spacing: 0.3em; color: rgba(200,151,42,0.35); writing-mode: vertical-rl; z-index: 2; }
 
-    .about { background: var(--darker); display: grid; grid-template-columns: 1fr; gap: 30px; }
-    .about-heading { font-family: 'Cormorant Garamond', serif; font-size: clamp(24px, 5vw, 40px); font-weight: 300; line-height: 1.2; color: var(--cream); margin-bottom: 20px; }
-    .about-text { font-size: 15px; line-height: 1.8; color: rgba(245,240,232,0.68); margin-bottom: 15px; }
-    .about-btn { display: inline-block; font-family: 'Cinzel', serif; font-size: 9px; letter-spacing: 0.15em; color: var(--darker); background: var(--gold); padding: 11px 24px; text-decoration: none; margin-top: 15px; transition: background 0.2s; }
-    .about-btn:hover { background: var(--warm); }
-    .about-imgs { display: grid; grid-template-columns: 1fr; gap: 10px; }
-    .about-imgs img { width: 100%; height: auto; object-fit: cover; }
+section { padding: 110px 60px; }
+.section-label { font-family: 'Cinzel', serif; font-size: 10px; letter-spacing: 0.4em; color: var(--gold); margin-bottom: 16px; display: block; }
 
-    .craft { background: #1c1307; text-align: center; }
-    .craft-heading { font-family: 'Cormorant Garamond', serif; font-size: clamp(24px, 5vw, 40px); font-weight: 300; font-style: italic; color: var(--cream); margin-bottom: 30px; }
-    .craft-grid { display: grid; grid-template-columns: 1fr; gap: 10px; }
-    .craft-img { width: 100%; height: auto; object-fit: cover; display: block; }
+.about { background: var(--darker); display: grid; grid-template-columns: 1fr 1fr; gap: 90px; align-items: center; }
+.about-heading { font-family: 'Cormorant Garamond', serif; font-size: clamp(34px, 4vw, 56px); font-weight: 300; line-height: 1.15; color: var(--cream); margin-bottom: 32px; }
+.about-text { font-size: 17px; line-height: 1.9; color: rgba(245,240,232,0.68); margin-bottom: 20px; }
+.about-btn { display: inline-block; font-family: 'Cinzel', serif; font-size: 10px; letter-spacing: 0.28em; color: var(--darker); background: var(--gold); padding: 13px 32px; text-decoration: none; margin-top: 18px; transition: background 0.2s, transform 0.2s; }
+.about-btn:hover { background: var(--warm); transform: translateY(-2px); }
+.about-imgs { display: grid; grid-template-columns: 1fr 1fr; gap: 4px; }
+.about-imgs img { width: 100%; height: 240px; object-fit: cover; filter: sepia(8%) brightness(0.8); transition: filter 0.4s; }
+.about-imgs img:hover { filter: sepia(0%) brightness(0.95); }
+.about-imgs img:first-child { grid-column: 1/-1; height: 300px; }
 
-    .features { background: var(--darker); display: grid; grid-template-columns: 1fr; gap: 30px; text-align: center; }
-    .feature-num { font-family: 'Cormorant Garamond', serif; font-size: 32px; color: var(--gold); font-style: italic; margin-bottom: 10px; }
-    .feature-title { font-family: 'Cinzel', serif; font-size: 10px; letter-spacing: 0.2em; color: var(--cream); margin-bottom: 10px; }
-    .feature-text { font-size: 14px; line-height: 1.7; color: rgba(245,240,232,0.5); }
+.craft { background: #1c1307; text-align: center; }
+.craft-heading { font-family: 'Cormorant Garamond', serif; font-size: clamp(36px, 5vw, 64px); font-weight: 300; font-style: italic; color: var(--cream); margin-bottom: 64px; }
+.craft-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 4px; }
+.craft-img { width: 100%; height: 340px; object-fit: cover; display: block; filter: sepia(8%) brightness(0.78); transition: filter 0.4s; }
+.craft-img:hover { filter: sepia(0%) brightness(1); }
 
-    .process { background: #1c1307; }
-    .process-heading { font-family: 'Cormorant Garamond', serif; font-size: clamp(24px, 5vw, 40px); font-weight: 300; font-style: italic; color: var(--cream); margin-bottom: 30px; text-align: center; }
-    .process-grid { display: grid; grid-template-columns: 1fr; gap: 10px; margin-bottom: 30px; }
-    .process-img { width: 100%; height: auto; object-fit: cover; display: block; }
-    .process-text { max-width: 100%; margin: 0 auto; text-align: center; }
-    .gold-line { width: 40px; height: 1px; background: var(--gold); margin: 0 auto 20px; }
-    .process-text h3 { font-family: 'Cormorant Garamond', serif; font-size: 22px; font-weight: 300; color: var(--cream); margin-bottom: 15px; }
-    .process-text p { font-size: 15px; line-height: 1.8; color: rgba(245,240,232,0.62); }
+.features { background: var(--darker); display: grid; grid-template-columns: repeat(3, 1fr); gap: 55px; text-align: center; }
+.feature-num { font-family: 'Cormorant Garamond', serif; font-size: 44px; color: var(--gold); font-style: italic; margin-bottom: 14px; opacity: 0.45; }
+.feature-title { font-family: 'Cinzel', serif; font-size: 11px; letter-spacing: 0.2em; color: var(--cream); margin-bottom: 14px; }
+.feature-text { font-size: 15px; line-height: 1.85; color: rgba(245,240,232,0.5); }
 
-    .contact { background: var(--darker); display: grid; grid-template-columns: 1fr; gap: 30px; }
-    .contact-heading { font-family: 'Cormorant Garamond', serif; font-size: clamp(24px, 5vw, 40px); font-weight: 300; font-style: italic; color: var(--cream); margin-bottom: 30px; }
-    .contact-item { margin-bottom: 25px; }
-    .contact-item h3 { font-family: 'Cinzel', serif; font-size: 9px; letter-spacing: 0.2em; color: var(--gold); margin-bottom: 8px; }
-    .contact-item p, .contact-item a { font-size: 16px; color: rgba(245,240,232,0.72); text-decoration: none; line-height: 1.6; }
-    .contact-item a:hover { color: var(--gold); }
-    .order-form { display: flex; flex-direction: column; gap: 15px; margin-top: 10px; }
-    .form-group { display: flex; flex-direction: column; gap: 6px; }
-    .form-group label { font-family: 'Cinzel', serif; font-size: 9px; letter-spacing: 0.2em; color: var(--gold); }
-    .form-group input, .form-group select, .form-group textarea { background: rgba(255,255,255,0.04); border: 1px solid rgba(200,151,42,0.2); color: var(--cream); font-family: 'EB Garamond', serif; font-size: 15px; padding: 11px 14px; outline: none; }
-    .form-group select option { background: #1a1008; color: var(--cream); }
-    .form-group textarea { resize: vertical; min-height: 90px; }
-    .form-submit { font-family: 'Cinzel', serif; font-size: 10px; letter-spacing: 0.2em; color: var(--darker); background: var(--gold); border: none; padding: 13px 30px; cursor: pointer; transition: background 0.2s; }
-    .form-submit:hover { background: var(--warm); }
-    .form-success { display: none; font-family: 'Cormorant Garamond', serif; font-size: 18px; font-style: italic; color: var(--gold); padding: 20px 0; }
+.process { background: #1c1307; }
+.process-heading { font-family: 'Cormorant Garamond', serif; font-size: clamp(36px, 5vw, 62px); font-weight: 300; font-style: italic; color: var(--cream); margin-bottom: 64px; text-align: center; }
+.process-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 4px; margin-bottom: 64px; }
+.process-img { width: 100%; height: 300px; object-fit: cover; display: block; filter: sepia(12%) brightness(0.72); transition: filter 0.3s; }
+.process-img:hover { filter: sepia(0%) brightness(0.95); }
+.process-text { max-width: 700px; margin: 0 auto; text-align: center; }
+.gold-line { width: 48px; height: 1px; background: var(--gold); margin: 0 auto 34px; opacity: 0.45; }
+.process-text h3 { font-family: 'Cormorant Garamond', serif; font-size: 30px; font-weight: 300; color: var(--cream); margin-bottom: 22px; }
+.process-text p { font-size: 17px; line-height: 1.9; color: rgba(245,240,232,0.62); }
 
-    .gallery-hero { min-height: 30vh; background: linear-gradient(160deg, #160d02 0%, #2a1a05 100%); display: flex; align-items: flex-end; padding: 40px 20px 30px; }
-    .gallery-hero h1 { font-family: 'Cormorant Garamond', serif; font-size: clamp(32px, 7vw, 60px); font-weight: 300; font-style: italic; color: var(--cream); }
-    .gallery-section { background: var(--dark); padding: 50px 20px; }
-    .gallery-section h2 { font-family: 'Cinzel', serif; font-size: 9px; letter-spacing: 0.25em; color: var(--gold); margin-bottom: 25px; }
-    .gallery-masonry { display: grid; grid-template-columns: 1fr; gap: 10px; margin-bottom: 30px; max-width: 600px; }
-    .gallery-masonry img { width: 100%; height: auto; display: block; }
-    .gallery-caption { font-family: 'Cormorant Garamond', serif; font-size: 15px; font-style: italic; color: rgba(245,240,232,0.45); margin-bottom: 30px; }
-    .gallery-3col { display: grid; grid-template-columns: 1fr; gap: 10px; max-width: 600px; }
-    .gallery-3col img { width: 100%; height: auto; display: block; }
+.contact { background: var(--darker); display: grid; grid-template-columns: 1fr 1fr; gap: 90px; align-items: start; }
+.contact-heading { font-family: 'Cormorant Garamond', serif; font-size: clamp(34px, 4vw, 52px); font-weight: 300; font-style: italic; color: var(--cream); margin-bottom: 46px; }
+.contact-item { margin-bottom: 32px; }
+.contact-item h3 { font-family: 'Cinzel', serif; font-size: 10px; letter-spacing: 0.25em; color: var(--gold); margin-bottom: 10px; }
+.contact-item p, .contact-item a { font-size: 18px; color: rgba(245,240,232,0.72); text-decoration: none; line-height: 1.7; }
+.contact-item a:hover { color: var(--gold); }
+.contact-dev { font-size: 13px; color: rgba(245,240,232,0.3); font-style: italic; margin-top: 44px; line-height: 1.8; border-top: 1px solid rgba(200,151,42,0.08); padding-top: 28px; }
+.order-form { display: flex; flex-direction: column; gap: 18px; margin-top: 10px; }
+.form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 18px; }
+.form-group { display: flex; flex-direction: column; gap: 8px; }
+.form-group label { font-family: 'Cinzel', serif; font-size: 10px; letter-spacing: 0.25em; color: var(--gold); }
+.form-group input, .form-group select, .form-group textarea { background: rgba(255,255,255,0.04); border: 1px solid rgba(200,151,42,0.2); color: var(--cream); font-family: 'EB Garamond', serif; font-size: 16px; padding: 12px 16px; outline: none; transition: border-color 0.2s; width: 100%; }
+.form-group input:focus, .form-group select:focus, .form-group textarea:focus { border-color: rgba(200,151,42,0.6); }
+.form-group select option { background: #1a1008; color: var(--cream); }
+.form-group textarea { resize: vertical; min-height: 100px; }
+.form-submit { font-family: 'Cinzel', serif; font-size: 11px; letter-spacing: 0.25em; color: var(--darker); background: var(--gold); border: none; padding: 16px 40px; cursor: none; transition: background 0.2s, transform 0.2s; align-self: flex-start; margin-top: 8px; }
+.form-submit:hover { background: var(--warm); transform: translateY(-2px); }
+.form-success { display: none; font-family: 'Cormorant Garamond', serif; font-size: 22px; font-style: italic; color: var(--gold); padding: 24px 0; }
+@media (max-width: 900px) { .form-row { grid-template-columns: 1fr; } }
+.contact-imgs { display: flex; flex-direction: column; gap: 4px; margin-top: 76px; }
+.contact-imgs img { width: 100%; object-fit: cover; filter: sepia(8%) brightness(0.78); transition: filter 0.3s; }
+.contact-imgs img:first-child { height: 270px; }
+.contact-imgs img:last-child { height: 190px; }
 
-    .shows-section { background: var(--darker); padding: 50px 20px; }
-    .shows-heading { font-family: 'Cormorant Garamond', serif; font-size: clamp(28px, 5vw, 48px); font-weight: 300; color: var(--cream); margin-bottom: 30px; }
-    .shows-tabs { display: flex; gap: 15px; border-bottom: 1px solid rgba(200,151,42,0.2); margin-bottom: 25px; }
-    .shows-tabs button { background: none; border: none; padding: 12px 0; color: rgba(245,240,232,0.5); font-family: 'Cinzel', serif; font-size: 11px; letter-spacing: 0.15em; cursor: pointer; border-bottom: 2px solid transparent; transition: all 0.3s; }
-    .shows-tabs button:hover { color: var(--cream); }
-    .shows-tabs button.active { color: var(--gold); border-bottom-color: var(--gold); }
-    .shows-grid { display: grid; grid-template-columns: 1fr; gap: 20px; }
-    .show-card { border: 1px solid rgba(200,151,42,0.2); overflow: hidden; transition: all 0.3s; }
-    .show-image { width: 100%; height: 200px; background: #333; overflow: hidden; }
-    .show-image img { width: 100%; height: 100%; object-fit: cover; }
-    .show-info { padding: 15px; background: rgba(15,10,3,0.8); }
-    .show-date { font-family: 'Cinzel', serif; font-size: 9px; letter-spacing: 0.15em; color: var(--gold); margin-bottom: 5px; }
-    .show-location { font-size: 15px; color: var(--cream); margin-bottom: 8px; font-weight: 600; }
-    .show-description { font-size: 13px; color: rgba(245,240,232,0.6); line-height: 1.5; }
-    .empty-shows { text-align: center; padding: 30px; color: rgba(245,240,232,0.4); font-style: italic; }
+.gallery-hero { min-height: 42vh; background: linear-gradient(160deg, #160d02 0%, #2a1a05 100%); display: flex; align-items: flex-end; padding: 100px 60px 55px; }
+.gallery-section { background: var(--dark); padding: 70px 60px; }
+.gallery-section h2 { font-family: 'Cinzel', serif; font-size: 10px; letter-spacing: 0.3em; color: var(--gold); margin-bottom: 36px; }
+.gallery-masonry { columns: 2; gap: 6px; margin-bottom: 50px; }
+.gallery-masonry img { width: 100%; display: block; margin-bottom: 6px; filter: sepia(6%) brightness(0.8); transition: filter 0.3s; cursor: none; }
+.gallery-masonry img:hover { filter: sepia(0%) brightness(1); }
+.gallery-caption { font-family: 'Cormorant Garamond', serif; font-size: 16px; font-style: italic; color: rgba(245,240,232,0.45); margin-bottom: 44px; }
+.gallery-3col { columns: 3; gap: 6px; }
+.gallery-3col img { width: 100%; display: block; margin-bottom: 6px; filter: sepia(6%) brightness(0.8); transition: filter 0.3s; cursor: none; }
+.gallery-3col img:hover { filter: sepia(0%) brightness(1); }
 
-    .admin-login { padding: 50px 20px; background: var(--darker); max-width: 100%; }
-    .login-form { background: rgba(26,16,8,0.8); padding: 20px; border: 1px solid rgba(200,151,42,0.2); }
-    .login-form h2 { font-family: 'Cormorant Garamond', serif; font-size: 26px; color: var(--cream); margin-bottom: 20px; }
-    .login-field { margin-bottom: 15px; }
-    .login-field label { display: block; font-family: 'Cinzel', serif; font-size: 9px; letter-spacing: 0.15em; color: var(--gold); margin-bottom: 6px; }
-    .login-field input { width: 100%; padding: 11px 14px; background: rgba(255,255,255,0.04); border: 1px solid rgba(200,151,42,0.2); color: var(--cream); font-family: 'EB Garamond', serif; font-size: 15px; outline: none; }
-    .login-btn { width: 100%; padding: 12px; background: var(--gold); color: var(--darker); border: none; font-family: 'Cinzel', serif; font-size: 10px; letter-spacing: 0.15em; cursor: pointer; transition: background 0.2s; font-weight: 600; }
-    .login-btn:hover { background: var(--warm); }
-    .login-error { color: #ff6b6b; font-size: 13px; margin-top: 10px; text-align: center; }
+footer { background: #060401; padding: 38px 60px; display: flex; align-items: center; justify-content: space-between; border-top: 1px solid rgba(200,151,42,0.1); }
+.footer-logo { font-family: 'Cinzel', serif; font-size: 11px; letter-spacing: 0.12em; color: rgba(245,240,232,0.35); }
+.footer-copy { font-family: 'Cinzel', serif; font-size: 10px; letter-spacing: 0.12em; color: rgba(245,240,232,0.22); }
+.footer-social { display: flex; gap: 22px; }
+.footer-social a { font-family: 'Cinzel', serif; font-size: 10px; letter-spacing: 0.12em; color: rgba(245,240,232,0.3); text-decoration: none; transition: color 0.2s; }
+.footer-social a:hover { color: var(--gold); }
 
-    .admin-panel { background: var(--darker); padding: 50px 20px; }
-    .admin-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 25px; flex-wrap: wrap; gap: 15px; }
-    .admin-header h2 { font-family: 'Cormorant Garamond', serif; font-size: 32px; color: var(--cream); }
-    .logout-btn { padding: 9px 18px; background: #ff6b6b; color: white; border: none; font-family: 'Cinzel', serif; font-size: 9px; letter-spacing: 0.1em; cursor: pointer; transition: background 0.2s; }
-    .admin-btn.new { background: var(--gold); color: var(--darker); margin-bottom: 15px; padding: 11px 22px; border: none; font-family: 'Cinzel', serif; font-size: 10px; cursor: pointer; }
-    .success-msg { background: rgba(76,175,80,0.2); color: #81c784; border-left: 3px solid #81c784; padding: 12px; margin-bottom: 15px; font-size: 14px; }
-    .admin-tab { outline: none; padding: 10px 15px; border: none; background: none; color: rgba(245,240,232,0.6); font-family: 'Cinzel', serif; cursor: pointer; font-size: 10px; letter-spacing: 0.15em; }
-    .admin-tab.active { color: var(--gold); }
+.page { display: none; }
+.page.active { display: block; }
+.reveal { opacity: 0; transform: translateY(32px); transition: opacity 0.8s ease, transform 0.8s ease; }
+.reveal.visible { opacity: 1; transform: translateY(0); }
 
-    .shows-list { border: 1px solid rgba(200,151,42,0.2); background: rgba(26,16,8,0.8); max-height: 400px; overflow-y: auto; margin-bottom: 20px; }
-    .show-item { padding: 12px; border-bottom: 1px solid rgba(200,151,42,0.1); cursor: pointer; color: rgba(245,240,232,0.6); transition: all 0.2s; }
-    .show-item:hover { background: rgba(200,151,42,0.1); }
-    .show-item.active { background: rgba(200,151,42,0.25); color: var(--gold); }
-    .show-item-title { font-weight: 600; margin-bottom: 3px; font-size: 14px; }
-    .show-item-date { font-size: 11px; opacity: 0.7; }
+.lightbox { display: none; position: fixed; inset: 0; background: rgba(5,3,1,0.96); z-index: 1000; align-items: center; justify-content: center; }
+.lightbox.open { display: flex; }
+.lightbox img { max-width: 88vw; max-height: 88vh; object-fit: contain; }
+.lightbox-close { position: absolute; top: 26px; right: 38px; font-family: 'Cinzel', serif; font-size: 12px; letter-spacing: 0.2em; color: rgba(245,240,232,0.45); cursor: none; transition: color 0.2s; }
+.lightbox-close:hover { color: var(--gold); }
 
-    .edit-form { border: 1px solid rgba(200,151,42,0.2); background: rgba(26,16,8,0.8); padding: 15px; }
-    .edit-form h3 { font-family: 'Cormorant Garamond', serif; font-size: 22px; color: var(--cream); margin-bottom: 15px; }
-    .edit-field { margin-bottom: 15px; }
-    .edit-field label { display: block; font-family: 'Cinzel', serif; font-size: 9px; letter-spacing: 0.1em; color: var(--gold); margin-bottom: 5px; }
-    .edit-field input, .edit-field textarea { width: 100%; padding: 10px 12px; background: rgba(255,255,255,0.04); border: 1px solid rgba(200,151,42,0.2); color: var(--cream); font-family: 'EB Garamond', serif; font-size: 14px; }
-    .edit-field textarea { resize: vertical; min-height: 80px; }
-    .upload-area { border: 2px dashed rgba(200,151,42,0.3); padding: 15px; text-align: center; cursor: pointer; transition: all 0.3s; margin-top: 8px; }
-    .upload-area:hover { border-color: var(--gold); background: rgba(200,151,42,0.05); }
-    .image-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(80px, 1fr)); gap: 10px; margin-top: 12px; }
-    .image-thumb { position: relative; border: 1px solid rgba(200,151,42,0.2); overflow: hidden; aspect-ratio: 1; }
-    .image-thumb img { width: 100%; height: 100%; object-fit: cover; }
-    .image-thumb .del-btn { position: absolute; top: 2px; right: 2px; background: #ff6b6b; color: white; border: none; width: 20px; height: 20px; cursor: pointer; opacity: 0; font-size: 14px; padding: 0; }
-    .image-thumb:hover .del-btn { opacity: 1; }
-    .button-group { display: flex; gap: 10px; margin-top: 15px; flex-wrap: wrap; }
-    .admin-btn.save { background: var(--gold); color: var(--darker); flex: 1; min-width: 120px; padding: 10px; border: none; font-family: 'Cinzel', serif; font-size: 9px; cursor: pointer; }
-    .admin-btn.delete { background: #ff6b6b; color: white; padding: 10px 15px; border: none; font-family: 'Cinzel', serif; font-size: 9px; cursor: pointer; }
+@keyframes fadeUp { from { opacity: 0; transform: translateY(26px); } to { opacity: 1; transform: translateY(0); } }
 
-    .content-editor { display: grid; gap: 20px; }
-    .content-group { border: 1px solid rgba(200,151,42,0.2); background: rgba(26,16,8,0.8); padding: 15px; }
-    .content-group h3 { font-family: 'Cormorant Garamond', serif; font-size: 20px; color: var(--cream); margin-bottom: 15px; }
-    .content-field { margin-bottom: 15px; }
-    .content-field label { display: block; font-family: 'Cinzel', serif; font-size: 9px; letter-spacing: 0.1em; color: var(--gold); margin-bottom: 5px; }
-    .content-field input, .content-field textarea { width: 100%; padding: 10px 12px; background: rgba(255,255,255,0.04); border: 1px solid rgba(200,151,42,0.2); color: var(--cream); font-family: 'EB Garamond', serif; font-size: 14px; }
+/* SHOWS & ADMIN STYLES */
+.shows-section { background: var(--darker); padding: 70px 60px; }
+.shows-heading { font-family: 'Cormorant Garamond', serif; font-size: clamp(34px, 4vw, 56px); font-weight: 300; line-height: 1.15; color: var(--cream); margin-bottom: 50px; }
+.shows-tabs { display: flex; gap: 2rem; border-bottom: 1px solid rgba(200,151,42,0.2); margin-bottom: 3rem; }
+.shows-tabs button { background: none; border: none; padding: 1rem 0; color: rgba(245,240,232,0.5); font-family: 'Cinzel', serif; font-size: 12px; letter-spacing: 0.2em; cursor: pointer; border-bottom: 2px solid transparent; transition: all 0.3s; }
+.shows-tabs button:hover { color: var(--cream); }
+.shows-tabs button.active { color: var(--gold); border-bottom-color: var(--gold); }
+.shows-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(320px, 1fr)); gap: 2rem; }
+.show-card { border: 1px solid rgba(200,151,42,0.2); overflow: hidden; transition: all 0.3s; }
+.show-card:hover { border-color: var(--gold); box-shadow: 0 8px 24px rgba(0,0,0,0.3); }
+.show-image { width: 100%; height: 240px; background: #333; overflow: hidden; }
+.show-image img { width: 100%; height: 100%; object-fit: cover; filter: sepia(8%) brightness(0.8); transition: filter 0.3s; }
+.show-card:hover .show-image img { filter: sepia(0%) brightness(1); }
+.show-info { padding: 1.5rem; background: rgba(15,10,3,0.8); }
+.show-date { font-family: 'Cinzel', serif; font-size: 10px; letter-spacing: 0.2em; color: var(--gold); margin-bottom: 0.5rem; }
+.show-location { font-size: 16px; color: var(--cream); margin-bottom: 0.75rem; font-weight: 600; }
+.show-description { font-size: 14px; color: rgba(245,240,232,0.6); line-height: 1.6; }
+.empty-shows { text-align: center; padding: 3rem; color: rgba(245,240,232,0.4); font-style: italic; }
+.admin-login { padding: 70px 60px; background: var(--darker); max-width: 500px; margin: 0 auto; }
+.login-form { background: rgba(26,16,8,0.8); padding: 2rem; border: 1px solid rgba(200,151,42,0.2); }
+.login-form h2 { font-family: 'Cormorant Garamond', serif; font-size: 32px; color: var(--cream); margin-bottom: 2rem; }
+.login-field { margin-bottom: 1.5rem; }
+.login-field label { display: block; font-family: 'Cinzel', serif; font-size: 10px; letter-spacing: 0.2em; color: var(--gold); margin-bottom: 0.5rem; }
+.login-field input { width: 100%; padding: 12px 16px; background: rgba(255,255,255,0.04); border: 1px solid rgba(200,151,42,0.2); color: var(--cream); font-family: 'EB Garamond', serif; font-size: 16px; outline: none; transition: border-color 0.2s; }
+.login-field input:focus { border-color: rgba(200,151,42,0.6); }
+.login-btn { width: 100%; padding: 14px; background: var(--gold); color: var(--darker); border: none; font-family: 'Cinzel', serif; font-size: 11px; letter-spacing: 0.2em; font-weight: 600; cursor: pointer; transition: background 0.2s; }
+.login-btn:hover { background: var(--warm); }
+.login-error { color: #ff6b6b; font-size: 14px; margin-top: 1rem; text-align: center; }
+.admin-panel { background: var(--darker); padding: 70px 60px; }
+.admin-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 3rem; }
+.admin-header h2 { font-family: 'Cormorant Garamond', serif; font-size: 42px; color: var(--cream); }
+.logout-btn { padding: 10px 26px; background: #ff6b6b; color: white; border: none; font-family: 'Cinzel', serif; font-size: 10px; letter-spacing: 0.15em; cursor: pointer; transition: background 0.2s; }
+.logout-btn:hover { background: #ff4757; }
+.admin-content { display: grid; grid-template-columns: 300px 1fr; gap: 2rem; }
+.shows-list { border: 1px solid rgba(200,151,42,0.2); background: rgba(26,16,8,0.8); max-height: 600px; overflow-y: auto; }
+.show-item { padding: 1rem; border-bottom: 1px solid rgba(200,151,42,0.1); cursor: pointer; transition: all 0.2s; color: rgba(245,240,232,0.6); }
+.show-item:hover { background: rgba(200,151,42,0.1); color: var(--cream); }
+.show-item.active { background: rgba(200,151,42,0.25); color: var(--gold); border-left: 3px solid var(--gold); padding-left: calc(1rem - 3px); }
+.show-item-title { font-weight: 600; margin-bottom: 0.25rem; }
+.show-item-date { font-size: 12px; opacity: 0.7; }
+.edit-form { border: 1px solid rgba(200,151,42,0.2); background: rgba(26,16,8,0.8); padding: 2rem; }
+.edit-form h3 { font-family: 'Cormorant Garamond', serif; font-size: 28px; color: var(--cream); margin-bottom: 1.5rem; }
+.edit-field { margin-bottom: 1.5rem; }
+.edit-field label { display: block; font-family: 'Cinzel', serif; font-size: 10px; letter-spacing: 0.15em; color: var(--gold); margin-bottom: 0.5rem; }
+.edit-field input, .edit-field textarea { width: 100%; padding: 12px 16px; background: rgba(255,255,255,0.04); border: 1px solid rgba(200,151,42,0.2); color: var(--cream); font-family: 'EB Garamond', serif; font-size: 16px; outline: none; }
+.edit-field textarea { resize: vertical; min-height: 100px; }
+.upload-area { border: 2px dashed rgba(200,151,42,0.3); padding: 2rem; text-align: center; cursor: pointer; transition: all 0.3s; }
+.upload-area:hover { border-color: var(--gold); background: rgba(200,151,42,0.05); }
+.image-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(100px, 1fr)); gap: 1rem; margin-top: 1rem; }
+.image-thumb { position: relative; border: 1px solid rgba(200,151,42,0.2); overflow: hidden; aspect-ratio: 1; }
+.image-thumb img { width: 100%; height: 100%; object-fit: cover; }
+.image-thumb .del-btn { position: absolute; top: 2px; right: 2px; background: #ff6b6b; color: white; border: none; width: 24px; height: 24px; cursor: pointer; opacity: 0; transition: opacity 0.2s; font-size: 16px; padding: 0; }
+.image-thumb:hover .del-btn { opacity: 1; }
+.button-group { display: flex; gap: 1rem; margin-top: 2rem; }
+.admin-btn { padding: 12px 32px; border: none; font-family: 'Cinzel', serif; font-size: 11px; letter-spacing: 0.15em; cursor: pointer; transition: all 0.2s; }
+.admin-btn.save { background: var(--gold); color: var(--darker); flex: 1; }
+.admin-btn.save:hover { background: var(--warm); }
+.admin-btn.delete { background: #ff6b6b; color: white; }
+.admin-btn.delete:hover { background: #ff4757; }
+.admin-btn.new { background: var(--gold); color: var(--darker); margin-bottom: 1.5rem; padding: 12px 26px; }
+.success-msg { background: rgba(76,175,80,0.2); color: #81c784; border-left: 3px solid #81c784; padding: 1rem; margin-bottom: 1rem; }
+
+    .admin-tab { outline: none; }
+    .admin-tab.active { color: var(--gold) !important; border-bottom-color: var(--gold) !important; }
+    .admin-tab:hover { color: var(--cream) !important; }
+
+    .content-editor { display: grid; gap: 2rem; }
+    .content-group { border: 1px solid rgba(200,151,42,0.2); background: rgba(26,16,8,0.8); padding: 1.5rem; }
+    .content-group h3 { font-family: 'Cormorant Garamond', serif; font-size: 24px; color: var(--cream); margin-bottom: 1.5rem; }
+    .content-field { margin-bottom: 1.5rem; }
+    .content-field label { display: block; font-family: 'Cinzel', serif; font-size: 10px; letter-spacing: 0.15em; color: var(--gold); margin-bottom: 0.5rem; }
+    .content-field input, .content-field textarea { width: 100%; padding: 12px 16px; background: rgba(255,255,255,0.04); border: 1px solid rgba(200,151,42,0.2); color: var(--cream); font-family: 'EB Garamond', serif; font-size: 16px; outline: none; }
     .content-field textarea { resize: vertical; min-height: 80px; }
-    .img-preview { width: 100%; max-width: 250px; height: auto; border: 1px solid rgba(200,151,42,0.2); margin-top: 10px; }
-    .save-all-btn { background: var(--gold); color: var(--darker); padding: 12px; border: none; font-family: 'Cinzel', serif; font-size: 10px; letter-spacing: 0.15em; cursor: pointer; margin-top: 15px; width: 100%; font-weight: 600; }
+    .img-upload { border: 2px dashed rgba(200,151,42,0.3); padding: 1.5rem; text-align: center; cursor: pointer; transition: all 0.3s; margin-top: 0.5rem; }
+    .img-upload:hover { border-color: var(--gold); background: rgba(200,151,42,0.05); }
+    .img-preview { width: 100%; max-width: 300px; height: auto; border: 1px solid rgba(200,151,42,0.2); margin-top: 1rem; }
+    .save-all-btn { background: var(--gold); color: var(--darker); padding: 14px 32px; border: none; font-family: 'Cinzel', serif; font-size: 11px; letter-spacing: 0.15em; cursor: pointer; font-weight: 600; transition: background 0.2s; margin-top: 2rem; width: 100%; }
+    .save-all-btn:hover { background: var(--warm); }
 
-    footer { background: #060401; padding: 25px 20px; display: grid; grid-template-columns: 1fr; gap: 15px; text-align: center; border-top: 1px solid rgba(200,151,42,0.1); }
-    .footer-logo { font-family: 'Cinzel', serif; font-size: 10px; letter-spacing: 0.1em; color: rgba(245,240,232,0.35); }
-    .footer-copy { font-family: 'Cinzel', serif; font-size: 9px; letter-spacing: 0.1em; color: rgba(245,240,232,0.22); }
-    .footer-social { display: flex; gap: 12px; justify-content: center; flex-wrap: wrap; }
-    .footer-social a { font-family: 'Cinzel', serif; font-size: 9px; letter-spacing: 0.1em; color: rgba(245,240,232,0.3); text-decoration: none; transition: color 0.2s; }
-    .footer-social a:hover { color: var(--gold); }
+@keyframes fadeUp { from { opacity: 0; transform: translateY(26px); } to { opacity: 1; transform: translateY(0); } }
 
-    .page { display: none; }
-    .page.active { display: block; }
-    .reveal { opacity: 1; }
-
-    .lightbox { display: none; position: fixed; inset: 0; background: rgba(5,3,1,0.96); z-index: 1000; align-items: center; justify-content: center; padding: 20px; }
-    .lightbox.open { display: flex; }
-    .lightbox img { max-width: 95vw; max-height: 85vh; object-fit: contain; }
-    .lightbox-close { position: absolute; top: 20px; right: 20px; font-family: 'Cinzel', serif; font-size: 28px; color: rgba(245,240,232,0.45); cursor: pointer; transition: color 0.2s; background: none; border: none; }
-    .lightbox-close:hover { color: var(--gold); }
-  </style>
+@media (max-width: 900px) {
+nav { padding: 14px 20px; }
+section { padding: 70px 20px; }
+.about, .contact { grid-template-columns: 1fr; gap: 40px; }
+.craft-grid, .process-grid, .features { grid-template-columns: 1fr; }
+.hero { padding: 0 20px 55px; }
+.hero-year { display: none; }
+footer { flex-direction: column; gap: 18px; text-align: center; }
+.gallery-masonry, .gallery-3col { columns: 1; }
+.about-imgs { grid-template-columns: 1fr; }
+.about-imgs img:first-child { grid-column: 1; }
+}
+</style>
 </head>
 <body>
 
-  <nav id="navbar">
-    <a class="nav-logo" href="#" onclick="showPage('home')">
-      <img class="nav-logo-img" src="images/logo-leather.png" alt="Tauris logo">
-      <div class="nav-logo-text">Tauris<br>Belts</div>
-    </a>
-    <button class="menu-btn" id="menu-toggle" onclick="toggleMobileMenu()">☰</button>
-    <div class="nav-links" id="nav-links">
-      <a href="#" onclick="showPage('home'); closeMobileMenu()">Home</a>
-      <a href="#" onclick="showPage('shows'); closeMobileMenu()">Shows</a>
-      <a href="#" onclick="showPage('gallery'); closeMobileMenu()">Gallery</a>
-      <a href="#" onclick="showPage('admin'); closeMobileMenu()">Admin</a>
-      <a href="#order" class="shop-btn" onclick="closeMobileMenu()">Order</a>
-    </div>
-  </nav>
-  <div class="mobile-menu" id="mobile-menu">
-    <a href="#" onclick="showPage('home'); closeMobileMenu()">Home</a>
-    <a href="#" onclick="showPage('shows'); closeMobileMenu()">Shows</a>
-    <a href="#" onclick="showPage('gallery'); closeMobileMenu()">Gallery</a>
-    <a href="#" onclick="showPage('admin'); closeMobileMenu()">Admin</a>
-    <a href="#order" onclick="closeMobileMenu()">Order Now</a>
-  </div>
+<div class="cursor" id="cursor"></div>
+<div class="cursor-ring" id="cursorRing"></div>
 
-  <div class="page active" id="page-home">
-    <section class="hero">
-      <img class="hero-bg-img" src="images/belts-table.png" alt="belts display">
-      <div class="hero-overlay"></div>
-      <div class="hero-content">
-        <span class="hero-label">Est. 1978</span>
-        <h1 class="hero-title">Tauris Belts<br>&amp; <em>Custom</em><br>Leathers</h1>
-        <p class="hero-sub">Handcrafted leather goods built to last a lifetime.</p>
-        <a href="#" class="hero-cta" onclick="showPage('gallery')">View Our Work</a>
-      </div>
-    </section>
+<nav id="navbar">
+<a class="nav-logo" href="#" onclick="showPage('home')">
+<img class="nav-logo-img" src="images/logo-leather.png" alt="Tauris logo">
+<div class="nav-logo-text">Tauris Belts<br>&amp; Custom Leathers</div>
+</a>
+<div class="nav-links">
+<a href="#" onclick="showPage('home')">Home</a>
+<a href="#" onclick="showPage('shows')">Shows</a>
+<a href="#" onclick="showPage('gallery')">Gallery</a>
+<a href="#" onclick="showPage('admin')">Admin</a>
+<a href="#order" onclick="document.getElementById('order').scrollIntoView({behavior:'smooth'})" class="shop-btn">Order Now</a>
+</div>
+</nav>
 
-    <section class="about">
-      <div>
-        <span class="section-label">Our Story</span>
-        <h2 class="about-heading">An Ethos of Excellence Crafted Since 1978</h2>
-        <p class="about-text">Tauris Belts and Custom Leathers was established in 1978 by Philip P. Taurisano, a former Utica, New York police officer.</p>
-        <p class="about-text">We create high-quality leather products that last a lifetime, carrying the hallmark of over four decades of American craftsmanship.</p>
-        <a href="#" class="about-btn" onclick="showPage('gallery')">View Our Process</a>
-      </div>
-      <div class="about-imgs">
-        <img src="images/show-booth.png" alt="show booth">
-        <img src="images/snakeskin-belt.png" alt="snakeskin belt">
-      </div>
-    </section>
+<div class="page active" id="page-home">
 
-    <section class="craft">
-      <span class="section-label">Our Craftsmanship</span>
-      <h2 class="craft-heading">An Inheritance of Skill</h2>
-      <div class="craft-grid">
-        <img class="craft-img" src="images/show-booth.png" alt="show booth">
-        <img class="craft-img" src="images/snakeskin-belt.png" alt="snakeskin belt">
-        <img class="craft-img" src="images/axe-sheath.png" alt="axe sheath">
-      </div>
-    </section>
+<section class="hero">
+<img class="hero-bg-img" src="images/belts-table.png" alt="belts display">
+<div class="hero-overlay"></div>
+<div class="hero-content">
+<span class="hero-label">Est. 1978 · New Hartford, New York</span>
+<h1 class="hero-title">Tauris Belts<br>&amp; <em>Custom</em><br>Leathers</h1>
+<p class="hero-sub">Handcrafted leather goods built to last a lifetime, carrying the hallmark of over four decades of American craftsmanship.</p>
+<a href="#" class="hero-cta" onclick="showPage('gallery')">View Our Work</a>
+</div>
+<div class="hero-year">Since · 1978</div>
+</section>
 
-    <section class="features">
-      <div>
-        <div class="feature-num">1</div>
-        <div class="feature-title">Premium Materials</div>
-        <div class="feature-text">We source only the finest leather and hardware.</div>
-      </div>
-      <div>
-        <div class="feature-num">2</div>
-        <div class="feature-title">Expert Crafted</div>
-        <div class="feature-text">Each piece is handmade with precision and care.</div>
-      </div>
-      <div>
-        <div class="feature-num">3</div>
-        <div class="feature-title">Built to Last</div>
-        <div class="feature-text">Designed to be passed down for generations.</div>
-      </div>
-    </section>
+<section class="about">
+<div class="reveal">
+<span class="section-label">Chapter I — Our Story</span>
+<h2 class="about-heading">An Ethos of Excellence Crafted Since 1978</h2>
+<p class="about-text">Tauris Belts and Custom Leathers was established in 1978 by Philip P. Taurisano, a former Utica, New York police officer. Philip worked alongside his brother, Michael P. Taurisano, who operated the Tauris Holsters brand since the mid-1960s.</p>
+<p class="about-text">While collaborating with Michael — who also served as the Deputy Chief of the Utica Police Department — Philip developed a firm conviction: every officer and legal weapon carrier needed a high-quality leather belt to properly contain any holster or apparatus carrying their weapon.</p>
+<a href="#" class="about-btn" onclick="showPage('gallery')">View Our Process</a>
+</div>
+<div class="about-imgs reveal">
+<img src="images/show-booth.png" alt="show booth">
+<img src="images/snakeskin-belt.png" alt="snakeskin belt">
+<img src="images/axe-sheath.png" alt="axe sheath">
+</div>
+</section>
 
-    <section class="process">
-      <span class="section-label">Our Process</span>
-      <h2 class="process-heading">Craftsmanship in Motion</h2>
-      <div class="process-grid">
-        <img class="process-img" src="images/knife-sheath.png" alt="process">
-        <img class="process-img" src="images/sewing-machine-1.png" alt="process">
-        <img class="process-img" src="images/sewing-machine-2.png" alt="process">
-      </div>
-      <div class="process-text">
-        <div class="gold-line"></div>
-        <h3>Every Piece Matters</h3>
-        <p>We take pride in every stitch, every cut, and every finished product.</p>
-      </div>
-    </section>
+<section class="craft">
+<span class="section-label reveal">Chapter II — Our Craftsmanship</span>
+<h2 class="craft-heading reveal">An Inheritance of Skill Since 1978</h2>
+<div class="craft-grid reveal">
+<img class="craft-img" src="images/show-booth.png" alt="show booth">
+<img class="craft-img" src="images/snakeskin-belt.png" alt="snakeskin belt">
+<img class="craft-img" src="images/axe-sheath.png" alt="axe sheath">
+</div>
+</section>
 
-    <section class="contact" id="order">
-      <div>
-        <span class="section-label">Get In Touch</span>
-        <h2 class="contact-heading">Order Your Custom Piece</h2>
-        <form id="orderForm" action="https://formspree.io/f/mbjwdqgg" method="POST" class="order-form">
-          <div class="form-group">
-            <label for="name">Full Name</label>
-            <input type="text" id="name" name="name" required>
-          </div>
-          <div class="form-group">
-            <label for="email">Email</label>
-            <input type="email" id="email" name="email" required>
-          </div>
-          <div class="form-group">
-            <label for="product">Product Type</label>
-            <select id="product" name="product" required>
-              <option value="">Select...</option>
-              <option>Belt</option>
-              <option>Rifle Sling</option>
-              <option>Guitar Strap</option>
-              <option>Knife / Axe Sheath</option>
-              <option>Wallet</option>
-            </select>
-          </div>
-          <div class="form-group">
-            <label for="measurements">Measurements</label>
-            <input type="text" id="measurements" name="measurements" placeholder="waist 36, width 1.5">
-          </div>
-          <div class="form-group">
-            <label for="details">Custom Details</label>
-            <textarea id="details" name="details" placeholder="Color, material, preferences..."></textarea>
-          </div>
-          <button type="submit" class="form-submit">Send Order</button>
-        </form>
-        <p class="form-success" id="formSuccess">Thank you! We'll be in touch soon. ✦</p>
-      </div>
-      <div>
-        <div class="contact-item">
-          <h3>Phone</h3>
-          <a href="tel:3157946081">315-794-6081</a>
-        </div>
-        <div class="contact-item">
-          <h3>Location</h3>
-          <p>420 Higby Road<br>New Hartford, New York</p>
-        </div>
-        <div class="contact-item">
-          <h3>Follow Us</h3>
-          <a href="https://instagram.com/tauris_leather_llc/" target="_blank" style="display: inline-block; margin-right: 10px;">Instagram</a>
-          <a href="https://facebook.com/TaurisLeather315" target="_blank" style="display: inline-block;">Facebook</a>
-        </div>
-      </div>
-    </section>
-  </div>
+<section class="features">
+<div class="feature-item reveal">
+<div class="feature-num">I.</div>
+<div class="feature-title">Premium Materials</div>
+<p class="feature-text">Every belt is hand-cut from premium full-grain hides and burnished with natural oils for a lifetime of wear.</p>
+</div>
+<div class="feature-item reveal">
+<div class="feature-num">II.</div>
+<div class="feature-title">Expert Hardware</div>
+<p class="feature-text">From equestrian gear to specialized hardware, where durability meets refined aesthetic precision.</p>
+</div>
+<div class="feature-item reveal">
+<div class="feature-num">III.</div>
+<div class="feature-title">Hallmark Quality</div>
+<p class="feature-text">From cardholders to tool rolls, every piece carries our 1978 hallmark of decades of expertise.</p>
+</div>
+</section>
 
-  <div class="page" id="page-shows">
-    <div class="shows-section">
-      <h2 class="shows-heading">Events & Shows</h2>
-      <div class="shows-tabs">
-        <button class="active" onclick="switchShowsTab('upcoming')">Upcoming</button>
-        <button onclick="switchShowsTab('previous')">Previous</button>
-      </div>
-      <div class="shows-grid" id="upcoming-grid"></div>
-      <div class="shows-grid" id="previous-grid" style="display: none;"></div>
-    </div>
-  </div>
+<section class="process">
+<span class="section-label" style="text-align:center;display:block">The Process</span>
+<h2 class="process-heading reveal">The Art of Meticulous Handling</h2>
+<div class="process-grid reveal">
+<img class="process-img" src="images/knife-sheath.png" alt="knife sheath">
+<img class="process-img" src="images/sewing-machine-1.png" alt="sewing leather">
+<img class="process-img" src="images/sewing-machine-2.png" alt="sewing detail">
+</div>
+<div class="process-text reveal">
+<div class="gold-line"></div>
+<h3>A Heritage Since 1978</h3>
+<p>Our process is anchored in the belief that true luxury requires time. Every hide is inspected for depth and durability, then hand-cut and stitched using techniques that have remained unchanged since our founding in 1978. We don't just manufacture leather goods; we build companions that carry the legacy of over four decades of expertise.</p>
+</div>
+</section>
 
-  <div class="page" id="page-gallery">
-    <div class="gallery-hero">
-      <div>
-        <span class="section-label">Collection</span>
-        <h1>Previous Shows</h1>
-      </div>
-    </div>
-    <div class="gallery-section">
-      <h2>Work Showcase</h2>
-      <div class="gallery-masonry">
-        <img src="images/show-booth.png" alt="show booth" onclick="openLightbox(this.src)">
-        <img src="images/barn-show.png" alt="barn show" onclick="openLightbox(this.src)">
-        <img src="images/rifle-guitar-straps.png" alt="rifle straps" onclick="openLightbox(this.src)">
-        <img src="images/belts-table.png" alt="belts" onclick="openLightbox(this.src)">
-      </div>
-      <p class="gallery-caption">3 Generations at one table</p>
-      <div class="gallery-3col">
-        <img src="images/three-generations.png" alt="three generations" onclick="openLightbox(this.src)">
-        <img src="images/snakeskin-belt.png" alt="snakeskin belt" onclick="openLightbox(this.src)">
-        <img src="images/axe-sheath.png" alt="axe sheath" onclick="openLightbox(this.src)">
-        <img src="images/knife-sheath.png" alt="knife sheath" onclick="openLightbox(this.src)">
-        <img src="images/sewing-machine-1.png" alt="sewing" onclick="openLightbox(this.src)">
-        <img src="images/sewing-machine-2.png" alt="sewing" onclick="openLightbox(this.src)">
-        <img src="images/knife-sheath-2.png" alt="sheath" onclick="openLightbox(this.src)">
-        <img src="images/belts-detail.png" alt="belt detail" onclick="openLightbox(this.src)">
-        <img src="images/logo-leather.png" alt="logo" onclick="openLightbox(this.src)">
-      </div>
-    </div>
-  </div>
+<section class="contact" id="order">
+<div class="reveal">
+<span class="section-label">Nº3. Place an Order</span>
+<h2 class="contact-heading">Request a Custom Piece</h2>
+<p style="font-size:16px;line-height:1.85;color:rgba(245,240,232,0.6);margin-bottom:36px;">All items are handmade to order. Fill out the form and Philip will be in touch to confirm details and pricing.</p>
+<form class="order-form" id="orderForm" action="https://formspree.io/f/xyknzovk" method="POST">
+<div class="form-row">
+<div class="form-group">
+<label for="name">Full Name</label>
+<input type="text" id="name" name="name" required placeholder="John Smith">
+</div>
+<div class="form-group">
+<label for="email">Email Address</label>
+<input type="email" id="email" name="email" required placeholder="you@email.com">
+</div>
+</div>
+<div class="form-row">
+<div class="form-group">
+<label for="phone">Phone Number</label>
+<input type="tel" id="phone" name="phone" placeholder="315-555-0000">
+</div>
+<div class="form-group">
+<label for="product">Product Type</label>
+<select id="product" name="product" required>
+<option value="" disabled selected>Select a product...</option>
+<option>Belt</option>
+<option>Rifle Sling</option>
+<option>Guitar Strap</option>
+<option>Knife / Axe Sheath</option>
+<option>Wallet</option>
+<option>Police &amp; Security Equipment</option>
+</select>
+</div>
+</div>
+<div class="form-group">
+<label for="measurements">Measurements</label>
+<input type="text" id="measurements" name="measurements" placeholder="e.g. waist 36 inches, belt width 1.5 inches">
+</div>
+<div class="form-group">
+<label for="details">Custom Details</label>
+<textarea id="details" name="details" placeholder="Color, material, hardware preferences, any special requests..."></textarea>
+</div>
+<button type="submit" class="form-submit">Send Order Request</button>
+</form>
+<p class="form-success" id="formSuccess">Thank you! Philip will be in touch shortly. ✦</p>
+<p class="contact-dev">This website was developed by Nicholas Phillip Taurisano. Suggestions? Email: <a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="71181f171e3105100403180213141d0502101f15120402051e1c1d141005191403025f121e1c">[email&#160;protected]</a></p>
+</div>
+<div class="contact-imgs reveal">
+<img src="images/rifle-guitar-straps.png" alt="rifle slings and guitar straps">
+<img src="images/belts-detail.png" alt="belt detail">
+<div style="margin-top:32px;">
+<div class="contact-item">
+<h3>Phone</h3>
+<a href="tel:3157946081" style="font-size:18px;color:rgba(245,240,232,0.72);text-decoration:none;">315-794-6081</a>
+</div>
+<div class="contact-item" style="margin-top:24px;">
+<h3>Location</h3>
+<p style="font-size:18px;color:rgba(245,240,232,0.72);">420 Higby Road<br>New Hartford, New York</p>
+</div>
+</div>
+</div>
+</section>
+</div>
 
-  <div class="page" id="page-admin">
-    <div style="background: var(--darker); min-height: 100vh; padding: 50px 20px;">
-      <div id="login-section" class="admin-login">
-        <div class="login-form">
-          <h2>Admin Access</h2>
-          <div class="login-field">
-            <label>Username</label>
-            <input type="text" id="admin-username" placeholder="Username">
-          </div>
-          <div class="login-field">
-            <label>Password</label>
-            <input type="password" id="admin-password" placeholder="Password">
-          </div>
-          <button class="login-btn" onclick="adminLogin()">Login</button>
-          <div class="login-error" id="login-error-msg"></div>
-        </div>
-      </div>
-      <div id="admin-section" style="display: none;">
-        <div class="admin-header">
+<div class="page" id="page-gallery">
+<div class="gallery-hero">
+<div>
+<span class="section-label">Collection No. 01</span>
+<h1 style="font-family:'Cormorant Garamond',serif;font-size:clamp(46px,7vw,88px);font-weight:300;font-style:italic;color:var(--cream)">Previous Shows...</h1>
+</div>
+</div>
+<div class="gallery-section">
+<h2>Work Showcase</h2>
+<div class="gallery-masonry">
+<img src="images/show-booth.png" alt="Tauris show booth" onclick="openLightbox(this.src)">
+<img src="images/barn-show.png" alt="barn show" onclick="openLightbox(this.src)">
+<img src="images/rifle-guitar-straps.png" alt="rifle and guitar straps" onclick="openLightbox(this.src)">
+<img src="images/belts-table.png" alt="belts on table" onclick="openLightbox(this.src)">
+</div>
+<p class="gallery-caption">3 Generations at one table — Krish Schillaci, Philip P Taurisano, and Philip A Taurisano</p>
+<div class="gallery-3col">
+<img src="images/three-generations.png" alt="three generations" onclick="openLightbox(this.src)">
+<img src="images/snakeskin-belt.png" alt="snakeskin belt" onclick="openLightbox(this.src)">
+<img src="images/axe-sheath.png" alt="axe sheath" onclick="openLightbox(this.src)">
+<img src="images/knife-sheath.png" alt="knife sheath" onclick="openLightbox(this.src)">
+<img src="images/sewing-machine-1.png" alt="sewing leather" onclick="openLightbox(this.src)">
+<img src="images/sewing-machine-2.png" alt="sewing detail" onclick="openLightbox(this.src)">
+<img src="images/knife-sheath-2.png" alt="carved sheath" onclick="openLightbox(this.src)">
+<img src="images/belts-detail.png" alt="belt detail" onclick="openLightbox(this.src)">
+<img src="images/logo-leather.png" alt="Tauris leather logo" onclick="openLightbox(this.src)">
+</div>
+</div>
+</div>
+
+<div class="page" id="page-shows">
+<div class="shows-section">
+<h2 class="shows-heading">Events & Shows</h2>
+<div class="shows-tabs">
+<button class="active" onclick="switchShowsTab('upcoming')">Upcoming</button>
+<button onclick="switchShowsTab('previous')">Previous</button>
+</div>
+<div class="shows-grid" id="upcoming-grid"></div>
+<div class="shows-grid" id="previous-grid" style="display: none;"></div>
+</div>
+</div>
+
+<div class="page" id="page-admin">
+<div style="background: var(--darker); min-height: 100vh; padding: 70px 60px;">
+<div id="login-section" class="admin-login">
+<div class="login-form">
+<h2>Admin Access</h2>
+<div class="login-field">
+<label>Username</label>
+<input type="text" id="admin-username" placeholder="Enter username">
+</div>
+<div class="login-field">
+<label>Password</label>
+<input type="password" id="admin-password" placeholder="Enter password">
+</div>
+<button class="login-btn" onclick="adminLogin()">Login</button>
+<div class="login-error" id="login-error-msg"></div>
+</div>
+</div>
+<div id="admin-section" style="display: none;">
+<div class="admin-header">
+          <h2>Manage Shows</h2>
           <h2>Admin Panel</h2>
-          <button class="logout-btn" onclick="adminLogout()">Logout</button>
-        </div>
-        <div id="success-msg" class="success-msg" style="display: none;"></div>
+<button class="logout-btn" onclick="adminLogout()">Logout</button>
+</div>
+<div id="success-msg" class="success-msg" style="display: none;"></div>
+        <button class="admin-btn new" onclick="createNewShow()">+ New Show</button>
+        <div class="admin-content">
+          <div class="shows-list" id="admin-shows-list"></div>
+          <div class="edit-form" id="edit-form-container"></div>
         
-        <div style="display: flex; gap: 10px; margin-bottom: 20px; border-bottom: 1px solid rgba(200,151,42,0.2); padding-bottom: 10px; flex-wrap: wrap;">
-          <button id="tab-shows" class="admin-tab active" onclick="switchAdminTab('shows')">Manage Shows</button>
-          <button id="tab-content" class="admin-tab" onclick="switchAdminTab('content')">Edit Content</button>
+        <div style="display: flex; gap: 1rem; margin-bottom: 2rem; border-bottom: 1px solid rgba(200,151,42,0.2); padding-bottom: 1rem;">
+          <button style="padding: 0.75rem 1.5rem; border: none; background: none; color: rgba(245,240,232,0.6); font-family: 'Cinzel', serif; cursor: pointer; border-bottom: 2px solid transparent; transition: all 0.3s;" id="tab-shows" class="admin-tab active" onclick="switchAdminTab('shows')">Manage Shows</button>
+          <button style="padding: 0.75rem 1.5rem; border: none; background: none; color: rgba(245,240,232,0.6); font-family: 'Cinzel', serif; cursor: pointer; border-bottom: 2px solid transparent; transition: all 0.3s;" id="tab-content" class="admin-tab" onclick="switchAdminTab('content')">Edit Content</button>
         </div>
 
         <div id="shows-admin" style="display: block;">
           <button class="admin-btn new" onclick="createNewShow()">+ New Show</button>
-          <div class="shows-list" id="admin-shows-list"></div>
-          <div class="edit-form" id="edit-form-container"></div>
+          <div class="admin-content">
+            <div class="shows-list" id="admin-shows-list"></div>
+            <div class="edit-form" id="edit-form-container"></div>
+          </div>
         </div>
 
         <div id="content-admin" style="display: none;">
           <div class="content-editor" id="content-editor"></div>
-        </div>
-      </div>
-    </div>
-  </div>
+</div>
+</div>
+</div>
+</div>
 
-  <footer>
-    <div class="footer-logo">Tauris Belts &amp; Custom Leathers</div>
-    <div class="footer-copy">© 2026 Tauris Belts and Custom Leathers</div>
-    <div class="footer-social">
-      <a href="https://www.facebook.com/TaurisLeather315" target="_blank">Facebook</a>
-      <a href="https://www.instagram.com/tauris_leather_llc/" target="_blank">Instagram</a>
-      <a href="https://www.youtube.com/@TaurisBeltsAndCustomLeathers" target="_blank">YouTube</a>
-      <a href="https://www.tiktok.com/@taurisbeltsandleather" target="_blank">TikTok</a>
-      <a href="https://x.com/Taurisano1910" target="_blank">X</a>
-    </div>
-  </footer>
+<footer>
+<div class="footer-logo">Tauris Belts &amp; Custom Leathers</div>
+<div class="footer-copy">© 2026 Tauris Belts and Custom Leathers</div>
+<div class="footer-social">
+<a href="https://www.facebook.com/TaurisLeather315" target="_blank">Facebook</a>
+<a href="https://www.instagram.com/tauris_leather_llc/" target="_blank">Instagram</a>
+<a href="https://www.youtube.com/@TaurisBeltsAndCustomLeathers" target="_blank">YouTube</a>
+<a href="https://www.tiktok.com/@taurisbeltsandleather" target="_blank">TikTok</a>
+<a href="https://x.com/Taurisano1910" target="_blank">X</a>
+</div>
+</footer>
 
-  <div class="lightbox" id="lightbox" onclick="closeLightbox()">
-    <button class="lightbox-close" onclick="closeLightbox()">✕</button>
-    <img id="lightbox-img" src="" alt="">
-  </div>
+<div class="lightbox" id="lightbox" onclick="closeLightbox()">
+<span class="lightbox-close">✕ Close</span>
+<img id="lightbox-img" src="" alt="">
+</div>
 
-  <script>
-    window.scrollY = 0
-    window.adminLoggedIn = false
-    let currentEditingShowId = null
-    let shows = []
+<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script>
+<script>
+const cursor = document.getElementById('cursor')
+const ring = document.getElementById('cursorRing')
+let mx = 0, my = 0, rx = 0, ry = 0
 
-    function toggleMobileMenu() {
-      document.getElementById('mobile-menu').classList.toggle('active')
-    }
-    function closeMobileMenu() {
-      document.getElementById('mobile-menu').classList.remove('active')
-    }
+document.addEventListener('mousemove', e => {
+mx = e.clientX
+my = e.clientY
+cursor.style.left = mx + 'px'
+cursor.style.top = my + 'px'
+})
 
-    window.addEventListener('scroll', () => {
-      document.getElementById('navbar').classList.toggle('scrolled', window.scrollY > 50)
-    })
+function animRing() {
+rx += (mx - rx) * 0.1
+ry += (my - ry) * 0.1
+ring.style.left = rx + 'px'
+ring.style.top = ry + 'px'
+requestAnimationFrame(animRing)
+}
+animRing()
 
-    function showPage(name) {
-      document.querySelectorAll('.page').forEach(p => p.classList.remove('active'))
-      document.getElementById('page-' + name).classList.add('active')
-      window.scrollTo(0, 0)
-      if (name === 'shows') renderShowsDisplay()
-      if (name === 'admin') {
-        if (!window.adminLoggedIn) {
-          document.getElementById('login-section').style.display = 'block'
-          document.getElementById('admin-section').style.display = 'none'
-        } else {
-          document.getElementById('login-section').style.display = 'none'
-          document.getElementById('admin-section').style.display = 'block'
-          renderAdminList()
-        }
-      }
-    }
+window.addEventListener('scroll', () => {
+document.getElementById('navbar').classList.toggle('scrolled', window.scrollY > 50)
+})
 
-    function openLightbox(src) {
-      document.getElementById('lightbox-img').src = src
-      document.getElementById('lightbox').classList.add('open')
-    }
-    function closeLightbox() {
-      document.getElementById('lightbox').classList.remove('open')
-    }
-    document.addEventListener('keydown', e => { if (e.key === 'Escape') closeLightbox() })
+function showPage(name) {
+document.querySelectorAll('.page').forEach(p => p.classList.remove('active'))
+document.getElementById('page-' + name).classList.add('active')
+window.scrollTo(0, 0)
+setTimeout(observeReveal, 100)
+if (name === 'shows') renderShowsDisplay()
+if (name === 'admin') {
+if (!window.adminLoggedIn) {
+document.getElementById('login-section').style.display = 'block'
+document.getElementById('admin-section').style.display = 'none'
+} else {
+document.getElementById('login-section').style.display = 'none'
+document.getElementById('admin-section').style.display = 'block'
+renderAdminList()
+}
+}
+}
 
-    // SHOWS & ADMIN
-    const ADMIN_HASH = 'fc254a3dbd45ff626c83e2d70061c6db47265e99a4194b59644fdcef59b1f97a'
+function observeReveal() {
+const obs = new IntersectionObserver(entries => {
+entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible') })
+}, { threshold: 0.08 })
+document.querySelectorAll('.reveal:not(.visible)').forEach(el => obs.observe(el))
+}
+observeReveal()
 
-    function loadShows() {
-      const saved = localStorage.getItem('tauris-shows')
-      shows = saved ? JSON.parse(saved) : []
-    }
+function openLightbox(src) {
+document.getElementById('lightbox-img').src = src
+document.getElementById('lightbox').classList.add('open')
+}
+function closeLightbox() { document.getElementById('lightbox').classList.remove('open') }
+document.addEventListener('keydown', e => { if (e.key === 'Escape') closeLightbox() })
 
-    function saveShows() {
-      localStorage.setItem('tauris-shows', JSON.stringify(shows))
-    }
+// SHOWS & ADMIN
+const ADMIN_HASH = 'fc254a3dbd45ff626c83e2d70061c6db47265e99a4194b59644fdcef59b1f97a'
+window.adminLoggedIn = false
+let currentEditingShowId = null
+let shows = []
 
-    async function hashCredentials(username, password) {
-      const str = username + ':' + password
-      const buffer = await crypto.subtle.digest('SHA-256', new TextEncoder().encode(str))
-      const hashArray = Array.from(new Uint8Array(buffer))
-      return hashArray.map(b => b.toString(16).padStart(2, '0')).join('')
-    }
+function loadShows() {
+const saved = localStorage.getItem('tauris-shows')
+shows = saved ? JSON.parse(saved) : []
+}
 
-    async function adminLogin() {
-      const username = document.getElementById('admin-username').value
-      const password = document.getElementById('admin-password').value
-      const errorDiv = document.getElementById('login-error-msg')
-      if (!username || !password) {
-        errorDiv.textContent = 'Please fill in all fields'
-        return
-      }
-      const hash = await hashCredentials(username, password)
-      if (hash === ADMIN_HASH) {
-        window.adminLoggedIn = true
-        loadShows()
-        document.getElementById('login-section').style.display = 'none'
-        document.getElementById('admin-section').style.display = 'block'
-        renderAdminList()
-      } else {
-        errorDiv.textContent = 'Invalid credentials'
-      }
-    }
+function saveShows() {
+localStorage.setItem('tauris-shows', JSON.stringify(shows))
+}
 
-    function adminLogout() {
-      window.adminLoggedIn = false
-      currentEditingShowId = null
-      document.getElementById('login-section').style.display = 'block'
-      document.getElementById('admin-section').style.display = 'none'
-      document.getElementById('admin-username').value = ''
-      document.getElementById('admin-password').value = ''
-      document.getElementById('login-error-msg').textContent = ''
-    }
+async function hashCredentials(username, password) {
+const str = username + ':' + password
+const buffer = await crypto.subtle.digest('SHA-256', new TextEncoder().encode(str))
+const hashArray = Array.from(new Uint8Array(buffer))
+return hashArray.map(b => b.toString(16).padStart(2, '0')).join('')
+}
 
-    function createNewShow() {
-      const newShow = { id: Date.now(), date: '', location: '', description: '', images: [], isPast: false }
-      shows.unshift(newShow)
-      currentEditingShowId = newShow.id
-      renderAdminList()
-    }
+async function adminLogin() {
+const username = document.getElementById('admin-username').value
+const password = document.getElementById('admin-password').value
+const errorDiv = document.getElementById('login-error-msg')
+if (!username || !password) {
+errorDiv.textContent = 'Please fill in all fields'
+return
+}
+const hash = await hashCredentials(username, password)
+if (hash === ADMIN_HASH) {
+window.adminLoggedIn = true
+loadShows()
+document.getElementById('login-section').style.display = 'none'
+document.getElementById('admin-section').style.display = 'block'
+        const pageContent = loadPageContent()
+        applyContentChanges(pageContent)
+renderAdminList()
+} else {
+errorDiv.textContent = 'Invalid credentials'
+}
+}
 
-    function renderAdminList() {
-      const list = document.getElementById('admin-shows-list')
-      list.innerHTML = ''
-      if (shows.length === 0) {
-        list.innerHTML = '<div style="padding: 12px; color: rgba(245,240,232,0.4); text-align: center; font-size: 14px;">No shows</div>'
-      } else {
-        shows.forEach(show => {
-          const item = document.createElement('div')
-          item.className = 'show-item' + (show.id === currentEditingShowId ? ' active' : '')
-          item.onclick = () => { currentEditingShowId = show.id; renderAdminList() }
-          item.innerHTML = `<div class="show-item-title">${show.location || 'Untitled'}</div><div class="show-item-date">${show.date || 'No date'}</div>`
-          list.appendChild(item)
-        })
-      }
-      const formContainer = document.getElementById('edit-form-container')
-      if (currentEditingShowId) {
-        const show = shows.find(s => s.id === currentEditingShowId)
-        if (show) {
-          formContainer.innerHTML = `<h3>Edit Show</h3>
-            <div class="edit-field"><label>Date</label><input type="text" id="edit-date" placeholder="March 15, 2024" value="${show.date}"></div>
-            <div class="edit-field"><label>Location</label><input type="text" id="edit-location" placeholder="Brooklyn, NY" value="${show.location}"></div>
-            <div class="edit-field"><label>Description</label><textarea id="edit-description" placeholder="Details...">${show.description}</textarea></div>
-            <div class="edit-field"><label>Type</label><div style="display: flex; gap: 15px; margin-top: 8px;"><label style="font-weight: normal;"><input type="radio" name="show-type" value="false" ${!show.isPast ? 'checked' : ''}> Upcoming</label><label style="font-weight: normal;"><input type="radio" name="show-type" value="true" ${show.isPast ? 'checked' : ''}> Previous</label></div></div>
-            <div class="edit-field"><label>Images</label><div class="upload-area" id="upload-area" ondrop="handleDrop(event)" ondragover="event.preventDefault()"><p style="margin: 0; font-size: 13px;">Drag or click to upload</p><input type="file" id="file-input" accept="image/*" multiple style="display: none;"></div><div class="image-grid" id="image-grid"></div></div>
-            <div class="button-group"><button class="admin-btn save" onclick="saveShow()">Save</button><button class="admin-btn delete" onclick="deleteShow()">Delete</button></div>`
-          document.getElementById('upload-area').addEventListener('click', () => document.getElementById('file-input').click())
-          document.getElementById('file-input').addEventListener('change', (e) => handleFileSelect(e))
-          renderImageGrid(show)
-        }
-      } else {
-        formContainer.innerHTML = '<p style="color: rgba(245,240,232,0.4); font-size: 14px;">Select a show to edit</p>'
-      }
-    }
+function adminLogout() {
+window.adminLoggedIn = false
+currentEditingShowId = null
+document.getElementById('login-section').style.display = 'block'
+document.getElementById('admin-section').style.display = 'none'
+document.getElementById('admin-username').value = ''
+document.getElementById('admin-password').value = ''
+document.getElementById('login-error-msg').textContent = ''
+}
 
-    function handleFileSelect(e) {
-      const show = shows.find(s => s.id === currentEditingShowId)
-      if (!show) return
-      Array.from(e.target.files).forEach(file => {
-        const reader = new FileReader()
-        reader.onload = (evt) => { show.images.push(evt.target.result); renderImageGrid(show) }
-        reader.readAsDataURL(file)
-      })
-    }
+function createNewShow() {
+const newShow = { id: Date.now(), date: '', location: '', description: '', images: [], isPast: false }
+shows.unshift(newShow)
+currentEditingShowId = newShow.id
+renderAdminList()
+}
 
-    function handleDrop(e) {
-      e.preventDefault()
-      const show = shows.find(s => s.id === currentEditingShowId)
-      if (!show) return
-      Array.from(e.dataTransfer.files).forEach(file => {
-        const reader = new FileReader()
-        reader.onload = (evt) => { show.images.push(evt.target.result); renderImageGrid(show) }
-        reader.readAsDataURL(file)
-      })
-    }
+function renderAdminList() {
+const list = document.getElementById('admin-shows-list')
+list.innerHTML = ''
+if (shows.length === 0) {
+list.innerHTML = '<div style="padding: 1rem; color: rgba(245,240,232,0.4); text-align: center;">No shows yet</div>'
+} else {
+shows.forEach(show => {
+const item = document.createElement('div')
+item.className = 'show-item' + (show.id === currentEditingShowId ? ' active' : '')
+item.onclick = () => { currentEditingShowId = show.id; renderAdminList() }
+item.innerHTML = `<div class="show-item-title">${show.location || 'Untitled'}</div><div class="show-item-date">${show.date || 'No date'}</div>`
+list.appendChild(item)
+})
+}
+const formContainer = document.getElementById('edit-form-container')
+if (currentEditingShowId) {
+const show = shows.find(s => s.id === currentEditingShowId)
+if (show) {
+formContainer.innerHTML = `<h3>Edit Show</h3>
+           <div class="edit-field"><label>Date</label><input type="text" id="edit-date" placeholder="e.g., March 15, 2024" value="${show.date}"></div>
+           <div class="edit-field"><label>Location</label><input type="text" id="edit-location" placeholder="e.g., Brooklyn, NY" value="${show.location}"></div>
+           <div class="edit-field"><label>Description</label><textarea id="edit-description" placeholder="Details about the show...">${show.description}</textarea></div>
+           <div class="edit-field"><label>Type</label><div style="display: flex; gap: 1.5rem; margin-top: 0.5rem;"><label style="font-family: 'EB Garamond', serif; color: var(--cream); font-weight: normal;"><input type="radio" name="show-type" value="false" ${!show.isPast ? 'checked' : ''}> Upcoming</label><label style="font-family: 'EB Garamond', serif; color: var(--cream); font-weight: normal;"><input type="radio" name="show-type" value="true" ${show.isPast ? 'checked' : ''}> Previous</label></div></div>
+           <div class="edit-field"><label>Images</label><div class="upload-area" id="upload-area" ondrop="handleDrop(event)" ondragover="event.preventDefault()" ondragleave="event.preventDefault()"><p style="margin: 0; color: rgba(245,240,232,0.6);">Drag images here or click to upload</p><input type="file" id="file-input" accept="image/*" multiple style="display: none;"></div><div class="image-grid" id="image-grid"></div></div>
+           <div class="button-group"><button class="admin-btn save" onclick="saveShow()">Save Show</button><button class="admin-btn delete" onclick="deleteShow()">Delete</button></div>`
+document.getElementById('upload-area').addEventListener('click', () => document.getElementById('file-input').click())
+document.getElementById('file-input').addEventListener('change', (e) => handleFileSelect(e))
+renderImageGrid(show)
+}
+} else {
+formContainer.innerHTML = '<p style="color: rgba(245,240,232,0.4);">Select a show to edit</p>'
+}
+}
 
-    function renderImageGrid(show) {
-      const grid = document.getElementById('image-grid')
-      grid.innerHTML = ''
-      show.images.forEach((img, idx) => {
-        const thumb = document.createElement('div')
-        thumb.className = 'image-thumb'
-        thumb.innerHTML = `<img src="${img}" alt="Show"><button type="button" class="del-btn" onclick="deleteImage(${idx})">×</button>`
-        grid.appendChild(thumb)
-      })
-    }
+function handleFileSelect(e) {
+const show = shows.find(s => s.id === currentEditingShowId)
+if (!show) return
+Array.from(e.target.files).forEach(file => {
+const reader = new FileReader()
+reader.onload = (evt) => { show.images.push(evt.target.result); renderImageGrid(show) }
+reader.readAsDataURL(file)
+})
+}
 
-    function deleteImage(idx) {
-      const show = shows.find(s => s.id === currentEditingShowId)
-      if (show) { show.images.splice(idx, 1); renderImageGrid(show) }
-    }
+function handleDrop(e) {
+e.preventDefault()
+const show = shows.find(s => s.id === currentEditingShowId)
+if (!show) return
+Array.from(e.dataTransfer.files).forEach(file => {
+const reader = new FileReader()
+reader.onload = (evt) => { show.images.push(evt.target.result); renderImageGrid(show) }
+reader.readAsDataURL(file)
+})
+}
 
-    function saveShow() {
-      const show = shows.find(s => s.id === currentEditingShowId)
-      if (!show) return
-      show.date = document.getElementById('edit-date').value
-      show.location = document.getElementById('edit-location').value
-      show.description = document.getElementById('edit-description').value
-      show.isPast = document.querySelector('input[name="show-type"]:checked').value === 'true'
-      saveShows()
-      renderAdminList()
-      showSuccess('Saved!')
-    }
+function renderImageGrid(show) {
+const grid = document.getElementById('image-grid')
+grid.innerHTML = ''
+show.images.forEach((img, idx) => {
+const thumb = document.createElement('div')
+thumb.className = 'image-thumb'
+thumb.innerHTML = `<img src="${img}" alt="Show image"><button type="button" class="del-btn" onclick="deleteImage(${idx})">×</button>`
+grid.appendChild(thumb)
+})
+}
 
-    function deleteShow() {
-      if (confirm('Delete this show?')) {
-        shows = shows.filter(s => s.id !== currentEditingShowId)
-        currentEditingShowId = null
-        saveShows()
-        renderAdminList()
-        showSuccess('Deleted!')
-      }
-    }
+function deleteImage(idx) {
+const show = shows.find(s => s.id === currentEditingShowId)
+if (show) { show.images.splice(idx, 1); renderImageGrid(show) }
+}
 
-    function showSuccess(msg) {
-      const el = document.getElementById('success-msg')
-      el.textContent = msg
-      el.style.display = 'block'
-      setTimeout(() => { el.style.display = 'none' }, 3000)
-    }
+function saveShow() {
+const show = shows.find(s => s.id === currentEditingShowId)
+if (!show) return
+show.date = document.getElementById('edit-date').value
+show.location = document.getElementById('edit-location').value
+show.description = document.getElementById('edit-description').value
+show.isPast = document.querySelector('input[name="show-type"]:checked').value === 'true'
+saveShows()
+renderAdminList()
+showSuccess('Show saved!')
+}
 
-    function renderShowsDisplay() {
-      loadShows()
-      const upcoming = shows.filter(s => !s.isPast)
-      const previous = shows.filter(s => s.isPast).sort((a, b) => new Date(b.date) - new Date(a.date))
-      renderShowsGrid('upcoming', upcoming)
-      renderShowsGrid('previous', previous)
-    }
+function deleteShow() {
+if (confirm('Delete this show?')) {
+shows = shows.filter(s => s.id !== currentEditingShowId)
+currentEditingShowId = null
+saveShows()
+renderAdminList()
+showSuccess('Show deleted!')
+}
+}
 
-    function renderShowsGrid(type, showsList) {
-      const grid = document.getElementById(type + '-grid')
-      if (showsList.length === 0) {
-        grid.innerHTML = '<div style="grid-column: 1/-1;" class="empty-shows">No ' + type + ' shows.</div>'
-      } else {
-        grid.innerHTML = ''
-        showsList.forEach(show => {
-          const card = document.createElement('div')
-          card.className = 'show-card'
-          let content = ''
-          if (show.images.length > 0) content += '<div class="show-image"><img src="' + show.images[0] + '" alt="' + show.location + '"></div>'
-          content += '<div class="show-info"><div class="show-date">' + show.date + '</div><div class="show-location">' + show.location + '</div><div class="show-description">' + show.description + '</div></div>'
-          card.innerHTML = content
-          grid.appendChild(card)
-        })
-      }
-    }
+function showSuccess(msg) {
+const el = document.getElementById('success-msg')
+el.textContent = msg
+el.style.display = 'block'
+setTimeout(() => { el.style.display = 'none' }, 3000)
+}
 
-    function switchShowsTab(tab) {
-      document.querySelectorAll('.shows-tabs button').forEach(b => b.classList.remove('active'))
-      document.getElementById('upcoming-grid').style.display = 'none'
-      document.getElementById('previous-grid').style.display = 'none'
-      if (tab === 'upcoming') {
-        event.target.classList.add('active')
-        document.getElementById('upcoming-grid').style.display = 'grid'
-      } else {
-        document.querySelectorAll('.shows-tabs button')[1].classList.add('active')
-        document.getElementById('previous-grid').style.display = 'grid'
-      }
-    }
+function renderShowsDisplay() {
+loadShows()
+const upcoming = shows.filter(s => !s.isPast)
+const previous = shows.filter(s => s.isPast).sort((a, b) => new Date(b.date) - new Date(a.date))
+renderShowsGrid('upcoming', upcoming)
+renderShowsGrid('previous', previous)
+}
+
+function renderShowsGrid(type, showsList) {
+const grid = document.getElementById(type + '-grid')
+if (showsList.length === 0) {
+grid.innerHTML = '<div style="grid-column: 1/-1;" class="empty-shows">No ' + type + ' shows scheduled.</div>'
+} else {
+grid.innerHTML = ''
+showsList.forEach(show => {
+const card = document.createElement('div')
+card.className = 'show-card'
+let content = ''
+if (show.images.length > 0) content += '<div class="show-image"><img src="' + show.images[0] + '" alt="' + show.location + '"></div>'
+content += '<div class="show-info"><div class="show-date">' + show.date + '</div><div class="show-location">' + show.location + '</div><div class="show-description">' + show.description + '</div></div>'
+card.innerHTML = content
+grid.appendChild(card)
+})
+}
+}
+
+function switchShowsTab(tab) {
+document.querySelectorAll('.shows-tabs button').forEach(b => b.classList.remove('active'))
+document.getElementById('upcoming-grid').style.display = 'none'
+document.getElementById('previous-grid').style.display = 'none'
+if (tab === 'upcoming') {
+event.target.classList.add('active')
+document.getElementById('upcoming-grid').style.display = 'grid'
+} else {
+document.querySelectorAll('.shows-tabs button')[1].classList.add('active')
+document.getElementById('previous-grid').style.display = 'grid'
+}
+}
 
     function switchAdminTab(tab) {
       document.querySelectorAll('.admin-tab').forEach(b => b.classList.remove('active'))
       document.getElementById('shows-admin').style.display = 'none'
       document.getElementById('content-admin').style.display = 'none'
+      
       if (tab === 'shows') {
         document.getElementById('tab-shows').classList.add('active')
         document.getElementById('shows-admin').style.display = 'block'
@@ -684,11 +763,11 @@
       const saved = localStorage.getItem('tauris-content')
       return saved ? JSON.parse(saved) : {
         heroTitle: 'Tauris Belts<br>&amp; <em>Custom</em><br>Leathers',
-        heroSub: 'Handcrafted leather goods built to last a lifetime.',
+        heroSub: 'Handcrafted leather goods built to last a lifetime, carrying the hallmark of over four decades of American craftsmanship.',
         aboutHeading: 'An Ethos of Excellence Crafted Since 1978',
-        aboutText1: 'Tauris Belts and Custom Leathers was established in 1978.',
-        aboutText2: 'We create high-quality leather products that last a lifetime.',
-        craftHeading: 'An Inheritance of Skill',
+        aboutText1: 'Tauris Belts and Custom Leathers was established in 1978 by Philip P. Taurisano, a former Utica, New York police officer. Philip worked alongside his brother, Michael P. Taurisano, who operated the Tauris Holsters brand since the mid-1960s.',
+        aboutText2: 'While collaborating with Michael — who also served as the Deputy Chief of the Utica Police Department — Philip developed a firm conviction: every officer and legal weapon carrier needed a high-quality leather belt to properly contain any holster or apparatus carrying their weapon.',
+        craftHeading: 'An Inheritance of Skill Since 1978',
         processHeading: 'Craftsmanship in Motion',
         processText: 'Every piece is made with precision and care.',
         contactPhone: '315-794-6081',
@@ -703,33 +782,89 @@
     function renderContentEditor() {
       const content = loadPageContent()
       const editor = document.getElementById('content-editor')
+      
       editor.innerHTML = `
         <div class="content-group">
           <h3>Hero Section</h3>
-          <div class="content-field"><label>Title (use &lt;br&gt; for line breaks)</label><textarea id="heroTitle" style="min-height: 80px;">${content.heroTitle}</textarea></div>
-          <div class="content-field"><label>Subtitle</label><textarea id="heroSub" style="min-height: 70px;">${content.heroSub}</textarea></div>
+          <div class="content-field">
+            <label>Hero Title (use &lt;br&gt; for line breaks, &lt;em&gt; for italics)</label>
+            <textarea id="heroTitle" style="min-height: 100px;">${content.heroTitle}</textarea>
+          </div>
+          <div class="content-field">
+            <label>Hero Subtitle</label>
+            <textarea id="heroSub" style="min-height: 100px;">${content.heroSub}</textarea>
+          </div>
+          <div class="content-field">
+            <label>Hero Background Image</label>
+            <div class="img-upload" onclick="document.getElementById('hero-img-input').click()">
+              Click to upload or drag image
+              <input type="file" id="hero-img-input" accept="image/*" style="display: none;" onchange="handleImageUpload('heroImg', event)">
+            </div>
+            <img id="heroImg-preview" src="images/belts-table.png" alt="Hero" class="img-preview">
+          </div>
         </div>
+
         <div class="content-group">
           <h3>About Section</h3>
-          <div class="content-field"><label>Heading</label><textarea id="aboutHeading">${content.aboutHeading}</textarea></div>
-          <div class="content-field"><label>Paragraph 1</label><textarea id="aboutText1">${content.aboutText1}</textarea></div>
-          <div class="content-field"><label>Paragraph 2</label><textarea id="aboutText2">${content.aboutText2}</textarea></div>
+          <div class="content-field">
+            <label>Heading</label>
+            <textarea id="aboutHeading">${content.aboutHeading}</textarea>
+          </div>
+          <div class="content-field">
+            <label>Paragraph 1</label>
+            <textarea id="aboutText1">${content.aboutText1}</textarea>
+          </div>
+          <div class="content-field">
+            <label>Paragraph 2</label>
+            <textarea id="aboutText2">${content.aboutText2}</textarea>
+          </div>
         </div>
+
         <div class="content-group">
           <h3>Craft Section</h3>
-          <div class="content-field"><label>Heading</label><textarea id="craftHeading">${content.craftHeading}</textarea></div>
+          <div class="content-field">
+            <label>Heading</label>
+            <textarea id="craftHeading">${content.craftHeading}</textarea>
+          </div>
         </div>
+
         <div class="content-group">
           <h3>Process Section</h3>
-          <div class="content-field"><label>Heading</label><textarea id="processHeading">${content.processHeading}</textarea></div>
-          <div class="content-field"><label>Description</label><textarea id="processText">${content.processText}</textarea></div>
+          <div class="content-field">
+            <label>Heading</label>
+            <textarea id="processHeading">${content.processHeading}</textarea>
+          </div>
+          <div class="content-field">
+            <label>Description Text</label>
+            <textarea id="processText">${content.processText}</textarea>
+          </div>
         </div>
+
         <div class="content-group">
           <h3>Contact Section</h3>
-          <div class="content-field"><label>Phone</label><input type="text" id="contactPhone" value="${content.contactPhone}"></div>
-          <div class="content-field"><label>Location (use &lt;br&gt; for line breaks)</label><textarea id="contactLocation">${content.contactLocation}</textarea></div>
+          <div class="content-field">
+            <label>Phone</label>
+            <input type="text" id="contactPhone" value="${content.contactPhone}">
+          </div>
+          <div class="content-field">
+            <label>Location (use &lt;br&gt; for line breaks)</label>
+            <textarea id="contactLocation">${content.contactLocation}</textarea>
+          </div>
         </div>
-        <button class="save-all-btn" onclick="saveAllContent()">Save All Changes</button>`
+
+        <button class="save-all-btn" onclick="saveAllContent()">Save All Changes</button>
+      `
+    }
+
+    function handleImageUpload(fieldName, event) {
+      const file = event.target.files[0]
+      if (!file) return
+      const reader = new FileReader()
+      reader.onload = (e) => {
+        localStorage.setItem('tauris-img-' + fieldName, e.target.result)
+        document.getElementById(fieldName + '-preview').src = e.target.result
+      }
+      reader.readAsDataURL(file)
     }
 
     function saveAllContent() {
@@ -753,32 +888,38 @@
     function applyContentChanges(content) {
       const hero = document.querySelector('.hero-title')
       if (hero) hero.innerHTML = content.heroTitle
+      
       const heroSub = document.querySelector('.hero-sub')
       if (heroSub) heroSub.textContent = content.heroSub
+      
       const aboutHead = document.querySelector('.about-heading')
       if (aboutHead) aboutHead.textContent = content.aboutHeading
+      
       const aboutTexts = document.querySelectorAll('.about-text')
       if (aboutTexts[0]) aboutTexts[0].textContent = content.aboutText1
       if (aboutTexts[1]) aboutTexts[1].textContent = content.aboutText2
+      
       const craftHead = document.querySelector('.craft-heading')
       if (craftHead) craftHead.textContent = content.craftHeading
+      
       const processHead = document.querySelector('.process-heading')
       if (processHead) processHead.textContent = content.processHeading
+      
       const processText = document.querySelector('.process-text p')
       if (processText) processText.textContent = content.processText
     }
 
-    loadShows()
+loadShows()
 
-    const form = document.getElementById('orderForm')
-    if (form) {
-      form.addEventListener('submit', async e => {
-        e.preventDefault()
-        const data = new FormData(form)
-        const res = await fetch(form.action, { method: 'POST', body: data })
-        if (res.ok) document.getElementById('formSuccess').style.display = 'block'
-      })
-    }
-  </script>
+const form = document.getElementById('orderForm')
+if (form) {
+form.addEventListener('submit', async e => {
+e.preventDefault()
+const data = new FormData(form)
+const res = await fetch(form.action, { method: 'POST', body: data })
+if (res.ok) document.getElementById('formSuccess').style.display = 'block'
+})
+}
+</script>
 </body>
 </html>
