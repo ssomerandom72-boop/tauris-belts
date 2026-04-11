@@ -189,6 +189,23 @@
     .admin-btn.new { background: var(--gold); color: var(--darker); margin-bottom: 1.5rem; padding: 12px 26px; }
     .success-msg { background: rgba(76,175,80,0.2); color: #81c784; border-left: 3px solid #81c784; padding: 1rem; margin-bottom: 1rem; }
 
+    .admin-tab { outline: none; }
+    .admin-tab.active { color: var(--gold) !important; border-bottom-color: var(--gold) !important; }
+    .admin-tab:hover { color: var(--cream) !important; }
+
+    .content-editor { display: grid; gap: 2rem; }
+    .content-group { border: 1px solid rgba(200,151,42,0.2); background: rgba(26,16,8,0.8); padding: 1.5rem; }
+    .content-group h3 { font-family: 'Cormorant Garamond', serif; font-size: 24px; color: var(--cream); margin-bottom: 1.5rem; }
+    .content-field { margin-bottom: 1.5rem; }
+    .content-field label { display: block; font-family: 'Cinzel', serif; font-size: 10px; letter-spacing: 0.15em; color: var(--gold); margin-bottom: 0.5rem; }
+    .content-field input, .content-field textarea { width: 100%; padding: 12px 16px; background: rgba(255,255,255,0.04); border: 1px solid rgba(200,151,42,0.2); color: var(--cream); font-family: 'EB Garamond', serif; font-size: 16px; outline: none; }
+    .content-field textarea { resize: vertical; min-height: 80px; }
+    .img-upload { border: 2px dashed rgba(200,151,42,0.3); padding: 1.5rem; text-align: center; cursor: pointer; transition: all 0.3s; margin-top: 0.5rem; }
+    .img-upload:hover { border-color: var(--gold); background: rgba(200,151,42,0.05); }
+    .img-preview { width: 100%; max-width: 300px; height: auto; border: 1px solid rgba(200,151,42,0.2); margin-top: 1rem; }
+    .save-all-btn { background: var(--gold); color: var(--darker); padding: 14px 32px; border: none; font-family: 'Cinzel', serif; font-size: 11px; letter-spacing: 0.15em; cursor: pointer; font-weight: 600; transition: background 0.2s; margin-top: 2rem; width: 100%; }
+    .save-all-btn:hover { background: var(--warm); }
+
     @keyframes fadeUp { from { opacity: 0; transform: translateY(26px); } to { opacity: 1; transform: translateY(0); } }
 
     @media (max-width: 900px) {
@@ -421,14 +438,26 @@
       </div>
       <div id="admin-section" style="display: none;">
         <div class="admin-header">
-          <h2>Manage Shows</h2>
+          <h2>Admin Panel</h2>
           <button class="logout-btn" onclick="adminLogout()">Logout</button>
         </div>
         <div id="success-msg" class="success-msg" style="display: none;"></div>
-        <button class="admin-btn new" onclick="createNewShow()">+ New Show</button>
-        <div class="admin-content">
-          <div class="shows-list" id="admin-shows-list"></div>
-          <div class="edit-form" id="edit-form-container"></div>
+        
+        <div style="display: flex; gap: 1rem; margin-bottom: 2rem; border-bottom: 1px solid rgba(200,151,42,0.2); padding-bottom: 1rem;">
+          <button style="padding: 0.75rem 1.5rem; border: none; background: none; color: rgba(245,240,232,0.6); font-family: 'Cinzel', serif; cursor: pointer; border-bottom: 2px solid transparent; transition: all 0.3s;" id="tab-shows" class="admin-tab active" onclick="switchAdminTab('shows')">Manage Shows</button>
+          <button style="padding: 0.75rem 1.5rem; border: none; background: none; color: rgba(245,240,232,0.6); font-family: 'Cinzel', serif; cursor: pointer; border-bottom: 2px solid transparent; transition: all 0.3s;" id="tab-content" class="admin-tab" onclick="switchAdminTab('content')">Edit Content</button>
+        </div>
+
+        <div id="shows-admin" style="display: block;">
+          <button class="admin-btn new" onclick="createNewShow()">+ New Show</button>
+          <div class="admin-content">
+            <div class="shows-list" id="admin-shows-list"></div>
+            <div class="edit-form" id="edit-form-container"></div>
+          </div>
+        </div>
+
+        <div id="content-admin" style="display: none;">
+          <div class="content-editor" id="content-editor"></div>
         </div>
       </div>
     </div>
@@ -546,6 +575,8 @@
         loadShows()
         document.getElementById('login-section').style.display = 'none'
         document.getElementById('admin-section').style.display = 'block'
+        const pageContent = loadPageContent()
+        applyContentChanges(pageContent)
         renderAdminList()
       } else {
         errorDiv.textContent = 'Invalid credentials'
@@ -706,6 +737,171 @@
         document.querySelectorAll('.shows-tabs button')[1].classList.add('active')
         document.getElementById('previous-grid').style.display = 'grid'
       }
+    }
+
+    function switchAdminTab(tab) {
+      document.querySelectorAll('.admin-tab').forEach(b => b.classList.remove('active'))
+      document.getElementById('shows-admin').style.display = 'none'
+      document.getElementById('content-admin').style.display = 'none'
+      
+      if (tab === 'shows') {
+        document.getElementById('tab-shows').classList.add('active')
+        document.getElementById('shows-admin').style.display = 'block'
+      } else {
+        document.getElementById('tab-content').classList.add('active')
+        document.getElementById('content-admin').style.display = 'block'
+        renderContentEditor()
+      }
+    }
+
+    function loadPageContent() {
+      const saved = localStorage.getItem('tauris-content')
+      return saved ? JSON.parse(saved) : {
+        heroTitle: 'Tauris Belts<br>&amp; <em>Custom</em><br>Leathers',
+        heroSub: 'Handcrafted leather goods built to last a lifetime, carrying the hallmark of over four decades of American craftsmanship.',
+        aboutHeading: 'An Ethos of Excellence Crafted Since 1978',
+        aboutText1: 'Tauris Belts and Custom Leathers was established in 1978 by Philip P. Taurisano, a former Utica, New York police officer. Philip worked alongside his brother, Michael P. Taurisano, who operated the Tauris Holsters brand since the mid-1960s.',
+        aboutText2: 'While collaborating with Michael — who also served as the Deputy Chief of the Utica Police Department — Philip developed a firm conviction: every officer and legal weapon carrier needed a high-quality leather belt to properly contain any holster or apparatus carrying their weapon.',
+        craftHeading: 'An Inheritance of Skill Since 1978',
+        processHeading: 'Craftsmanship in Motion',
+        processText: 'Every piece is made with precision and care.',
+        contactPhone: '315-794-6081',
+        contactLocation: '420 Higby Road<br>New Hartford, New York'
+      }
+    }
+
+    function savePageContent(content) {
+      localStorage.setItem('tauris-content', JSON.stringify(content))
+    }
+
+    function renderContentEditor() {
+      const content = loadPageContent()
+      const editor = document.getElementById('content-editor')
+      
+      editor.innerHTML = `
+        <div class="content-group">
+          <h3>Hero Section</h3>
+          <div class="content-field">
+            <label>Hero Title (use &lt;br&gt; for line breaks, &lt;em&gt; for italics)</label>
+            <textarea id="heroTitle" style="min-height: 100px;">${content.heroTitle}</textarea>
+          </div>
+          <div class="content-field">
+            <label>Hero Subtitle</label>
+            <textarea id="heroSub" style="min-height: 100px;">${content.heroSub}</textarea>
+          </div>
+          <div class="content-field">
+            <label>Hero Background Image</label>
+            <div class="img-upload" onclick="document.getElementById('hero-img-input').click()">
+              Click to upload or drag image
+              <input type="file" id="hero-img-input" accept="image/*" style="display: none;" onchange="handleImageUpload('heroImg', event)">
+            </div>
+            <img id="heroImg-preview" src="images/belts-table.png" alt="Hero" class="img-preview">
+          </div>
+        </div>
+
+        <div class="content-group">
+          <h3>About Section</h3>
+          <div class="content-field">
+            <label>Heading</label>
+            <textarea id="aboutHeading">${content.aboutHeading}</textarea>
+          </div>
+          <div class="content-field">
+            <label>Paragraph 1</label>
+            <textarea id="aboutText1">${content.aboutText1}</textarea>
+          </div>
+          <div class="content-field">
+            <label>Paragraph 2</label>
+            <textarea id="aboutText2">${content.aboutText2}</textarea>
+          </div>
+        </div>
+
+        <div class="content-group">
+          <h3>Craft Section</h3>
+          <div class="content-field">
+            <label>Heading</label>
+            <textarea id="craftHeading">${content.craftHeading}</textarea>
+          </div>
+        </div>
+
+        <div class="content-group">
+          <h3>Process Section</h3>
+          <div class="content-field">
+            <label>Heading</label>
+            <textarea id="processHeading">${content.processHeading}</textarea>
+          </div>
+          <div class="content-field">
+            <label>Description Text</label>
+            <textarea id="processText">${content.processText}</textarea>
+          </div>
+        </div>
+
+        <div class="content-group">
+          <h3>Contact Section</h3>
+          <div class="content-field">
+            <label>Phone</label>
+            <input type="text" id="contactPhone" value="${content.contactPhone}">
+          </div>
+          <div class="content-field">
+            <label>Location (use &lt;br&gt; for line breaks)</label>
+            <textarea id="contactLocation">${content.contactLocation}</textarea>
+          </div>
+        </div>
+
+        <button class="save-all-btn" onclick="saveAllContent()">Save All Changes</button>
+      `
+    }
+
+    function handleImageUpload(fieldName, event) {
+      const file = event.target.files[0]
+      if (!file) return
+      const reader = new FileReader()
+      reader.onload = (e) => {
+        localStorage.setItem('tauris-img-' + fieldName, e.target.result)
+        document.getElementById(fieldName + '-preview').src = e.target.result
+      }
+      reader.readAsDataURL(file)
+    }
+
+    function saveAllContent() {
+      const content = {
+        heroTitle: document.getElementById('heroTitle').value,
+        heroSub: document.getElementById('heroSub').value,
+        aboutHeading: document.getElementById('aboutHeading').value,
+        aboutText1: document.getElementById('aboutText1').value,
+        aboutText2: document.getElementById('aboutText2').value,
+        craftHeading: document.getElementById('craftHeading').value,
+        processHeading: document.getElementById('processHeading').value,
+        processText: document.getElementById('processText').value,
+        contactPhone: document.getElementById('contactPhone').value,
+        contactLocation: document.getElementById('contactLocation').value
+      }
+      savePageContent(content)
+      applyContentChanges(content)
+      showSuccess('Content saved!')
+    }
+
+    function applyContentChanges(content) {
+      const hero = document.querySelector('.hero-title')
+      if (hero) hero.innerHTML = content.heroTitle
+      
+      const heroSub = document.querySelector('.hero-sub')
+      if (heroSub) heroSub.textContent = content.heroSub
+      
+      const aboutHead = document.querySelector('.about-heading')
+      if (aboutHead) aboutHead.textContent = content.aboutHeading
+      
+      const aboutTexts = document.querySelectorAll('.about-text')
+      if (aboutTexts[0]) aboutTexts[0].textContent = content.aboutText1
+      if (aboutTexts[1]) aboutTexts[1].textContent = content.aboutText2
+      
+      const craftHead = document.querySelector('.craft-heading')
+      if (craftHead) craftHead.textContent = content.craftHeading
+      
+      const processHead = document.querySelector('.process-heading')
+      if (processHead) processHead.textContent = content.processHeading
+      
+      const processText = document.querySelector('.process-text p')
+      if (processText) processText.textContent = content.processText
     }
 
     loadShows()
