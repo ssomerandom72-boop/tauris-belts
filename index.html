@@ -706,9 +706,8 @@
       editor.innerHTML = `
         <div class="content-group">
           <h3>Hero Section</h3>
-          <div class="content-field"><label>Title</label><textarea id="heroTitle" style="min-height: 90px;">${content.heroTitle}</textarea></div>
-          <div class="content-field"><label>Subtitle</label><textarea id="heroSub" style="min-height: 80px;">${content.heroSub}</textarea></div>
-          <div class="content-field"><label>Hero Background Image</label><div class="upload-area" onclick="document.getElementById('hero-img-input').click()" style="cursor: pointer; border: 2px dashed rgba(200,151,42,0.3); padding: 15px; text-align: center;">Click to upload image<input type="file" id="hero-img-input" accept="image/*" style="display: none;" onchange="handleContentImageUpload('heroImg', event)"></div><img id="heroImg-preview" src="images/belts-table.png" alt="Hero" class="img-preview"></div>
+          <div class="content-field"><label>Title (use &lt;br&gt; for line breaks)</label><textarea id="heroTitle" style="min-height: 80px;">${content.heroTitle}</textarea></div>
+          <div class="content-field"><label>Subtitle</label><textarea id="heroSub" style="min-height: 70px;">${content.heroSub}</textarea></div>
         </div>
         <div class="content-group">
           <h3>About Section</h3>
@@ -728,21 +727,9 @@
         <div class="content-group">
           <h3>Contact Section</h3>
           <div class="content-field"><label>Phone</label><input type="text" id="contactPhone" value="${content.contactPhone}"></div>
-          <div class="content-field"><label>Location</label><textarea id="contactLocation">${content.contactLocation}</textarea></div>
+          <div class="content-field"><label>Location (use &lt;br&gt; for line breaks)</label><textarea id="contactLocation">${content.contactLocation}</textarea></div>
         </div>
-        <button class="save-all-btn" onclick="saveAllContent()">Save All</button>`
-    }
-
-    function handleContentImageUpload(fieldName, event) {
-      const file = event.target.files[0]
-      if (!file) return
-      const reader = new FileReader()
-      reader.onload = (e) => {
-        localStorage.setItem('tauris-img-' + fieldName, e.target.result)
-        const preview = document.getElementById(fieldName + '-preview')
-        if (preview) preview.src = e.target.result
-      }
-      reader.readAsDataURL(file)
+        <button class="save-all-btn" onclick="saveAllContent()">Save All Changes</button>`
     }
 
     function saveAllContent() {
