@@ -275,7 +275,7 @@
           <button type="submit" class="form-submit">Send Order Request</button>
         </form>
         <p class="form-success" id="formSuccess">Thank you! Philip will be in touch shortly. ✦</p>
-        <p class="contact-dev">This website was developed by Nicholas Phillip Taurisano. Suggestions? Email: info@taurisbeltsandcustomleathers.com</p>
+        <p class="contact-dev">This website was developed by Nicholas Phillip Taurisano. Suggestions? Email: <a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="721b1c141d32061307001b0110171e0601131c16110701061d1f1e1713061a1700015c111d1f">[email&#160;protected]</a></p>
       </div>
       <div class="contact-imgs reveal">
         <img src="images/rifle-guitar-straps.png" alt="rifle slings and guitar straps">
@@ -341,7 +341,7 @@
     <img id="lightbox-img" src="" alt="">
   </div>
 
-  <script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
+  <script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
     const cursor = document.getElementById('cursor')
     const ring = document.getElementById('cursorRing')
     let mx = 0, my = 0, rx = 0, ry = 0
@@ -366,6 +366,20 @@
       document.getElementById('page-' + name).classList.add('active')
       window.scrollTo(0, 0)
       setTimeout(observeReveal, 100)
+      
+      if (name === 'shows') {
+        renderShowsDisplay()
+      }
+      if (name === 'admin') {
+        if (!window.adminLoggedIn) {
+          document.getElementById('login-section').style.display = 'block'
+          document.getElementById('admin-section').style.display = 'none'
+        } else {
+          document.getElementById('login-section').style.display = 'none'
+          document.getElementById('admin-section').style.display = 'block'
+          renderAdminList()
+        }
+      }
     }
 
     function observeReveal() {
@@ -383,18 +397,284 @@
     function closeLightbox() { document.getElementById('lightbox').classList.remove('open') }
     document.addEventListener('keydown', e => { if (e.key === 'Escape') closeLightbox() })
 
+    // SHOWS & ADMIN CODE
+    const ADMIN_HASH = 'fc254a3dbd45ff626c83e2d70061c6db47265e99a4194b59644fdcef59b1f97a';
+    window.adminLoggedIn = false;
+    let currentEditingShowId = null;
+    let shows = [];
+
+    function loadShows() {
+      const saved = localStorage.getItem('tauris-shows');
+      shows = saved ? JSON.parse(saved) : [];
+    }
+
+    function saveShows() {
+      localStorage.setItem('tauris-shows', JSON.stringify(shows));
+    }
+
+    async function hashCredentials(username, password) {
+      const str = username + ':' + password;
+      const buffer = await crypto.subtle.digest('SHA-256', new TextEncoder().encode(str));
+      const hashArray = Array.from(new Uint8Array(buffer));
+      return hashArray.map(b => b.toString(16).padStart(2, '0')).join('');
+    }
+
+    async function adminLogin() {
+      const username = document.getElementById('admin-username').value;
+      const password = document.getElementById('admin-password').value;
+      const errorDiv = document.getElementById('login-error-msg');
+
+      if (!username || !password) {
+        errorDiv.textContent = 'Please fill in all fields';
+        return;
+      }
+
+      const hash = await hashCredentials(username, password);
+      
+      if (hash === ADMIN_HASH) {
+        window.adminLoggedIn = true;
+        loadShows();
+        document.getElementById('login-section').style.display = 'none';
+        document.getElementById('admin-section').style.display = 'block';
+        renderAdminList();
+      } else {
+        errorDiv.textContent = 'Invalid credentials';
+      }
+    }
+
+    function adminLogout() {
+      window.adminLoggedIn = false;
+      currentEditingShowId = null;
+      document.getElementById('login-section').style.display = 'block';
+      document.getElementById('admin-section').style.display = 'none';
+      document.getElementById('admin-username').value = '';
+      document.getElementById('admin-password').value = '';
+      document.getElementById('login-error-msg').textContent = '';
+    }
+
+    function createNewShow() {
+      const newShow = {
+        id: Date.now(),
+        date: '',
+        location: '',
+        description: '',
+        images: [],
+        isPast: false
+      };
+      shows.unshift(newShow);
+      currentEditingShowId = newShow.id;
+      renderAdminList();
+    }
+
+    function renderAdminList() {
+      const list = document.getElementById('admin-shows-list');
+      list.innerHTML = '';
+
+      if (shows.length === 0) {
+        list.innerHTML = '<div style="padding: 1rem; color: rgba(245,240,232,0.4); text-align: center;">No shows yet</div>';
+      } else {
+        shows.forEach(show => {
+          const item = document.createElement('div');
+          item.className = 'show-item' + (show.id === currentEditingShowId ? ' active' : '');
+          item.onclick = () => {
+            currentEditingShowId = show.id;
+            renderAdminList();
+          };
+          item.innerHTML = `
+            <div class="show-item-title">${show.location || 'Untitled'}</div>
+            <div class="show-item-date">${show.date || 'No date'}</div>
+          `;
+          list.appendChild(item);
+        });
+      }
+
+      const formContainer = document.getElementById('edit-form-container');
+      if (currentEditingShowId) {
+        const show = shows.find(s => s.id === currentEditingShowId);
+        if (show) {
+          formContainer.innerHTML = `
+            <h3>Edit Show</h3>
+            <div class="edit-field">
+              <label>Date</label>
+              <input type="text" id="edit-date" placeholder="e.g., March 15, 2024" value="${show.date}">
+            </div>
+            <div class="edit-field">
+              <label>Location</label>
+              <input type="text" id="edit-location" placeholder="e.g., Brooklyn, NY" value="${show.location}">
+            </div>
+            <div class="edit-field">
+              <label>Description</label>
+              <textarea id="edit-description" placeholder="Details about the show...">${show.description}</textarea>
+            </div>
+            <div class="edit-field">
+              <label>Type</label>
+              <div style="display: flex; gap: 1.5rem; margin-top: 0.5rem;">
+                <label style="font-family: 'EB Garamond', serif; color: var(--cream); font-weight: normal;">
+                  <input type="radio" name="show-type" value="false" ${!show.isPast ? 'checked' : ''}> Upcoming
+                </label>
+                <label style="font-family: 'EB Garamond', serif; color: var(--cream); font-weight: normal;">
+                  <input type="radio" name="show-type" value="true" ${show.isPast ? 'checked' : ''}> Previous
+                </label>
+              </div>
+            </div>
+            <div class="edit-field">
+              <label>Images</label>
+              <div class="upload-area" id="upload-area" ondrop="handleDrop(event)" ondragover="event.preventDefault()" ondragleave="event.preventDefault()">
+                <p style="margin: 0; color: rgba(245,240,232,0.6);">Drag images here or click to upload</p>
+                <input type="file" id="file-input" accept="image/*" multiple style="display: none;">
+              </div>
+              <div class="image-grid" id="image-grid"></div>
+            </div>
+            <div class="button-group">
+              <button class="admin-btn save" onclick="saveShow()">Save Show</button>
+              <button class="admin-btn delete" onclick="deleteShow()">Delete</button>
+            </div>
+          `;
+
+          document.getElementById('upload-area').addEventListener('click', () => document.getElementById('file-input').click());
+          document.getElementById('file-input').addEventListener('change', (e) => handleFileSelect(e));
+
+          renderImageGrid(show);
+        }
+      } else {
+        formContainer.innerHTML = '<p style="color: rgba(245,240,232,0.4);">Select a show to edit</p>';
+      }
+    }
+
+    function handleFileSelect(e) {
+      const show = shows.find(s => s.id === currentEditingShowId);
+      if (!show) return;
+
+      Array.from(e.target.files).forEach(file => {
+        const reader = new FileReader();
+        reader.onload = (evt) => {
+          show.images.push(evt.target.result);
+          renderImageGrid(show);
+        };
+        reader.readAsDataURL(file);
+      });
+    }
+
+    function handleDrop(e) {
+      e.preventDefault();
+      const show = shows.find(s => s.id === currentEditingShowId);
+      if (!show) return;
+
+      Array.from(e.dataTransfer.files).forEach(file => {
+        const reader = new FileReader();
+        reader.onload = (evt) => {
+          show.images.push(evt.target.result);
+          renderImageGrid(show);
+        };
+        reader.readAsDataURL(file);
+      });
+    }
+
+    function renderImageGrid(show) {
+      const grid = document.getElementById('image-grid');
+      grid.innerHTML = '';
+      show.images.forEach((img, idx) => {
+        const thumb = document.createElement('div');
+        thumb.className = 'image-thumb';
+        thumb.innerHTML = `
+          <img src="${img}" alt="Show image">
+          <button type="button" class="del-btn" onclick="deleteImage(${idx})">×</button>
+        `;
+        grid.appendChild(thumb);
+      });
+    }
+
+    function deleteImage(idx) {
+      const show = shows.find(s => s.id === currentEditingShowId);
+      if (show) {
+        show.images.splice(idx, 1);
+        renderImageGrid(show);
+      }
+    }
+
+    function saveShow() {
+      const show = shows.find(s => s.id === currentEditingShowId);
+      if (!show) return;
+
+      show.date = document.getElementById('edit-date').value;
+      show.location = document.getElementById('edit-location').value;
+      show.description = document.getElementById('edit-description').value;
+      show.isPast = document.querySelector('input[name="show-type"]:checked').value === 'true';
+
+      saveShows();
+      renderAdminList();
+      showSuccess('Show saved!');
+    }
+
+    function deleteShow() {
+      if (confirm('Delete this show? This cannot be undone.')) {
+        shows = shows.filter(s => s.id !== currentEditingShowId);
+        currentEditingShowId = null;
+        saveShows();
+        renderAdminList();
+        showSuccess('Show deleted!');
+      }
+    }
+
+    function showSuccess(msg) {
+      const el = document.getElementById('success-msg');
+      el.textContent = msg;
+      el.style.display = 'block';
+      setTimeout(() => { el.style.display = 'none'; }, 3000);
+    }
+
+    function renderShowsDisplay() {
+      loadShows();
+      const upcoming = shows.filter(s => !s.isPast);
+      const previous = shows.filter(s => s.isPast).sort((a, b) => new Date(b.date) - new Date(a.date));
+
+      renderShowsGrid('upcoming', upcoming);
+      renderShowsGrid('previous', previous);
+    }
+
+    function renderShowsGrid(type, showsList) {
+      const grid = document.getElementById(type + '-grid');
+      if (showsList.length === 0) {
+        grid.innerHTML = '<div style="grid-column: 1/-1;" class="empty-shows">No ' + type + ' shows scheduled. Check back soon!</div>';
+      } else {
+        grid.innerHTML = '';
+        showsList.forEach(show => {
+          const card = document.createElement('div');
+          card.className = 'show-card';
+          let content = '';
+          if (show.images.length > 0) {
+            content += '<div class="show-image"><img src="' + show.images[0] + '" alt="' + show.location + '"></div>';
+          }
+          content += '<div class="show-info">';
+          content += '<div class="show-date">' + show.date + '</div>';
+          content += '<div class="show-location">' + show.location + '</div>';
+          content += '<div class="show-description">' + show.description + '</div>';
+          content += '</div>';
+          card.innerHTML = content;
+          grid.appendChild(card);
+        });
+      }
+    }
+
+    function switchShowsTab(tab) {
+      document.querySelectorAll('.shows-tabs button').forEach(b => b.classList.remove('active'));
+      document.getElementById('upcoming-grid').style.display = 'none';
+      document.getElementById('previous-grid').style.display = 'none';
+
+      if (tab === 'upcoming') {
+        event.target.classList.add('active');
+        document.getElementById('upcoming-grid').style.display = 'grid';
+      } else {
+        document.querySelectorAll('.shows-tabs button')[1].classList.add('active');
+        document.getElementById('previous-grid').style.display = 'grid';
+      }
+    }
+
+    loadShows();
+
     const form = document.getElementById('orderForm')
     if (form) {
       form.addEventListener('submit', async e => {
         e.preventDefault()
         const data = new FormData(form)
-        const res = await fetch(form.action, { method: 'POST', body: data, headers: { 'Accept': 'application/json' } })
-        if (res.ok) {
-          form.style.display = 'none'
-          document.getElementById('formSuccess').style.display = 'block'
-        }
-      })
-    }
-  </script>
-</body>
-</html>
+        const res = await fetch(form.action, { method: 'PO
