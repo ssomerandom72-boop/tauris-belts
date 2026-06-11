@@ -35,7 +35,7 @@ nav.scrolled { background: rgba(10,7,2,0.98); border-bottom: 1px solid rgba(200,
 .hero-sub { font-size: 17px; line-height: 1.85; color: rgba(245,240,232,0.6); margin-bottom: 48px; max-width: 390px; opacity: 0; animation: fadeUp 0.8s 0.7s forwards; }
 .hero-cta { display: inline-flex; align-items: center; gap: 14px; font-family: 'Cinzel', serif; font-size: 10px; letter-spacing: 0.28em; color: var(--cream); text-decoration: none; border-bottom: 1px solid rgba(200,151,42,0.5); padding-bottom: 6px; opacity: 0; animation: fadeUp 0.8s 0.9s forwards; transition: color 0.2s, gap 0.2s; }
 .hero-cta:hover { color: var(--gold); gap: 22px; }
-.hero-cta::after { content: '→'; }
+.hero-cta:after { content: '→'; }
 .hero-year { position: absolute; right: 58px; bottom: 90px; font-family: 'Cinzel', serif; font-size: 10px; letter-spacing: 0.3em; color: rgba(200,151,42,0.35); writing-mode: vertical-rl; z-index: 2; }
 
 section { padding: 110px 60px; }
@@ -109,7 +109,7 @@ section { padding: 110px 60px; }
 
 footer { background: #060401; padding: 38px 60px; display: flex; align-items: center; justify-content: space-between; border-top: 1px solid rgba(200,151,42,0.1); }
 .footer-logo { font-family: 'Cinzel', serif; font-size: 11px; letter-spacing: 0.12em; color: rgba(245,240,232,0.35); }
-.footer-copy { font-family: 'Cinzel', serif; font-size: 10px; letter-spacing: 0.12em; color: rgba(245,240,232,0.22); }
+.footer-copy { font-family: 'Cinzel', serif; font-size: 10px; letter-spacing: 0.12em; color: rgba(245,240,232,0.22); text-align: center; line-height: 1.6; }
 .footer-social { display: flex; gap: 22px; }
 .footer-social a { font-family: 'Cinzel', serif; font-size: 10px; letter-spacing: 0.12em; color: rgba(245,240,232,0.3); text-decoration: none; transition: color 0.2s; }
 .footer-social a:hover { color: var(--gold); }
@@ -158,62 +158,6 @@ footer { background: #060401; padding: 38px 60px; display: flex; align-items: ce
 .admin-panel { background: var(--darker); padding: 70px 60px; }
 .admin-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 3rem; }
 .admin-header h2 { font-family: 'Cormorant Garamond', serif; font-size: 42px; color: var(--cream); }
-.logout-btn { padding: 10px 26px; background: #ff6b6b; color: white; border: none; font-family: 'Cinzel', serif; font-size: 10px; letter-spacing: 0.15em; cursor: pointer; transition: background 0.2s; }
-.logout-btn:hover { background: #ff4757; }
-.admin-content { display: grid; grid-template-columns: 300px 1fr; gap: 2rem; }
-.shows-list { border: 1px solid rgba(200,151,42,0.2); background: rgba(26,16,8,0.8); max-height: 600px; overflow-y: auto; }
-.show-item { padding: 1rem; border-bottom: 1px solid rgba(200,151,42,0.1); cursor: pointer; transition: all 0.2s; color: rgba(245,240,232,0.6); }
-.show-item:hover { background: rgba(200,151,42,0.1); color: var(--cream); }
-.show-item.active { background: rgba(200,151,42,0.25); color: var(--gold); border-left: 3px solid var(--gold); padding-left: calc(1rem - 3px); }
-.show-item-title { font-weight: 600; margin-bottom: 0.25rem; }
-.show-item-date { font-size: 12px; opacity: 0.7; }
-.edit-form { border: 1px solid rgba(200,151,42,0.2); background: rgba(26,16,8,0.8); padding: 2rem; }
-.edit-form h3 { font-family: 'Cormorant Garamond', serif; font-size: 28px; color: var(--cream); margin-bottom: 1.5rem; }
-.edit-field { margin-bottom: 1.5rem; }
-.edit-field label { display: block; font-family: 'Cinzel', serif; font-size: 10px; letter-spacing: 0.15em; color: var(--gold); margin-bottom: 0.5rem; }
-.edit-field input, .edit-field textarea { width: 100%; padding: 12px 16px; background: rgba(255,255,255,0.04); border: 1px solid rgba(200,151,42,0.2); color: var(--cream); font-family: 'EB Garamond', serif; font-size: 16px; outline: none; }
-.edit-field textarea { resize: vertical; min-height: 100px; }
-.upload-area { border: 2px dashed rgba(200,151,42,0.3); padding: 2rem; text-align: center; cursor: pointer; transition: all 0.3s; }
-.upload-area:hover { border-color: var(--gold); background: rgba(200,151,42,0.05); }
-.image-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(100px, 1fr)); gap: 1rem; margin-top: 1rem; }
-.image-thumb { position: relative; border: 1px solid rgba(200,151,42,0.2); overflow: hidden; aspect-ratio: 1; }
-.image-thumb img { width: 100%; height: 100%; object-fit: cover; }
-.image-thumb .del-btn { position: absolute; top: 2px; right: 2px; background: #ff6b6b; color: white; border: none; width: 24px; height: 24px; cursor: pointer; opacity: 0; transition: opacity 0.2s; font-size: 16px; padding: 0; }
-.image-thumb:hover .del-btn { opacity: 1; }
-.button-group { display: flex; gap: 1rem; margin-top: 2rem; }
-.admin-btn { padding: 12px 32px; border: none; font-family: 'Cinzel', serif; font-size: 11px; letter-spacing: 0.15em; cursor: pointer; transition: all 0.2s; }
-.admin-btn.save { background: var(--gold); color: var(--darker); flex: 1; }
-.admin-btn.save:hover { background: var(--warm); }
-.admin-btn.delete { background: #ff6b6b; color: white; }
-.admin-btn.delete:hover { background: #ff4757; }
-.admin-btn.new { background: var(--gold); color: var(--darker); margin-bottom: 1.5rem; padding: 12px 26px; }
-.success-msg { background: rgba(76,175,80,0.2); color: #81c784; border-left: 3px solid #81c784; padding: 1rem; margin-bottom: 1rem; }
-
-.admin-tab { outline: none; }
-.admin-tab.active { color: var(--gold) !important; border-bottom-color: var(--gold) !important; }
-.admin-tab:hover { color: var(--cream) !important; }
-
-.content-editor { display: grid; gap: 2rem; }
-.content-group { border: 1px solid rgba(200,151,42,0.2); background: rgba(26,16,8,0.8); padding: 1.5rem; }
-.content-group h3 { font-family: 'Cormorant Garamond', serif; font-size: 24px; color: var(--cream); margin-bottom: 1.5rem; }
-.content-field { margin-bottom: 1.5rem; }
-.content-field label { display: block; font-family: 'Cinzel', serif; font-size: 10px; letter-spacing: 0.15em; color: var(--gold); margin-bottom: 0.5rem; }
-.content-field input, .content-field textarea { width: 100%; padding: 12px 16px; background: rgba(255,255,255,0.04); border: 1px solid rgba(200,151,42,0.2); color: var(--cream); font-family: 'EB Garamond', serif; font-size: 16px; outline: none; }
-.content-field textarea { resize: vertical; min-height: 80px; }
-.img-upload { border: 2px dashed rgba(200,151,42,0.3); padding: 1.5rem; text-align: center; cursor: pointer; transition: all 0.3s; margin-top: 0.5rem; }
-.img-upload:hover { border-color: var(--gold); background: rgba(200,151,42,0.05); }
-.img-preview { width: 100%; max-width: 300px; height: auto; border: 1px solid rgba(200,151,42,0.2); margin-top: 1rem; }
-.save-all-btn { background: var(--gold); color: var(--darker); padding: 14px 32px; border: none; font-family: 'Cinzel', serif; font-size: 11px; letter-spacing: 0.15em; cursor: pointer; font-weight: 600; transition: background 0.2s; margin-top: 2rem; width: 100%; }
-.save-all-btn:hover { background: var(--warm); }
-
-.image-replace-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 2rem; }
-.image-replace-box { border: 1px solid rgba(200,151,42,0.2); background: rgba(26,16,8,0.8); padding: 1.5rem; }
-.image-replace-box h4 { font-family: 'Cormorant Garamond', serif; font-size: 20px; color: var(--gold); margin-bottom: 1rem; }
-.image-replace-upload { border: 2px dashed rgba(200,151,42,0.3); padding: 1rem; text-align: center; cursor: pointer; transition: all 0.3s; margin-bottom: 1rem; font-size: 14px; color: rgba(245,240,232,0.6); }
-.image-replace-upload:hover { border-color: var(--gold); background: rgba(200,151,42,0.05); }
-.image-replace-preview { width: 100%; height: 200px; border: 1px solid rgba(200,151,42,0.2); margin-top: 1rem; object-fit: cover; }
-
-@keyframes fadeUp { from { opacity: 0; transform: translateY(26px); } to { opacity: 1; transform: translateY(0); } }
 
 @media (max-width: 900px) {
 nav { padding: 14px 20px; }
@@ -226,7 +170,6 @@ footer { flex-direction: column; gap: 18px; text-align: center; }
 .gallery-masonry, .gallery-3col { columns: 1; }
 .about-imgs { grid-template-columns: 1fr; }
 .about-imgs img:first-child { grid-column: 1; }
-.image-replace-grid { grid-template-columns: 1fr; }
 }
 </style>
 </head>
@@ -366,7 +309,7 @@ footer { flex-direction: column; gap: 18px; text-align: center; }
 <button type="submit" class="form-submit">Send Order Request</button>
 </form>
 <p class="form-success" id="formSuccess">Thank you! Philip will be in touch shortly. ✦</p>
-<p class="contact-dev">This website was developed by Nicholas Phillip Taurisano. Suggestions? Email: <a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="71181f171e3105100403180213141d0502101f15120402051e1c1d141005191403025f121e1c">[email&#160;protected]</a></p>
+<p class="contact-dev">This website was developed by Nicholas Phillip Taurisano. Suggestions? Email: <a href="mailto:admin@taurisbeltsandcustomleathers.com" style="color:var(--gold);">admin@taurisbeltsandcustomleathers.com</a></p>
 </div>
 <div class="contact-imgs reveal">
 <img src="images/rifle-guitar-straps.png" alt="rifle slings and guitar straps">
@@ -374,7 +317,8 @@ footer { flex-direction: column; gap: 18px; text-align: center; }
 <div style="margin-top:32px;">
 <div class="contact-item">
 <h3>Phone</h3>
-<a href="tel:3157946081" style="font-size:18px;color:rgba(245,240,232,0.72);text-decoration:none;">315-794-6081</a>
+<a href="tel:3157946091" style="font-size:18px;color:rgba(245,240,232,0.72);text-decoration:none;">Business: 315-794-6091</a><br>
+<a href="tel:3157336174" style="font-size:18px;color:rgba(245,240,232,0.72);text-decoration:none;margin-top:8px;display:inline-block;">Home: 315-733-6174</a>
 </div>
 <div class="contact-item" style="margin-top:24px;">
 <h3>Location</h3>
@@ -444,512 +388,82 @@ footer { flex-direction: column; gap: 18px; text-align: center; }
 <div class="login-error" id="login-error-msg"></div>
 </div>
 </div>
-<div id="admin-section" style="display: none;">
-<div class="admin-header">
-<h2>Admin Panel</h2>
-<button class="logout-btn" onclick="adminLogout()">Logout</button>
-</div>
-<div id="success-msg" class="success-msg" style="display: none;"></div>
-
-<div style="display: flex; gap: 1rem; margin-bottom: 2rem; border-bottom: 1px solid rgba(200,151,42,0.2); padding-bottom: 1rem; flex-wrap: wrap;">
-<button style="padding: 0.75rem 1.5rem; border: none; background: none; color: rgba(245,240,232,0.6); font-family: 'Cinzel', serif; cursor: pointer; border-bottom: 2px solid transparent; transition: all 0.3s;" id="tab-shows" class="admin-tab active" onclick="switchAdminTab('shows')">Manage Shows</button>
-<button style="padding: 0.75rem 1.5rem; border: none; background: none; color: rgba(245,240,232,0.6); font-family: 'Cinzel', serif; cursor: pointer; border-bottom: 2px solid transparent; transition: all 0.3s;" id="tab-content" class="admin-tab" onclick="switchAdminTab('content')">Edit Content</button>
-<button style="padding: 0.75rem 1.5rem; border: none; background: none; color: rgba(245,240,232,0.6); font-family: 'Cinzel', serif; cursor: pointer; border-bottom: 2px solid transparent; transition: all 0.3s;" id="tab-images" class="admin-tab" onclick="switchAdminTab('images')">Replace Images</button>
-</div>
-
-<div id="shows-admin" style="display: block;">
-<button class="admin-btn new" onclick="createNewShow()">+ New Show</button>
-<div class="admin-content">
-<div class="shows-list" id="admin-shows-list"></div>
-<div class="edit-form" id="edit-form-container"></div>
-</div>
-</div>
-
-<div id="content-admin" style="display: none;">
-<div class="content-editor" id="content-editor"></div>
-</div>
-
-<div id="images-admin" style="display: none;">
-<h3 style="font-family: 'Cormorant Garamond', serif; font-size: 26px; color: var(--cream); margin-bottom: 2rem;">Replace Page Images</h3>
-<div class="image-replace-grid">
-<div class="image-replace-box"><h4>Hero Background</h4><div class="image-replace-upload" onclick="document.getElementById('img-hero').click()">Click to upload</div><input type="file" id="img-hero" accept="image/*" style="display: none;" onchange="replaceImage('hero-bg-img', 'hero-preview', event)"><img id="hero-preview" src="images/belts-table.png" class="image-replace-preview"></div>
-<div class="image-replace-box"><h4>About Image 1</h4><div class="image-replace-upload" onclick="document.getElementById('img-about1').click()">Click to upload</div><input type="file" id="img-about1" accept="image/*" style="display: none;" onchange="replaceImage('about-img-1', 'about1-preview', event)"><img id="about1-preview" src="images/show-booth.png" class="image-replace-preview"></div>
-<div class="image-replace-box"><h4>About Image 2</h4><div class="image-replace-upload" onclick="document.getElementById('img-about2').click()">Click to upload</div><input type="file" id="img-about2" accept="image/*" style="display: none;" onchange="replaceImage('about-img-2', 'about2-preview', event)"><img id="about2-preview" src="images/snakeskin-belt.png" class="image-replace-preview"></div>
-<div class="image-replace-box"><h4>About Image 3</h4><div class="image-replace-upload" onclick="document.getElementById('img-about3').click()">Click to upload</div><input type="file" id="img-about3" accept="image/*" style="display: none;" onchange="replaceImage('about-img-3', 'about3-preview', event)"><img id="about3-preview" src="images/axe-sheath.png" class="image-replace-preview"></div>
-<div class="image-replace-box"><h4>Craft Image 1</h4><div class="image-replace-upload" onclick="document.getElementById('img-craft1').click()">Click to upload</div><input type="file" id="img-craft1" accept="image/*" style="display: none;" onchange="replaceImage('craft-img-1', 'craft1-preview', event)"><img id="craft1-preview" src="images/show-booth.png" class="image-replace-preview"></div>
-<div class="image-replace-box"><h4>Craft Image 2</h4><div class="image-replace-upload" onclick="document.getElementById('img-craft2').click()">Click to upload</div><input type="file" id="img-craft2" accept="image/*" style="display: none;" onchange="replaceImage('craft-img-2', 'craft2-preview', event)"><img id="craft2-preview" src="images/snakeskin-belt.png" class="image-replace-preview"></div>
-<div class="image-replace-box"><h4>Craft Image 3</h4><div class="image-replace-upload" onclick="document.getElementById('img-craft3').click()">Click to upload</div><input type="file" id="img-craft3" accept="image/*" style="display: none;" onchange="replaceImage('craft-img-3', 'craft3-preview', event)"><img id="craft3-preview" src="images/axe-sheath.png" class="image-replace-preview"></div>
-<div class="image-replace-box"><h4>Process Image 1</h4><div class="image-replace-upload" onclick="document.getElementById('img-process1').click()">Click to upload</div><input type="file" id="img-process1" accept="image/*" style="display: none;" onchange="replaceImage('process-img-1', 'process1-preview', event)"><img id="process1-preview" src="images/knife-sheath.png" class="image-replace-preview"></div>
-<div class="image-replace-box"><h4>Process Image 2</h4><div class="image-replace-upload" onclick="document.getElementById('img-process2').click()">Click to upload</div><input type="file" id="img-process2" accept="image/*" style="display: none;" onchange="replaceImage('process-img-2', 'process2-preview', event)"><img id="process2-preview" src="images/sewing-machine-1.png" class="image-replace-preview"></div>
-<div class="image-replace-box"><h4>Process Image 3</h4><div class="image-replace-upload" onclick="document.getElementById('img-process3').click()">Click to upload</div><input type="file" id="img-process3" accept="image/*" style="display: none;" onchange="replaceImage('process-img-3', 'process3-preview', event)"><img id="process3-preview" src="images/sewing-machine-2.png" class="image-replace-preview"></div>
-<div class="image-replace-box"><h4>Contact Image 1</h4><div class="image-replace-upload" onclick="document.getElementById('img-contact1').click()">Click to upload</div><input type="file" id="img-contact1" accept="image/*" style="display: none;" onchange="replaceImage('contact-img-1', 'contact1-preview', event)"><img id="contact1-preview" src="images/rifle-guitar-straps.png" class="image-replace-preview"></div>
-<div class="image-replace-box"><h4>Contact Image 2</h4><div class="image-replace-upload" onclick="document.getElementById('img-contact2').click()">Click to upload</div><input type="file" id="img-contact2" accept="image/*" style="display: none;" onchange="replaceImage('contact-img-2', 'contact2-preview', event)"><img id="contact2-preview" src="images/belts-detail.png" class="image-replace-preview"></div>
-</div>
-</div>
 </div>
 </div>
 
 <footer>
-<div class="footer-logo">Tauris Belts &amp; Custom Leathers</div>
-<div class="footer-copy">© 2026 Tauris Belts and Custom Leathers</div>
+<div class="footer-logo">Tauris Belts & Custom Leathers</div>
+<div class="footer-copy">
+<strong>Business Phone:</strong> 315-794-6091 | <strong>Home:</strong> 315-733-6174<br>
+© 2026 Tauris Belts and Custom Leathers
+</div>
 <div class="footer-social">
-<a href="https://www.facebook.com/TaurisLeather315" target="_blank">Facebook</a>
-<a href="https://www.instagram.com/tauris_leather_llc/" target="_blank">Instagram</a>
-<a href="https://www.youtube.com/@TaurisBeltsAndCustomLeathers" target="_blank">YouTube</a>
-<a href="https://www.tiktok.com/@taurisbeltsandleather" target="_blank">TikTok</a>
-<a href="https://x.com/Taurisano1910" target="_blank">X</a>
+<a href="#">Facebook</a>
+<a href="#">Instagram</a>
+<a href="#">YouTube</a>
+<a href="#">TikTok</a>
+<a href="#">X</a>
 </div>
 </footer>
 
 <div class="lightbox" id="lightbox" onclick="closeLightbox()">
-<span class="lightbox-close">✕ Close</span>
-<img id="lightbox-img" src="" alt="">
+<span class="lightbox-close">Close ✕</span>
+<img id="lightbox-img" src="" alt="Enlarged view">
 </div>
 
-<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script>
 <script>
-const cursor = document.getElementById('cursor')
-const ring = document.getElementById('cursorRing')
-let mx = 0, my = 0, rx = 0, ry = 0
+// Custom Cursor
+const cursor = document.getElementById('cursor');
+const cursorRing = document.getElementById('cursorRing');
+document.addEventListener('mousemove', (e) => {
+    cursor.style.left = e.clientX + 'px';
+    cursor.style.top = e.clientY + 'px';
+    cursorRing.style.left = e.clientX + 'px';
+    cursorRing.style.top = e.clientY + 'px';
+});
 
-document.addEventListener('mousemove', e => {
-mx = e.clientX
-my = e.clientY
-cursor.style.left = mx + 'px'
-cursor.style.top = my + 'px'
-})
-
-function animRing() {
-rx += (mx - rx) * 0.1
-ry += (my - ry) * 0.1
-ring.style.left = rx + 'px'
-ring.style.top = ry + 'px'
-requestAnimationFrame(animRing)
-}
-animRing()
-
-window.addEventListener('scroll', () => {
-document.getElementById('navbar').classList.toggle('scrolled', window.scrollY > 50)
-})
-
-function showPage(name) {
-document.querySelectorAll('.page').forEach(p => p.classList.remove('active'))
-document.getElementById('page-' + name).classList.add('active')
-window.scrollTo(0, 0)
-setTimeout(observeReveal, 100)
-if (name === 'shows') renderShowsDisplay()
-if (name === 'admin') {
-if (!window.adminLoggedIn) {
-document.getElementById('login-section').style.display = 'block'
-document.getElementById('admin-section').style.display = 'none'
-} else {
-document.getElementById('login-section').style.display = 'none'
-document.getElementById('admin-section').style.display = 'block'
-renderAdminList()
-}
-}
+// Navigation
+function showPage(pageId) {
+    document.querySelectorAll('.page').forEach(page => page.classList.remove('active'));
+    document.getElementById('page-' + pageId).classList.add('active');
+    window.scrollTo(0, 0);
 }
 
-function observeReveal() {
-const obs = new IntersectionObserver(entries => {
-entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible') })
-}, { threshold: 0.08 })
-document.querySelectorAll('.reveal:not(.visible)').forEach(el => obs.observe(el))
-}
-observeReveal()
-
+// Lightbox functions
 function openLightbox(src) {
-document.getElementById('lightbox-img').src = src
-document.getElementById('lightbox').classList.add('open')
+    document.getElementById('lightbox-img').src = src;
+    document.getElementById('lightbox').classList.add('open');
 }
-function closeLightbox() { document.getElementById('lightbox').classList.remove('open') }
-document.addEventListener('keydown', e => { if (e.key === 'Escape') closeLightbox() })
-
-const ADMIN_HASH = 'fc254a3dbd45ff626c83e2d70061c6db47265e99a4194b59644fdcef59b1f97a'
-window.adminLoggedIn = false
-let currentEditingShowId = null
-let shows = []
-
-function loadShows() {
-const saved = localStorage.getItem('tauris-shows')
-shows = saved ? JSON.parse(saved) : []
+function closeLightbox() {
+    document.getElementById('lightbox').classList.remove('open');
 }
 
-function saveShows() {
-localStorage.setItem('tauris-shows', JSON.stringify(shows))
-}
-
-async function hashCredentials(username, password) {
-const str = username + ':' + password
-const buffer = await crypto.subtle.digest('SHA-256', new TextEncoder().encode(str))
-const hashArray = Array.from(new Uint8Array(buffer))
-return hashArray.map(b => b.toString(16).padStart(2, '0')).join('')
-}
-
-async function adminLogin() {
-const username = document.getElementById('admin-username').value
-const password = document.getElementById('admin-password').value
-const errorDiv = document.getElementById('login-error-msg')
-if (!username || !password) {
-errorDiv.textContent = 'Please fill in all fields'
-return
-}
-const hash = await hashCredentials(username, password)
-if (hash === ADMIN_HASH) {
-window.adminLoggedIn = true
-loadShows()
-document.getElementById('login-section').style.display = 'none'
-document.getElementById('admin-section').style.display = 'block'
-const pageContent = loadPageContent()
-applyContentChanges(pageContent)
-loadSavedImages()
-renderAdminList()
-} else {
-errorDiv.textContent = 'Invalid credentials'
-}
-}
-
-function adminLogout() {
-window.adminLoggedIn = false
-currentEditingShowId = null
-document.getElementById('login-section').style.display = 'block'
-document.getElementById('admin-section').style.display = 'none'
-document.getElementById('admin-username').value = ''
-document.getElementById('admin-password').value = ''
-document.getElementById('login-error-msg').textContent = ''
-}
-
-function replaceImage(elementId, previewId, event) {
-const file = event.target.files[0]
-if (!file) return
-const reader = new FileReader()
-reader.onload = (e) => {
-const dataUrl = e.target.result
-const img = document.getElementById(elementId)
-if (img) img.src = dataUrl
-const preview = document.getElementById(previewId)
-if (preview) preview.src = dataUrl
-localStorage.setItem('tauris-img-' + elementId, dataUrl)
-showSuccess('Image updated!')
-}
-reader.readAsDataURL(file)
-}
-
-function loadSavedImages() {
-const images = ['hero-bg-img', 'about-img-1', 'about-img-2', 'about-img-3', 'craft-img-1', 'craft-img-2', 'craft-img-3', 'process-img-1', 'process-img-2', 'process-img-3', 'contact-img-1', 'contact-img-2']
-images.forEach(id => {
-const saved = localStorage.getItem('tauris-img-' + id)
-if (saved) {
-const img = document.getElementById(id)
-if (img) img.src = saved
-const previewId = id.replace('img-', 'preview')
-const preview = document.getElementById(previewId)
-if (preview) preview.src = saved
-}
-})
-}
-
-function createNewShow() {
-const newShow = { id: Date.now(), date: '', location: '', description: '', images: [], isPast: false }
-shows.unshift(newShow)
-currentEditingShowId = newShow.id
-renderAdminList()
-}
-
-function renderAdminList() {
-const list = document.getElementById('admin-shows-list')
-list.innerHTML = ''
-if (shows.length === 0) {
-list.innerHTML = '<div style="padding: 1rem; color: rgba(245,240,232,0.4); text-align: center;">No shows yet</div>'
-} else {
-shows.forEach(show => {
-const item = document.createElement('div')
-item.className = 'show-item' + (show.id === currentEditingShowId ? ' active' : '')
-item.onclick = () => { currentEditingShowId = show.id; renderAdminList() }
-item.innerHTML = `<div class="show-item-title">${show.location || 'Untitled'}</div><div class="show-item-date">${show.date || 'No date'}</div>`
-list.appendChild(item)
-})
-}
-const formContainer = document.getElementById('edit-form-container')
-if (currentEditingShowId) {
-const show = shows.find(s => s.id === currentEditingShowId)
-if (show) {
-formContainer.innerHTML = `<h3>Edit Show</h3><div class="edit-field"><label>Date</label><input type="text" id="edit-date" placeholder="e.g., March 15, 2024" value="${show.date}"></div><div class="edit-field"><label>Location</label><input type="text" id="edit-location" placeholder="e.g., Brooklyn, NY" value="${show.location}"></div><div class="edit-field"><label>Description</label><textarea id="edit-description" placeholder="Details about the show...">${show.description}</textarea></div><div class="edit-field"><label>Type</label><div style="display: flex; gap: 1.5rem; margin-top: 0.5rem;"><label style="font-family: 'EB Garamond', serif; color: var(--cream); font-weight: normal;"><input type="radio" name="show-type" value="false" ${!show.isPast ? 'checked' : ''}> Upcoming</label><label style="font-family: 'EB Garamond', serif; color: var(--cream); font-weight: normal;"><input type="radio" name="show-type" value="true" ${show.isPast ? 'checked' : ''}> Previous</label></div></div><div class="edit-field"><label>Images</label><div class="upload-area" id="upload-area" ondrop="handleDrop(event)" ondragover="event.preventDefault()" ondragleave="event.preventDefault()"><p style="margin: 0; color: rgba(245,240,232,0.6);">Drag images here or click to upload</p><input type="file" id="file-input" accept="image/*" multiple style="display: none;"></div><div class="image-grid" id="image-grid"></div></div><div class="button-group"><button class="admin-btn save" onclick="saveShow()">Save Show</button><button class="admin-btn delete" onclick="deleteShow()">Delete</button></div>`
-document.getElementById('upload-area').addEventListener('click', () => document.getElementById('file-input').click())
-document.getElementById('file-input').addEventListener('change', (e) => handleFileSelect(e))
-renderImageGrid(show)
-}
-} else {
-formContainer.innerHTML = '<p style="color: rgba(245,240,232,0.4);">Select a show to edit</p>'
-}
-}
-
-function handleFileSelect(e) {
-const show = shows.find(s => s.id === currentEditingShowId)
-if (!show) return
-Array.from(e.target.files).forEach(file => {
-const reader = new FileReader()
-reader.onload = (evt) => { show.images.push(evt.target.result); renderImageGrid(show) }
-reader.readAsDataURL(file)
-})
-}
-
-function handleDrop(e) {
-e.preventDefault()
-const show = shows.find(s => s.id === currentEditingShowId)
-if (!show) return
-Array.from(e.dataTransfer.files).forEach(file => {
-const reader = new FileReader()
-reader.onload = (evt) => { show.images.push(evt.target.result); renderImageGrid(show) }
-reader.readAsDataURL(file)
-})
-}
-
-function renderImageGrid(show) {
-const grid = document.getElementById('image-grid')
-grid.innerHTML = ''
-show.images.forEach((img, idx) => {
-const thumb = document.createElement('div')
-thumb.className = 'image-thumb'
-thumb.innerHTML = `<img src="${img}" alt="Show image"><button type="button" class="del-btn" onclick="deleteImage(${idx})">×</button>`
-grid.appendChild(thumb)
-})
-}
-
-function deleteImage(idx) {
-const show = shows.find(s => s.id === currentEditingShowId)
-if (show) { show.images.splice(idx, 1); renderImageGrid(show) }
-}
-
-function saveShow() {
-const show = shows.find(s => s.id === currentEditingShowId)
-if (!show) return
-show.date = document.getElementById('edit-date').value
-show.location = document.getElementById('edit-location').value
-show.description = document.getElementById('edit-description').value
-show.isPast = document.querySelector('input[name="show-type"]:checked').value === 'true'
-saveShows()
-renderAdminList()
-showSuccess('Show saved!')
-}
-
-function deleteShow() {
-if (confirm('Delete this show?')) {
-shows = shows.filter(s => s.id !== currentEditingShowId)
-currentEditingShowId = null
-saveShows()
-renderAdminList()
-showSuccess('Show deleted!')
-}
-}
-
-function showSuccess(msg) {
-const el = document.getElementById('success-msg')
-el.textContent = msg
-el.style.display = 'block'
-setTimeout(() => { el.style.display = 'none' }, 3000)
-}
-
-function renderShowsDisplay() {
-loadShows()
-const upcoming = shows.filter(s => !s.isPast)
-const previous = shows.filter(s => s.isPast).sort((a, b) => new Date(b.date) - new Date(a.date))
-renderShowsGrid('upcoming', upcoming)
-renderShowsGrid('previous', previous)
-}
-
-function renderShowsGrid(type, showsList) {
-const grid = document.getElementById(type + '-grid')
-if (showsList.length === 0) {
-grid.innerHTML = '<div style="grid-column: 1/-1;" class="empty-shows">No ' + type + ' shows scheduled.</div>'
-} else {
-grid.innerHTML = ''
-showsList.forEach(show => {
-const card = document.createElement('div')
-card.className = 'show-card'
-let content = ''
-if (show.images.length > 0) content += '<div class="show-image"><img src="' + show.images[0] + '" alt="' + show.location + '"></div>'
-content += '<div class="show-info"><div class="show-date">' + show.date + '</div><div class="show-location">' + show.location + '</div><div class="show-description">' + show.description + '</div></div>'
-card.innerHTML = content
-grid.appendChild(card)
-})
-}
-}
-
+// Shows Tabs
 function switchShowsTab(tab) {
-document.querySelectorAll('.shows-tabs button').forEach(b => b.classList.remove('active'))
-document.getElementById('upcoming-grid').style.display = 'none'
-document.getElementById('previous-grid').style.display = 'none'
-if (tab === 'upcoming') {
-event.target.classList.add('active')
-document.getElementById('upcoming-grid').style.display = 'grid'
-} else {
-document.querySelectorAll('.shows-tabs button')[1].classList.add('active')
-document.getElementById('previous-grid').style.display = 'grid'
-}
+    document.getElementById('upcoming-grid').style.display = tab === 'upcoming' ? 'grid' : 'none';
+    document.getElementById('previous-grid').style.display = tab === 'previous' ? 'grid' : 'none';
+    const buttons = document.querySelectorAll('.shows-tabs button');
+    buttons[0].classList.toggle('active', tab === 'upcoming');
+    buttons[1].classList.toggle('active', tab === 'previous');
 }
 
-function switchAdminTab(tab) {
-document.querySelectorAll('.admin-tab').forEach(b => b.classList.remove('active'))
-document.getElementById('shows-admin').style.display = 'none'
-document.getElementById('content-admin').style.display = 'none'
-document.getElementById('images-admin').style.display = 'none'
-
-if (tab === 'shows') {
-document.getElementById('tab-shows').classList.add('active')
-document.getElementById('shows-admin').style.display = 'block'
-} else if (tab === 'content') {
-document.getElementById('tab-content').classList.add('active')
-document.getElementById('content-admin').style.display = 'block'
-renderContentEditor()
-} else if (tab === 'images') {
-document.getElementById('tab-images').classList.add('active')
-document.getElementById('images-admin').style.display = 'block'
-}
+// Fake Admin Login
+function adminLogin() {
+    document.getElementById('login-error-msg').innerText = "Database connection severed. Nice try, though.";
 }
 
-function loadPageContent() {
-const saved = localStorage.getItem('tauris-content')
-return saved ? JSON.parse(saved) : {
-heroTitle: 'Tauris Belts<br>&amp; <em>Custom</em><br>Leathers',
-heroSub: 'Handcrafted leather goods built to last a lifetime, carrying the hallmark of over four decades of American craftsmanship.',
-aboutHeading: 'An Ethos of Excellence Crafted Since 1978',
-aboutText1: 'Tauris Belts and Custom Leathers was established in 1978 by Philip P. Taurisano, a former Utica, New York police officer. Philip worked alongside his brother, Michael P. Taurisano, who operated the Tauris Holsters brand since the mid-1960s.',
-aboutText2: 'While collaborating with Michael — who also served as the Deputy Chief of the Utica Police Department — Philip developed a firm conviction: every officer and legal weapon carrier needed a high-quality leather belt to properly contain any holster or apparatus carrying their weapon.',
-craftHeading: 'An Inheritance of Skill Since 1978',
-processHeading: 'Craftsmanship in Motion',
-processText: 'Every piece is made with precision and care.',
-contactPhone: '315-794-6081',
-contactLocation: '420 Higby Road<br>New Hartford, New York'
-}
-}
+// Reveal Elements on Scroll
+const observerOptions = { threshold: 0.1 };
+const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+        if (entry.isIntersecting) {
+            entry.target.classList.add('visible');
+        }
+    });
+}, observerOptions);
 
-function savePageContent(content) {
-localStorage.setItem('tauris-content', JSON.stringify(content))
-}
-
-function renderContentEditor() {
-const content = loadPageContent()
-const editor = document.getElementById('content-editor')
-
-editor.innerHTML = `
-<div class="content-group">
-<h3>Hero Section</h3>
-<div class="content-field">
-<label>Hero Title (use &lt;br&gt; for line breaks, &lt;em&gt; for italics)</label>
-<textarea id="heroTitle" style="min-height: 100px;">${content.heroTitle}</textarea>
-</div>
-<div class="content-field">
-<label>Hero Subtitle</label>
-<textarea id="heroSub" style="min-height: 100px;">${content.heroSub}</textarea>
-</div>
-</div>
-
-<div class="content-group">
-<h3>About Section</h3>
-<div class="content-field">
-<label>Heading</label>
-<textarea id="aboutHeading">${content.aboutHeading}</textarea>
-</div>
-<div class="content-field">
-<label>Paragraph 1</label>
-<textarea id="aboutText1">${content.aboutText1}</textarea>
-</div>
-<div class="content-field">
-<label>Paragraph 2</label>
-<textarea id="aboutText2">${content.aboutText2}</textarea>
-</div>
-</div>
-
-<div class="content-group">
-<h3>Craft Section</h3>
-<div class="content-field">
-<label>Heading</label>
-<textarea id="craftHeading">${content.craftHeading}</textarea>
-</div>
-</div>
-
-<div class="content-group">
-<h3>Process Section</h3>
-<div class="content-field">
-<label>Heading</label>
-<textarea id="processHeading">${content.processHeading}</textarea>
-</div>
-<div class="content-field">
-<label>Description Text</label>
-<textarea id="processText">${content.processText}</textarea>
-</div>
-</div>
-
-<div class="content-group">
-<h3>Contact Section</h3>
-<div class="content-field">
-<label>Phone</label>
-<input type="text" id="contactPhone" value="${content.contactPhone}">
-</div>
-<div class="content-field">
-<label>Location (use &lt;br&gt; for line breaks)</label>
-<textarea id="contactLocation">${content.contactLocation}</textarea>
-</div>
-</div>
-
-<button class="save-all-btn" onclick="saveAllContent()">Save All Changes</button>
-`
-}
-
-function saveAllContent() {
-const content = {
-heroTitle: document.getElementById('heroTitle').value,
-heroSub: document.getElementById('heroSub').value,
-aboutHeading: document.getElementById('aboutHeading').value,
-aboutText1: document.getElementById('aboutText1').value,
-aboutText2: document.getElementById('aboutText2').value,
-craftHeading: document.getElementById('craftHeading').value,
-processHeading: document.getElementById('processHeading').value,
-processText: document.getElementById('processText').value,
-contactPhone: document.getElementById('contactPhone').value,
-contactLocation: document.getElementById('contactLocation').value
-}
-savePageContent(content)
-applyContentChanges(content)
-showSuccess('Content saved!')
-}
-
-function applyContentChanges(content) {
-const hero = document.querySelector('.hero-title')
-if (hero) hero.innerHTML = content.heroTitle
-
-const heroSub = document.querySelector('.hero-sub')
-if (heroSub) heroSub.textContent = content.heroSub
-
-const aboutHead = document.querySelector('.about-heading')
-if (aboutHead) aboutHead.textContent = content.aboutHeading
-
-const aboutTexts = document.querySelectorAll('.about-text')
-if (aboutTexts[0]) aboutTexts[0].textContent = content.aboutText1
-if (aboutTexts[1]) aboutTexts[1].textContent = content.aboutText2
-
-const craftHead = document.querySelector('.craft-heading')
-if (craftHead) craftHead.textContent = content.craftHeading
-
-const processHead = document.querySelector('.process-heading')
-if (processHead) processHead.textContent = content.processHeading
-
-const processText = document.querySelector('.process-text p')
-if (processText) processText.textContent = content.processText
-}
-
-loadShows()
-
-const form = document.getElementById('orderForm')
-if (form) {
-form.addEventListener('submit', async e => {
-e.preventDefault()
-const data = new FormData(form)
-const res = await fetch(form.action, { method: 'POST', body: data })
-if (res.ok) document.getElementById('formSuccess').style.display = 'block'
-})
-}
+document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
 </script>
+
 </body>
 </html>
