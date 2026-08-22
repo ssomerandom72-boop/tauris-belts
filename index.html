@@ -28,7 +28,9 @@ body {
     -webkit-text-size-adjust: 100%;
 }
 
-/* Fluid Editorial Header */
+/* ==========================================
+   MOBILE-FIRST / DEFAULT VIEWPORT STYLES
+   ========================================== */
 header { 
     position: fixed; 
     top: 0; left: 0; right: 0; 
@@ -36,79 +38,73 @@ header {
     display: flex;
     justify-content: space-between;
     align-items: center; 
-    padding: clamp(15px, 3vw, 35px) clamp(20px, 4vw, 50px); 
-    background: rgba(15,10,7,0.92);
+    padding: 20px 24px; 
+    background: rgba(15,10,7,0.95);
     backdrop-filter: blur(8px);
-    transition: all 0.3s ease;
     border-bottom: 1px solid var(--border-subtle);
+    transition: all 0.3s ease;
 }
-header.scrolled { 
-    padding: clamp(12px, 2vw, 20px) clamp(20px, 4vw, 50px); 
-    background: rgba(15,10,7,0.98); 
-}
-.header-left { display: flex; gap: clamp(15px, 2vw, 30px); }
-.header-left a { font-size: 10px; letter-spacing: 0.25em; text-transform: uppercase; color: var(--text-muted); text-decoration: none; transition: color 0.3s; }
-.header-left a:hover { color: var(--gold); }
+header.scrolled { padding: 15px 24px; }
+.header-left { display: flex; gap: 20px; }
+.header-left a { font-size: 10px; letter-spacing: 0.25em; text-transform: uppercase; color: var(--text-muted); text-decoration: none; }
 .header-logo { 
     font-family: 'Cormorant Garamond', serif; 
-    font-size: clamp(16px, 2.5vw, 22px); 
+    font-size: 16px; 
     letter-spacing: 0.3em; 
     text-transform: uppercase; 
-    text-align: center;
     color: var(--text-main);
     text-decoration: none;
 }
 .header-right { display: flex; justify-content: flex-end; }
 .inquire-btn { font-size: 10px; letter-spacing: 0.25em; text-transform: uppercase; color: var(--text-main); text-decoration: none; border-bottom: 1px solid var(--gold); padding-bottom: 2px; }
 
-/* Fluid Split Hero */
+/* Mobile Hero */
 .hero-editorial {
     min-height: 100vh;
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-    padding-top: clamp(70px, 10vh, 100px);
+    display: flex;
+    flex-direction: column;
+    padding-top: 70px;
 }
-.hero-image-wrap { position: relative; width: 100%; min-height: 45vh; overflow: hidden; }
+.hero-image-wrap { position: relative; width: 100%; height: 50vh; overflow: hidden; }
 .hero-image-wrap img { width: 100%; height: 100%; object-fit: cover; filter: sepia(20%) brightness(0.7); }
 .hero-content-wrap {
     display: flex;
     flex-direction: column;
     justify-content: center;
-    padding: clamp(30px, 6vw, 80px);
+    padding: 40px 24px;
     background: var(--bg-deep);
+    flex: 1;
 }
 .hero-subtitle { font-size: 9px; letter-spacing: 0.4em; text-transform: uppercase; color: var(--gold); margin-bottom: 15px; }
-.hero-main-title { font-family: 'Cormorant Garamond', serif; font-size: clamp(36px, 5vw, 84px); font-weight: 300; line-height: 1.1; margin-bottom: 25px; }
+.hero-main-title { font-family: 'Cormorant Garamond', serif; font-size: 40px; font-weight: 300; line-height: 1.1; margin-bottom: 20px; }
 .hero-main-title em { font-style: italic; color: var(--gold); }
-.hero-desc { font-size: 13px; line-height: 2.2; color: var(--text-muted); margin-bottom: 30px; max-width: 480px; }
+.hero-desc { font-size: 13px; line-height: 2.2; color: var(--text-muted); margin-bottom: 30px; }
 
-/* Fluid Magazine Sections */
-.editorial-section { padding: clamp(60px, 10vw, 160px) clamp(20px, 5vw, 80px); max-width: 1500px; margin: 0 auto; }
-.split-layout { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: clamp(40px, 8vw, 100px); align-items: center; }
-.editorial-text h2 { font-family: 'Cormorant Garamond', serif; font-size: clamp(32px, 4vw, 56px); font-weight: 300; line-height: 1.15; margin-bottom: 20px; }
-.editorial-text p { font-size: 13px; line-height: 2.4; color: var(--text-muted); margin-bottom: 15px; }
-.vertical-imgs { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 20px; align-items: center; }
-.vertical-imgs img { width: 100%; height: clamp(280px, 40vw, 480px); object-fit: cover; filter: sepia(15%) brightness(0.8); }
+/* Mobile Sections & Typography */
+.editorial-section { padding: 80px 24px; max-width: 1500px; margin: 0 auto; }
+.split-layout { display: flex; flex-direction: column; gap: 40px; }
+.editorial-text h2 { font-family: 'Cormorant Garamond', serif; font-size: 34px; font-weight: 300; line-height: 1.15; margin-bottom: 20px; }
+.editorial-text p { font-size: 13px; line-height: 2.2; color: var(--text-muted); margin-bottom: 15px; }
+.vertical-imgs { display: flex; flex-direction: column; gap: 16px; }
+.vertical-imgs img { width: 100%; height: 320px; object-fit: cover; filter: sepia(15%) brightness(0.8); }
 
-/* Fluid Runway Grid */
-.runway-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 30px; max-width: 1400px; margin: 0 auto; padding: 0 clamp(20px, 4vw, 40px); }
-.runway-item { position: relative; overflow: hidden; background: var(--bg-card); border: 1px solid var(--border-subtle); height: clamp(380px, 50vw, 650px); }
-.runway-item img { width: 100%; height: 100%; object-fit: cover; filter: sepia(15%) brightness(0.85); transition: transform 0.6s ease; }
-.runway-item:hover img { transform: scale(1.03); }
-.runway-caption { position: absolute; bottom: 0; left: 0; right: 0; padding: clamp(20px, 4vw, 40px); background: linear-gradient(to top, rgba(15,10,7,0.95), transparent); display: flex; justify-content: space-between; align-items: flex-end; }
-.runway-caption span { font-size: 9px; letter-spacing: 0.3em; color: var(--gold); text-transform: uppercase; }
-.runway-caption h4 { font-family: 'Cormorant Garamond', serif; font-size: clamp(20px, 2vw, 24px); font-weight: 300; }
+/* Mobile Archive Grid */
+.runway-grid { display: flex; flex-direction: column; gap: 20px; padding: 0 24px; }
+.runway-item { position: relative; overflow: hidden; background: var(--bg-card); border: 1px solid var(--border-subtle); height: 360px; }
+.runway-item img { width: 100%; height: 100%; object-fit: cover; filter: sepia(15%) brightness(0.85); }
+.runway-caption { position: absolute; bottom: 0; left: 0; right: 0; padding: 24px; background: linear-gradient(to top, rgba(15,10,7,0.95), transparent); display: flex; justify-content: space-between; align-items: flex-end; }
+.runway-caption span { font-size: 9px; letter-spacing: 0.25em; color: var(--gold); text-transform: uppercase; }
+.runway-caption h4 { font-family: 'Cormorant Garamond', serif; font-size: 20px; font-weight: 300; }
 
-/* Fluid Atelier Inquiry */
-.inquiry-atelier { background: var(--bg-surface); border-top: 1px solid var(--border-subtle); border-bottom: 1px solid var(--border-subtle); padding: clamp(60px, 10vw, 140px) clamp(20px, 4vw, 40px); }
+/* Mobile Form */
+.inquiry-atelier { background: var(--bg-surface); border-top: 1px solid var(--border-subtle); border-bottom: 1px solid var(--border-subtle); padding: 80px 24px; }
 .inquiry-container { max-width: 800px; margin: 0 auto; }
-.inquiry-header { text-align: center; margin-bottom: clamp(30px, 6vw, 60px); }
+.inquiry-header { text-align: center; margin-bottom: 40px; }
 .inquiry-header span { font-size: 9px; letter-spacing: 0.4em; color: var(--gold); text-transform: uppercase; display: block; margin-bottom: 10px; }
-.inquiry-header h2 { font-family: 'Cormorant Garamond', serif; font-size: clamp(34px, 5vw, 48px); font-weight: 300; }
+.inquiry-header h2 { font-family: 'Cormorant Garamond', serif; font-size: 36px; font-weight: 300; }
 
-.bespoke-form { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: clamp(20px, 4vw, 40px); }
-.form-group-full { grid-column: 1 / -1; display: flex; flex-direction: column; gap: 8px; }
-.form-group { display: flex; flex-direction: column; gap: 8px; }
+.bespoke-form { display: flex; flex-direction: column; gap: 24px; }
+.form-group-full, .form-group { display: flex; flex-direction: column; gap: 8px; }
 .bespoke-form label { font-size: 9px; letter-spacing: 0.25em; text-transform: uppercase; color: var(--text-muted); }
 .bespoke-form input, .bespoke-form select, .bespoke-form textarea {
     background: transparent;
@@ -124,7 +120,6 @@ header.scrolled {
 .bespoke-form select option { background: var(--bg-deep); color: var(--text-main); }
 .bespoke-form textarea { min-height: 120px; resize: vertical; }
 .submit-atelier {
-    grid-column: 1 / -1;
     background: var(--text-main);
     color: var(--bg-deep);
     font-family: 'Plus Jakarta Sans', sans-serif;
@@ -135,28 +130,85 @@ header.scrolled {
     border: none;
     cursor: pointer;
     font-weight: 400;
-    transition: background 0.3s, color 0.3s;
 }
-.submit-atelier:hover { background: var(--gold); color: var(--bg-deep); }
 
-/* Fluid Editorial Footer */
-footer { padding: clamp(40px, 8vw, 80px) clamp(20px, 4vw, 50px); background: var(--bg-deep); display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; gap: 30px; border-top: 1px solid var(--border-subtle); text-align: center; }
+/* Mobile Footer */
+footer { padding: 60px 24px; background: var(--bg-deep); display: flex; flex-direction: column; gap: 30px; text-align: center; border-top: 1px solid var(--border-subtle); align-items: center; }
 .footer-brand { font-family: 'Cormorant Garamond', serif; font-size: 16px; letter-spacing: 0.3em; text-transform: uppercase; }
 .footer-meta { font-size: 11px; letter-spacing: 0.1em; color: var(--text-muted); line-height: 1.8; }
 .footer-links { display: flex; gap: 20px; flex-wrap: wrap; justify-content: center; }
-.footer-links a { font-size: 9px; letter-spacing: 0.2em; text-transform: uppercase; color: var(--text-muted); text-decoration: none; transition: color 0.3s; }
-.footer-links a:hover { color: var(--gold); }
+.footer-links a { font-size: 9px; letter-spacing: 0.2em; text-transform: uppercase; color: var(--text-muted); text-decoration: none; }
+
+
+/* ==========================================
+   DESKTOP VIEWPORT OVERRIDES (Exact Original Look)
+   ========================================== */
+@media (min-width: 1024px) {
+    header { padding: 35px 50px; display: grid; grid-template-columns: 1fr auto 1fr; }
+    header.scrolled { padding: 20px 50px; background: rgba(15,10,7,0.98); }
+    .header-left { gap: 30px; }
+    .header-logo { font-size: 22px; letter-spacing: 0.35em; text-align: center; }
+    
+    /* Desktop Hero Split */
+    .hero-editorial {
+        height: 100vh;
+        min-height: auto;
+        display: grid;
+        grid-template-columns: 1.2fr 0.8fr;
+        padding-top: 100px;
+    }
+    .hero-image-wrap { height: 100%; }
+    .hero-image-wrap img { transform: scale(1.03); transition: transform 12s cubic-bezier(0.16, 1, 0.3, 1); }
+    .hero-editorial:hover .hero-image-wrap img { transform: scale(1); }
+    .hero-content-wrap { padding: 80px; flex: unset; }
+    .hero-subtitle { font-size: 10px; letter-spacing: 0.5em; }
+    .hero-main-title { font-size: clamp(48px, 6vw, 84px); margin-bottom: 35px; }
+    .hero-desc { font-size: 14px; max-width: 480px; }
+
+    /* Desktop Editorial Sections */
+    .editorial-section { padding: 160px 80px; }
+    .split-layout { display: grid; grid-template-columns: 1fr 1fr; gap: 100px; align-items: center; }
+    .editorial-text h2 { font-size: clamp(38px, 4vw, 56px); }
+    .editorial-text p { font-size: 14px; }
+    .vertical-imgs { display: grid; grid-template-columns: 1.2fr 0.8fr; gap: 20px; align-items: center; }
+    .vertical-imgs img { height: 480px; }
+    .vertical-imgs img:nth-child(2) { height: 380px; transform: translateY(40px); }
+
+    /* Desktop Asymmetrical Runway Grid */
+    .runway-grid { display: grid; grid-template-columns: repeat(12, 1fr); gap: 30px; padding: 0 40px; max-width: 1400px; margin: 0 auto; }
+    .runway-item { height: auto; border: 1px solid var(--border-subtle); }
+    .runway-item img { transition: transform 0.8s cubic-bezier(0.16, 1, 0.3, 1), filter 0.5s; }
+    .runway-item:hover img { transform: scale(1.03); filter: sepia(0%) brightness(1); }
+    .runway-item.tall { grid-column: span 7; height: 650px; }
+    .runway-item.short { grid-column: span 5; height: 500px; margin-top: 150px; }
+    .runway-item.full { grid-column: span 12; height: 750px; }
+    .runway-caption { padding: 40px; }
+    .runway-caption span { font-size: 10px; letter-spacing: 0.3em; }
+    .runway-caption h4 { font-size: 24px; }
+
+    /* Desktop Atelier Inquiry */
+    .inquiry-atelier { padding: 140px 40px; }
+    .inquiry-header span { font-size: 10px; letter-spacing: 0.5em; }
+    .inquiry-header h2 { font-size: 48px; }
+    .bespoke-form { display: grid; grid-template-columns: 1fr 1fr; gap: 40px; }
+    .form-group-full { grid-column: span 2; }
+    .bespoke-form label { font-size: 10px; letter-spacing: 0.3em; }
+    .submit-atelier { grid-column: span 2; font-size: 11px; letter-spacing: 0.3em; margin-top: 20px; transition: background 0.3s, color 0.3s; }
+    .submit-atelier:hover { background: var(--gold); color: var(--bg-deep); }
+
+    /* Desktop Footer */
+    footer { padding: 80px 50px; flex-direction: row; justify-content: space-between; text-align: left; }
+    .footer-brand { font-size: 18px; letter-spacing: 0.4em; }
+    .footer-links { gap: 30px; justify-content: flex-end; }
+    .footer-links a { font-size: 10px; letter-spacing: 0.25em; }
+}
 
 /* Fullscreen Lightbox */
 .lightbox { display: none; position: fixed; inset: 0; background: rgba(10,7,5,0.97); z-index: 1000; align-items: center; justify-content: center; padding: 20px; }
 .lightbox.open { display: flex; }
-.lightbox img { max-width: 100%; max-height: 80vh; object-fit: contain; }
-.lightbox-close { position: absolute; top: clamp(20px, 4vw, 40px); right: clamp(20px, 4vw, 50px); font-size: 10px; letter-spacing: 0.25em; text-transform: uppercase; color: var(--text-muted); cursor: pointer; }
+.lightbox img { max-width: 85vw; max-height: 85vh; object-fit: contain; }
+.lightbox-close { position: absolute; top: 30px; right: 40px; font-size: 10px; letter-spacing: 0.3em; text-transform: uppercase; color: var(--text-muted); cursor: pointer; transition: color 0.3s; }
 .lightbox-close:hover { color: var(--gold); }
-
-@media (min-width: 768px) {
-    footer { text-align: left; }
-}
 </style>
 </head>
 <body>
@@ -200,27 +252,27 @@ footer { padding: clamp(40px, 8vw, 80px) clamp(20px, 4vw, 50px); background: var
 </section>
 
 <section class="editorial-section" id="archive" style="padding-top: 0;">
-    <div style="text-align: center; margin-bottom: clamp(30px, 6vw, 60px);">
+    <div style="text-align: center; margin-bottom: 50px;">
         <span class="hero-subtitle">Visual Essay</span>
-        <h2 style="font-family: 'Cormorant Garamond', serif; font-size: clamp(34px, 5vw, 48px); font-weight: 300;">The Archive</h2>
+        <h2 style="font-family: 'Cormorant Garamond', serif; font-size: clamp(34px, 4vw, 48px); font-weight: 300;">The Archive</h2>
     </div>
     
     <div class="runway-grid">
-        <div class="runway-item" onclick="openLightbox('images/snakeskin-belt.png')">
+        <div class="runway-item tall" onclick="openLightbox('images/snakeskin-belt.png')">
             <img src="images/snakeskin-belt.png" alt="Exotic Belt">
             <div class="runway-caption">
                 <span>Accessories</span>
                 <h4>Exotic Accent Belts</h4>
             </div>
         </div>
-        <div class="runway-item" onclick="openLightbox('images/axe-sheath.png')">
+        <div class="runway-item short" onclick="openLightbox('images/axe-sheath.png')">
             <img src="images/axe-sheath.png" alt="Axe Sheath">
             <div class="runway-caption">
                 <span>Utilitarian</span>
                 <h4>Custom Edge Protection</h4>
             </div>
         </div>
-        <div class="runway-item" style="grid-column: 1 / -1;" onclick="openLightbox('images/show-booth.png')">
+        <div class="runway-item full" onclick="openLightbox('images/show-booth.png')">
             <img src="images/show-booth.png" alt="Showcase">
             <div class="runway-caption">
                 <span>Exhibition</span>
