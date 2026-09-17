@@ -281,7 +281,7 @@ footer { padding: 60px 24px; background: var(--bg-deep); display: flex; flex-dir
     </div>
     
     <div class="gallery-grid" id="gallery-grid">
-        <!-- Gallery items rendered dynamically or loaded -->
+        <!-- Gallery items rendered dynamically -->
     </div>
 </section>
 
@@ -335,7 +335,6 @@ footer { padding: 60px 24px; background: var(--bg-deep); display: flex; flex-dir
 </div>
 
 <script>
-// Default photos array
 let galleryData = [
     { src: 'images/IMG_4499.jpeg', title: 'Custom Work' },
     { src: 'images/IMG_5012.jpeg', title: 'Handcrafted Straps' },
@@ -385,6 +384,14 @@ function renderGallery() {
 }
 
 function toggleAdminMode() {
+    if (!isAdmin) {
+        const pass = prompt("Enter Admin Password:");
+        if (pass !== "Wow1910$") {
+            alert("Wrong password");
+            return;
+        }
+    }
+
     isAdmin = !isAdmin;
     const body = document.getElementById('page-body');
     const adminBar = document.getElementById('admin-bar');
@@ -440,13 +447,10 @@ function saveToLocal() {
 }
 
 function exportHTML() {
-    // Disable admin mode temporarily to clean attributes
     if (isAdmin) toggleAdminMode();
     
-    // Get full source html
     let htmlContent = "<!DOCTYPE html>\n" + document.documentElement.outerHTML;
     
-    // Create download element
     const blob = new Blob([htmlContent], { type: 'text/html' });
     const a = document.createElement('a');
     a.href = URL.createObjectURL(blob);
