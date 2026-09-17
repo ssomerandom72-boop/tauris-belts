@@ -4,109 +4,131 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>TAURIS LEATHER | Handcrafted Custom Leathers</title>
-<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,400&family=Plus+Jakarta+Sans:wght@200;300;400&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,400&family=Plus+Jakarta+Sans:wght@200;300;400;600&display=swap" rel="stylesheet">
 <style>
 *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
 :root { 
---bg-deep: #0f0a07;
---bg-surface: #18110c;
---bg-card: #201710;
---text-main: #f5efe6;
---text-muted: #9e8d7c;
---gold: #d4af37;
---gold-dim: rgba(212, 175, 55, 0.2);
---border-subtle: rgba(212, 175, 55, 0.12);
+    --bg-deep: #0f0a07;
+    --bg-surface: #18110c;
+    --bg-card: #201710;
+    --text-main: #f5efe6;
+    --text-muted: #9e8d7c;
+    --gold: #d4af37;
+    --gold-dim: rgba(212, 175, 55, 0.2);
+    --border-subtle: rgba(212, 175, 55, 0.12);
 }
 
 html { scroll-behavior: smooth; }
 body { 
-font-family: 'Plus Jakarta Sans', sans-serif; 
-background: var(--bg-deep); 
-color: var(--text-main); 
-overflow-x: hidden;
-letter-spacing: 0.04em;
--webkit-text-size-adjust: 100%;
+    font-family: 'Plus Jakarta Sans', sans-serif; 
+    background: var(--bg-deep); 
+    color: var(--text-main); 
+    overflow-x: hidden;
+    letter-spacing: 0.04em;
+    -webkit-text-size-adjust: 100%;
 }
 
-/* Pinned Banner */
+/* Admin Bar - Hidden by default */
+#admin-bar {
+    display: none;
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    z-index: 9999;
+    background: #111;
+    border: 1px solid var(--gold);
+    padding: 12px 20px;
+    border-radius: 8px;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.8);
+    gap: 12px;
+    align-items: center;
+}
+#admin-bar.active { 
+    display: flex; 
+}
+.admin-btn {
+    background: var(--gold);
+    color: #000;
+    border: none;
+    padding: 8px 14px;
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    cursor: pointer;
+    border-radius: 4px;
+}
+.admin-btn.secondary {
+    background: transparent;
+    color: var(--gold);
+    border: 1px solid var(--gold);
+}
+
+/* Announcement Banner */
 .event-banner {
-background: var(--gold);
-color: var(--bg-deep);
-padding: 10px 20px;
-text-align: center;
-font-size: 10px;
-letter-spacing: 0.2em;
-text-transform: uppercase;
-font-weight: 500;
-position: fixed;
-top: 0;
-left: 0;
-right: 0;
-z-index: 101;
-display: flex;
-justify-content: center;
-align-items: center;
-gap: 15px;
+    background: var(--gold);
+    color: var(--bg-deep);
+    padding: 10px 20px;
+    text-align: center;
+    font-size: 10px;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    font-weight: 500;
+    position: fixed;
+    top: 0; left: 0; right: 0;
+    z-index: 101;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 15px;
 }
-.event-banner a {
-color: var(--bg-deep);
-text-decoration: underline;
-font-weight: 600;
-}
+.event-banner a { color: var(--bg-deep); text-decoration: underline; font-weight: 600; }
 
-/* ==========================================
-  MOBILE-FIRST / DEFAULT VIEWPORT STYLES
-  ========================================== */
 header { 
-position: fixed; 
-top: 37px; left: 0; right: 0; 
-z-index: 100; 
-display: flex;
-justify-content: space-between;
-align-items: center; 
-padding: 20px 24px; 
-background: rgba(15,10,7,0.95);
-backdrop-filter: blur(8px);
-border-bottom: 1px solid var(--border-subtle);
-transition: all 0.3s ease;
+    position: fixed; 
+    top: 37px; left: 0; right: 0; 
+    z-index: 100; 
+    display: flex;
+    justify-content: space-between;
+    align-items: center; 
+    padding: 20px 24px; 
+    background: rgba(15,10,7,0.95);
+    backdrop-filter: blur(8px);
+    border-bottom: 1px solid var(--border-subtle);
 }
-header.scrolled { padding: 15px 24px; top: 37px; }
 .header-left { display: flex; gap: 20px; }
 .header-left a { font-size: 10px; letter-spacing: 0.25em; text-transform: uppercase; color: var(--text-muted); text-decoration: none; }
 .header-logo { 
-font-family: 'Cormorant Garamond', serif; 
-font-size: 16px; 
-letter-spacing: 0.3em; 
-text-transform: uppercase; 
-color: var(--text-main);
-text-decoration: none;
+    font-family: 'Cormorant Garamond', serif; 
+    font-size: 16px; 
+    letter-spacing: 0.3em; 
+    text-transform: uppercase; 
+    color: var(--text-main);
+    text-decoration: none;
 }
-.header-right { display: flex; justify-content: flex-end; }
-.inquire-btn { font-size: 10px; letter-spacing: 0.25em; text-transform: uppercase; color: var(--text-main); text-decoration: none; border-bottom: 1px solid var(--gold); padding-bottom: 2px; }
+.header-right { display: flex; align-items: center; gap: 20px; }
+.header-btn { 
+    font-size: 10px; 
+    letter-spacing: 0.25em; 
+    text-transform: uppercase; 
+    color: var(--gold); 
+    background: transparent; 
+    border: 1px solid var(--gold); 
+    padding: 6px 14px; 
+    text-decoration: none;
+}
 
-/* Mobile Hero */
-.hero-editorial {
-min-height: 100vh;
-display: flex;
-flex-direction: column;
-padding-top: 107px;
-}
+/* Hero Section */
+.hero-editorial { min-height: 100vh; display: flex; flex-direction: column; padding-top: 107px; }
 .hero-image-wrap { position: relative; width: 100%; height: 50vh; overflow: hidden; }
 .hero-image-wrap img { width: 100%; height: 100%; object-fit: cover; filter: sepia(20%) brightness(0.7); }
-.hero-content-wrap {
-display: flex;
-flex-direction: column;
-justify-content: center;
-padding: 40px 24px;
-background: var(--bg-deep);
-flex: 1;
-}
+.hero-content-wrap { display: flex; flex-direction: column; justify-content: center; padding: 40px 24px; background: var(--bg-deep); flex: 1; }
 .hero-subtitle { font-size: 9px; letter-spacing: 0.4em; text-transform: uppercase; color: var(--gold); margin-bottom: 15px; }
 .hero-main-title { font-family: 'Cormorant Garamond', serif; font-size: 40px; font-weight: 300; line-height: 1.1; margin-bottom: 20px; }
 .hero-main-title em { font-style: italic; color: var(--gold); }
 .hero-desc { font-size: 13px; line-height: 2.2; color: var(--text-muted); margin-bottom: 30px; }
 
-/* Mobile Sections & Typography */
+/* Sections */
 .editorial-section { padding: 80px 24px; max-width: 1500px; margin: 0 auto; }
 .split-layout { display: flex; flex-direction: column; gap: 40px; }
 .editorial-text h2 { font-family: 'Cormorant Garamond', serif; font-size: 34px; font-weight: 300; line-height: 1.15; margin-bottom: 20px; }
@@ -114,32 +136,82 @@ flex: 1;
 .vertical-imgs { display: flex; flex-direction: column; gap: 16px; }
 .vertical-imgs img { width: 100%; height: 320px; object-fit: cover; filter: sepia(15%) brightness(0.8); }
 
-/* Mobile Archive Grid */
-.runway-grid { display: flex; flex-direction: column; gap: 20px; padding: 0 24px; }
-.runway-item { position: relative; overflow: hidden; background: var(--bg-card); border: 1px solid var(--border-subtle); height: 360px; }
-.runway-item img { width: 100%; height: 100%; object-fit: cover; filter: sepia(15%) brightness(0.85); }
-.runway-caption { position: absolute; bottom: 0; left: 0; right: 0; padding: 24px; background: linear-gradient(to top, rgba(15,10,7,0.95), transparent); display: flex; justify-content: space-between; align-items: flex-end; }
-.runway-caption span { font-size: 9px; letter-spacing: 0.25em; color: var(--gold); text-transform: uppercase; }
-.runway-caption h4 { font-family: 'Cormorant Garamond', serif; font-size: 20px; font-weight: 300; }
+/* Gallery Grid */
+.gallery-grid { 
+    display: grid; 
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); 
+    gap: 20px; 
+    padding: 0 24px; 
+    max-width: 1400px; 
+    margin: 0 auto; 
+}
+.gallery-item { 
+    position: relative; 
+    overflow: hidden; 
+    background: var(--bg-card); 
+    border: 1px solid var(--border-subtle); 
+    height: 320px; 
+    cursor: pointer;
+    transition: border-color 0.3s ease, transform 0.3s ease;
+}
+.gallery-item:hover { border-color: var(--gold); transform: translateY(-3px); }
+.gallery-item img { width: 100%; height: 100%; object-fit: cover; filter: sepia(10%) brightness(0.85); }
+.gallery-caption { 
+    position: absolute; 
+    bottom: 0; left: 0; right: 0; 
+    padding: 16px 20px; 
+    background: linear-gradient(to top, rgba(15,10,7,0.95), transparent); 
+    display: flex; 
+    justify-content: space-between; 
+    align-items: flex-end; 
+}
+.gallery-caption span { font-size: 9px; letter-spacing: 0.25em; color: var(--gold); text-transform: uppercase; }
+
+/* Admin Overlay on Gallery Cards */
+.card-admin-controls {
+    display: none;
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    z-index: 10;
+    gap: 6px;
+}
+.body-admin-active .card-admin-controls { display: flex; }
+.card-admin-btn {
+    background: rgba(0,0,0,0.85);
+    color: var(--gold);
+    border: 1px solid var(--gold);
+    font-size: 10px;
+    padding: 4px 8px;
+    cursor: pointer;
+    border-radius: 3px;
+}
+
+/* Content Editable Styles */
+.body-admin-active [contenteditable="true"] {
+    outline: 1px dashed var(--gold) !important;
+    padding: 2px 4px;
+    border-radius: 2px;
+}
 
 /* Shows Section */
 .shows-list { max-width: 800px; margin: 0 auto; display: flex; flex-direction: column; gap: 20px; }
 .show-item { 
-display: flex; 
-align-items: center; 
-justify-content: space-between; 
-padding: 24px; 
-background: var(--bg-surface); 
-border: 1px solid var(--border-subtle); 
-transition: border-color 0.3s ease; 
-gap: 20px; 
+    display: flex; 
+    align-items: center; 
+    justify-content: space-between; 
+    padding: 24px; 
+    background: var(--bg-surface); 
+    border: 1px solid var(--border-subtle); 
+    transition: border-color 0.3s ease; 
+    gap: 20px; 
 }
 .show-item:hover { border-color: var(--gold); }
 .show-date { 
-text-align: center; 
-border-right: 1px solid var(--border-subtle); 
-padding-right: 24px; 
-min-width: 90px; 
+    text-align: center; 
+    border-right: 1px solid var(--border-subtle); 
+    padding-right: 24px; 
+    min-width: 90px; 
 }
 .show-date .month { display: block; font-size: 10px; letter-spacing: 0.2em; text-transform: uppercase; color: var(--gold); }
 .show-date .day { display: block; font-family: 'Cormorant Garamond', serif; font-size: 24px; color: var(--text-main); margin-top: 5px; }
@@ -147,322 +219,323 @@ min-width: 90px;
 .show-details h3 { font-family: 'Cormorant Garamond', serif; font-size: 22px; font-weight: 400; margin-bottom: 5px; }
 .show-details p { font-size: 12px; color: var(--text-muted); }
 .show-details .sub-info { font-size: 11px; color: var(--gold); margin-top: 4px; opacity: 0.8; }
-@media (max-width: 600px) {
-.show-item { flex-direction: column; text-align: center; }
-.show-date { border-right: none; border-bottom: 1px solid var(--border-subtle); padding-right: 0; padding-bottom: 15px; width: 100%; }
-}
+.inquire-btn { font-size: 10px; letter-spacing: 0.25em; text-transform: uppercase; color: var(--text-main); text-decoration: none; border-bottom: 1px solid var(--gold); padding-bottom: 2px; }
 
-/* Mobile Form */
-.inquiry-atelier { background: var(--bg-surface); border-top: 1px solid var(--border-subtle); border-bottom: 1px solid var(--border-subtle); padding: 80px 24px; }
-.inquiry-container { max-width: 800px; margin: 0 auto; }
-.inquiry-header { text-align: center; margin-bottom: 40px; }
-.inquiry-header span { font-size: 9px; letter-spacing: 0.4em; color: var(--gold); text-transform: uppercase; display: block; margin-bottom: 10px; }
-.inquiry-header h2 { font-family: 'Cormorant Garamond', serif; font-size: 36px; font-weight: 300; }
+/* Lightbox Modal */
+.lightbox { display: none; position: fixed; inset: 0; background: rgba(10,7,5,0.97); z-index: 1000; align-items: center; justify-content: center; padding: 20px; }
+.lightbox.open { display: flex; }
+.lightbox img { max-width: 85vw; max-height: 85vh; object-fit: contain; }
+.lightbox-close { position: absolute; top: 30px; right: 40px; font-size: 10px; letter-spacing: 0.3em; text-transform: uppercase; color: var(--text-muted); cursor: pointer; }
 
-.bespoke-form { display: flex; flex-direction: column; gap: 24px; }
-.form-group-full, .form-group { display: flex; flex-direction: column; gap: 8px; }
-.bespoke-form label { font-size: 9px; letter-spacing: 0.25em; text-transform: uppercase; color: var(--text-muted); }
-.bespoke-form input, .bespoke-form select, .bespoke-form textarea {
-background: transparent;
-border: none;
-border-bottom: 1px solid var(--border-subtle);
-color: var(--text-main);
-font-family: 'Plus Jakarta Sans', sans-serif;
-font-size: 14px;
-padding: 12px 0;
-outline: none;
-border-radius: 0;
-}
-.bespoke-form select option { background: var(--bg-deep); color: var(--text-main); }
-.bespoke-form textarea { min-height: 120px; resize: vertical; }
-.submit-atelier {
-background: var(--text-main);
-color: var(--bg-deep);
-font-family: 'Plus Jakarta Sans', sans-serif;
-font-size: 10px;
-letter-spacing: 0.25em;
-text-transform: uppercase;
-padding: 18px;
-border: none;
-cursor: pointer;
-font-weight: 400;
-}
-
-/* Mobile Footer */
+/* Footer */
 footer { padding: 60px 24px; background: var(--bg-deep); display: flex; flex-direction: column; gap: 30px; text-align: center; border-top: 1px solid var(--border-subtle); align-items: center; }
 .footer-brand { font-family: 'Cormorant Garamond', serif; font-size: 16px; letter-spacing: 0.3em; text-transform: uppercase; }
 .footer-meta { font-size: 11px; letter-spacing: 0.1em; color: var(--text-muted); line-height: 1.8; }
 .footer-links { display: flex; gap: 20px; flex-wrap: wrap; justify-content: center; }
 .footer-links a { font-size: 9px; letter-spacing: 0.2em; text-transform: uppercase; color: var(--text-muted); text-decoration: none; }
 
-
-/* ==========================================
-  DESKTOP VIEWPORT OVERRIDES
-  ========================================== */
 @media (min-width: 1024px) {
-header { padding: 35px 50px; display: grid; grid-template-columns: 1fr auto 1fr; top: 37px; }
-header.scrolled { padding: 20px 50px; background: rgba(15,10,7,0.98); top: 37px; }
-.header-left { gap: 30px; }
-.header-logo { font-size: 22px; letter-spacing: 0.35em; text-align: center; }
-
-/* Desktop Hero Split */
-.hero-editorial {
-height: 100vh;
-min-height: auto;
-display: grid;
-grid-template-columns: 1.2fr 0.8fr;
-padding-top: 137px;
+    header { padding: 35px 50px; display: grid; grid-template-columns: 1fr auto 1fr; top: 37px; }
+    .header-left { gap: 30px; }
+    .header-logo { font-size: 22px; letter-spacing: 0.35em; text-align: center; }
+    .header-right { justify-content: flex-end; }
+    .hero-editorial { height: 100vh; min-height: auto; display: grid; grid-template-columns: 1.2fr 0.8fr; padding-top: 137px; }
+    .hero-image-wrap { height: 100%; }
+    .hero-content-wrap { padding: 80px; flex: unset; }
+    .hero-main-title { font-size: clamp(48px, 6vw, 84px); margin-bottom: 35px; }
+    .editorial-section { padding: 160px 80px; }
+    .split-layout { display: grid; grid-template-columns: 1fr 1fr; gap: 100px; align-items: center; }
+    .vertical-imgs { display: grid; grid-template-columns: 1.2fr 0.8fr; gap: 20px; align-items: center; }
+    .vertical-imgs img { height: 480px; }
+    .vertical-imgs img:nth-child(2) { height: 380px; transform: translateY(40px); }
+    footer { padding: 80px 50px; flex-direction: row; justify-content: space-between; text-align: left; }
 }
-.hero-image-wrap { height: 100%; }
-.hero-image-wrap img { transform: scale(1.03); transition: transform 12s cubic-bezier(0.16, 1, 0.3, 1); }
-.hero-editorial:hover .hero-image-wrap img { transform: scale(1); }
-.hero-content-wrap { padding: 80px; flex: unset; }
-.hero-subtitle { font-size: 10px; letter-spacing: 0.5em; }
-.hero-main-title { font-size: clamp(48px, 6vw, 84px); margin-bottom: 35px; }
-.hero-desc { font-size: 14px; max-width: 480px; }
-
-/* Desktop Editorial Sections */
-.editorial-section { padding: 160px 80px; }
-.split-layout { display: grid; grid-template-columns: 1fr 1fr; gap: 100px; align-items: center; }
-.editorial-text h2 { font-size: clamp(38px, 4vw, 56px); }
-.editorial-text p { font-size: 14px; }
-.vertical-imgs { display: grid; grid-template-columns: 1.2fr 0.8fr; gap: 20px; align-items: center; }
-.vertical-imgs img { height: 480px; }
-.vertical-imgs img:nth-child(2) { height: 380px; transform: translateY(40px); }
-
-/* Desktop Asymmetrical Runway Grid */
-.runway-grid { display: grid; grid-template-columns: repeat(12, 1fr); gap: 30px; padding: 0 40px; max-width: 1400px; margin: 0 auto; }
-.runway-item { height: auto; border: 1px solid var(--border-subtle); }
-.runway-item img { transition: transform 0.8s cubic-bezier(0.16, 1, 0.3, 1), filter 0.5s; }
-.runway-item:hover img { transform: scale(1.03); filter: sepia(0%) brightness(1); }
-.runway-item.tall { grid-column: span 7; height: 650px; }
-.runway-item.short { grid-column: span 5; height: 500px; margin-top: 150px; }
-.runway-item.full { grid-column: span 12; height: 750px; }
-.runway-caption { padding: 40px; }
-.runway-caption span { font-size: 10px; letter-spacing: 0.3em; }
-.runway-caption h4 { font-size: 24px; }
-
-/* Desktop Atelier Inquiry */
-.inquiry-atelier { padding: 140px 40px; }
-.inquiry-header span { font-size: 10px; letter-spacing: 0.5em; }
-.inquiry-header h2 { font-size: 48px; }
-.bespoke-form { display: grid; grid-template-columns: 1fr 1fr; gap: 40px; }
-.form-group-full { grid-column: span 2; }
-.bespoke-form label { font-size: 10px; letter-spacing: 0.3em; }
-.submit-atelier { grid-column: span 2; font-size: 11px; letter-spacing: 0.3em; margin-top: 20px; transition: background 0.3s, color 0.3s; }
-.submit-atelier:hover { background: var(--gold); color: var(--bg-deep); }
-
-/* Desktop Footer */
-footer { padding: 80px 50px; flex-direction: row; justify-content: space-between; text-align: left; }
-.footer-brand { font-size: 18px; letter-spacing: 0.4em; }
-.footer-links { gap: 30px; justify-content: flex-end; }
-.footer-links a { font-size: 10px; letter-spacing: 0.25em; }
-}
-
-/* Fullscreen Lightbox */
-.lightbox { display: none; position: fixed; inset: 0; background: rgba(10,7,5,0.97); z-index: 1000; align-items: center; justify-content: center; padding: 20px; }
-.lightbox.open { display: flex; }
-.lightbox img { max-width: 85vw; max-height: 85vh; object-fit: contain; }
-.lightbox-close { position: absolute; top: 30px; right: 40px; font-size: 10px; letter-spacing: 0.3em; text-transform: uppercase; color: var(--text-muted); cursor: pointer; transition: color 0.3s; }
-.lightbox-close:hover { color: var(--gold); }
 </style>
 </head>
-<body>
+<body id="page-body">
 
 <div class="event-banner">
-<span>We are going there! Check out the <a href="https://www.svcraftshow.com" target="_blank" rel="noopener">SV Craft Show</a> &amp; <a href="https://www.google.com/goto?url=CAESXQHrOzAVvuSt_EHUib5tKgjtnHql6uNHLubPlRXxukDfRL7hBGiYjjF3f10wfj0WY5wdro-eMTUAGCJGNJe3o7k4n5GMOevJzov4Cw8N4_erbRJD8ttXlGf__6QLSA" target="_blank" rel="noopener">Facebook Event</a></span>
+    <span>Catch us live! Check out the <a href="https://www.svcraftshow.com" target="_blank" rel="noopener">SV Craft Show</a> &amp; <a href="https://www.nystrappers.org/convention-thank-you/" target="_blank" rel="noopener">Trapper's Convention</a></span>
 </div>
 
 <header id="header">
-<div class="header-left">
-<a href="#heritage">Heritage</a>
-<a href="#archive">Archive</a>
-<a href="#shows">Shows</a>
-</div>
-<a href="#" class="header-logo">Tauris Leather</a>
-<div class="header-right">
-<a href="#order" class="inquire-btn">Inquire</a>
-</div>
+    <div class="header-left">
+        <a href="#heritage">Heritage</a>
+        <a href="#gallery">Gallery</a>
+        <a href="#shows">Shows</a>
+        <a href="#inquiry">Inquire</a>
+        <a href="#" onclick="toggleAdminMode(); return false;" style="color: var(--gold);">[ Admin ]</a>
+    </div>
+    <a href="#" class="header-logo" editable>Tauris Leather</a>
+    <div class="header-right">
+        <a href="#inquiry" class="header-btn">Custom Order</a>
+    </div>
 </header>
 
 <section class="hero-editorial">
-<div class="hero-image-wrap">
-<img src="images/belts-table.png" alt="Tauris Leather Atelier Workshop">
-</div>
-<div class="hero-content-wrap">
-<span class="hero-subtitle">Est. 1978 · Utica &amp; New Hartford, New York</span>
-<h1 class="hero-main-title">Legacy <em>Leathers</em>, Uncompromising Craft.</h1>
-<p class="hero-desc">Rooted in decades of heirloom leatherwork from upstate New York. Built slow, finished by hand, and structured to age into absolute perfection.</p>
-<a href="#archive" class="inquire-btn" style="align-self: flex-start;">Explore Masterworks</a>
-</div>
+    <div class="hero-image-wrap">
+        <img id="hero-img" src="images/IMG_4499.jpeg" alt="Tauris Leather Goods">
+    </div>
+    <div class="hero-content-wrap">
+        <span class="hero-subtitle" editable>Est. 1978 · Upstate New York</span>
+        <h1 class="hero-main-title" editable>Legacy <em>Leathers</em>, Uncompromising Craft.</h1>
+        <p class="hero-desc" editable>Rooted in decades of heirloom leatherwork from upstate New York. Built slow, finished by hand, and structured to age into absolute perfection.</p>
+        <a href="#gallery" class="inquire-btn" style="align-self: flex-start;">Explore Gallery</a>
+    </div>
 </section>
 
 <section class="editorial-section" id="heritage">
-<div class="split-layout">
-<div class="editorial-text">
-<span class="hero-subtitle">The Origin</span>
-<h2>Forged on the Force</h2>
-<p>Tauris Belts and Custom Leathers was established in 1978 by Philip P. Taurisano, a former Utica, New York police officer. Philip worked alongside his brother, Michael P. Taurisano, who has operated the Tauris Holsters brand since the mid-1960s.</p>
-<p>While collaborating with Michael—who also served as the Deputy Chief of the Utica Police Department—Philip developed a firm conviction based on his own experience on the force: there was a vital need for every officer and legal weapon carrier to have a high-quality leather belt to properly contain any holster or apparatus carrying their weapon.</p>
-</div>
-<div class="vertical-imgs">
-<img src="images/show-booth.png" alt="Atelier Display">
-<img src="images/snakeskin-belt.png" alt="Detail View">
-</div>
-</div>
+    <div class="split-layout">
+        <div class="editorial-text">
+            <span class="hero-subtitle" editable>The Origin</span>
+            <h2 editable>Forged on the Force</h2>
+            <p editable>Tauris Belts and Custom Leathers was established in 1978 by Philip P. Taurisano, a former Utica, New York police officer. Philip worked alongside his brother, Michael P. Taurisano, who operated the Tauris Holsters brand starting in the mid-1960s.</p>
+            <p editable>While collaborating with Michael—who also served as the Deputy Chief of the Utica Police Department—Philip developed a firm conviction based on his own experience on the force: there was a vital need for every officer and legal weapon carrier to have a high-quality leather belt to properly contain any holster or apparatus carrying their weapon.</p>
+        </div>
+        <div class="vertical-imgs">
+            <img id="heritage-img-1" src="images/IMG_5012.jpeg" alt="Leather Detail">
+            <img id="heritage-img-2" src="images/IMG_5039.jpg" alt="Crafted Leather Belts">
+        </div>
+    </div>
 </section>
 
-<section class="editorial-section" id="archive" style="padding-top: 0;">
-<div style="text-align: center; margin-bottom: 50px;">
-<span class="hero-subtitle">Visual Essay</span>
-<h2 style="font-family: 'Cormorant Garamond', serif; font-size: clamp(34px, 4vw, 48px); font-weight: 300;">The Archive</h2>
-</div>
+<section class="editorial-section" id="gallery" style="padding-top: 0;">
+    <div style="text-align: center; margin-bottom: 30px;">
+        <span class="hero-subtitle" editable>Handcrafted Pieces</span>
+        <h2 style="font-family: 'Cormorant Garamond', serif; font-size: clamp(34px, 4vw, 48px); font-weight: 300;" editable>Product Gallery</h2>
+    </div>
 
-<div class="runway-grid">
-<div class="runway-item tall" onclick="openLightbox('images/snakeskin-belt.png')">
-<img src="images/snakeskin-belt.png" alt="Exotic Belt">
-<div class="runway-caption">
-<span>Accessories</span>
-<h4>Exotic Accent Belts</h4>
-</div>
-</div>
-<div class="runway-item short" onclick="openLightbox('images/axe-sheath.png')">
-<img src="images/axe-sheath.png" alt="Axe Sheath">
-<div class="runway-caption">
-<span>Utilitarian</span>
-<h4>Custom Edge Protection</h4>
-</div>
-</div>
-<div class="runway-item full" onclick="openLightbox('images/show-booth.png')">
-<img src="images/show-booth.png" alt="Showcase">
-<div class="runway-caption">
-<span>Exhibition</span>
-<h4>The Upstate Atelier Showcase</h4>
-</div>
-</div>
-</div>
+    <div style="text-align: center; margin-bottom: 30px; display: none;" id="add-photo-container">
+        <button class="admin-btn" onclick="addNewGalleryItem()">+ Add New Photo</button>
+    </div>
+    
+    <div class="gallery-grid" id="gallery-grid">
+        <!-- Gallery items rendered dynamically -->
+    </div>
 </section>
 
 <section class="editorial-section" id="shows" style="padding-top: 40px; padding-bottom: 40px;">
-<div style="text-align: center; margin-bottom: 50px;">
-<span class="hero-subtitle">Live Exhibitions</span>
-<h2 style="font-family: 'Cormorant Garamond', serif; font-size: clamp(34px, 4vw, 48px); font-weight: 300;">Upcoming Shows</h2>
-</div>
-
-<div class="shows-list">
-<div class="show-item">
-<div class="show-date">
-<span class="month">Sep</span>
-<span class="day">3–5</span>
-</div>
-<div class="show-details">
-<h3>Trapper's Convention &amp; Sportsman Show</h3>
-<p>Herkimer County Fairgrounds, 135 Cemetery St, Frankfort, NY</p>
-<div class="sub-info">Thu &amp; Fri: 8am–5pm | Sat: 8am–3pm</div>
-</div>
-<div class="show-action">
-                <a href="https://www.google.com/goto?url=CAESXQHrOzAVvuSt_EHUib5tKgjtnHql6uNHLubPlRXxukDfRL7hBGiYjjF3f10wfj0WY5wdro-eMTUAGCJGNJe3o7k4n5GMOevJzov4Cw8N4_erbRJD8ttXlGf__6QLSA" target="_blank" rel="noopener" class="inquire-btn">Facebook Event</a>
+    <div style="text-align: center; margin-bottom: 50px;">
+        <span class="hero-subtitle" editable>Live Exhibitions</span>
+        <h2 style="font-family: 'Cormorant Garamond', serif; font-size: clamp(34px, 4vw, 48px); font-weight: 300;" editable>Upcoming Shows</h2>
+    </div>
+    
+    <div class="shows-list">
+        <div class="show-item">
+            <div class="show-date">
+                <span class="month">Sep</span>
+                <span class="day">3–5</span>
+            </div>
+            <div class="show-details">
+                <h3 editable>Trapper's Convention &amp; Sportsman Show</h3>
+                <p editable>Herkimer County Fairgrounds, 135 Cemetery St, Frankfort, NY</p>
+                <div class="sub-info" editable>Thu &amp; Fri: 8am–5pm | Sat: 8am–3pm</div>
+            </div>
+            <div class="show-action">
                 <a href="https://www.nystrappers.org/convention-thank-you/" target="_blank" rel="noopener" class="inquire-btn">Event Details</a>
-</div>
-</div>
+            </div>
+        </div>
 
-<div class="show-item">
-<div class="show-date">
-<span class="month">Nov</span>
-<span class="day">21–22</span>
-</div>
-<div class="show-details">
-<h3>46th Sauquoit Valley Fine Arts &amp; Craft Show</h3>
-<p>Sauquoit Middle School, 2648 Sulphur Spring Rd, Sauquoit, NY</p>
-<div class="sub-info">10am–4pm | $5 Admission (12 &amp; under free)</div>
-</div>
-<div class="show-action">
-<a href="https://www.svcraftshow.com" target="_blank" rel="noopener" class="inquire-btn">Event Details</a>
-</div>
-</div>
-</div>
+        <div class="show-item">
+            <div class="show-date">
+                <span class="month">Nov</span>
+                <span class="day">21–22</span>
+            </div>
+            <div class="show-details">
+                <h3 editable>46th Sauquoit Valley Fine Arts &amp; Craft Show</h3>
+                <p editable>Sauquoit Middle School, 2648 Sulphur Spring Rd, Sauquoit, NY</p>
+                <div class="sub-info" editable>10am–4pm | $5 Admission (12 &amp; under free)</div>
+            </div>
+            <div class="show-action">
+                <a href="https://www.svcraftshow.com" target="_blank" rel="noopener" class="inquire-btn">Event Details</a>
+            </div>
+        </div>
+    </div>
 </section>
 
-<section class="inquiry-atelier" id="order">
-<div class="inquiry-container">
-<div class="inquiry-header">
-<span>Private Commissions</span>
-<h2>Commission a Piece</h2>
-</div>
-<form class="bespoke-form" action="https://formspree.io/f/xyknzovk" method="POST">
-<div class="form-group">
-<label>Full Name</label>
-<input type="text" name="name" required placeholder="John Doe">
-</div>
-<div class="form-group">
-<label>Email Address</label>
-<input type="email" name="email" required placeholder="john@example.com">
-</div>
-<div class="form-group">
-<label>Phone Number</label>
-<input type="tel" name="phone" placeholder="315-555-0199">
-</div>
-<div class="form-group">
-<label>Category</label>
-<select name="product" required>
-<option value="" disabled selected>Select category...</option>
-<option>Signature Belt</option>
-<option>Rifle Sling</option>
-<option>Guitar Strap</option>
-<option>Custom Sheath</option>
-<option>Personal Leather Goods</option>
-</select>
-</div>
-<div class="form-group-full">
-<label>Specifications / Sizing</label>
-<input type="text" name="measurements" placeholder="e.g., Waist 34&quot;, Width 1.5&quot;">
-</div>
-<div class="form-group-full">
-<label>Commission Details</label>
-<textarea name="details" placeholder="Describe leather finish, hardware preferences, and custom requests..."></textarea>
-</div>
-<button type="submit" class="submit-atelier">Submit Private Inquiry</button>
-</form>
-</div>
+<section class="inquiry-section" id="inquiry" style="padding: 80px 24px; background: var(--bg-surface);">
+    <div style="text-align: center;">
+        <span class="hero-subtitle" editable>Custom Orders &amp; Fitting</span>
+        <h2 style="font-family: 'Cormorant Garamond', serif; font-size: clamp(34px, 4vw, 48px); font-weight: 300;" editable>Submit an Inquiry</h2>
+    </div>
+
+    <form class="inquiry-form" action="https://formspree.io/f/xyknzovk" method="POST" style="max-width: 600px; margin: 40px auto 0 auto; display: flex; flex-direction: column; gap: 20px;">
+        <div style="display: flex; flex-direction: column; gap: 8px;">
+            <label style="font-size: 10px; letter-spacing: 0.25em; text-transform: uppercase; color: var(--gold);">Name</label>
+            <input type="text" name="name" required placeholder="Your full name" style="background: var(--bg-card); border: 1px solid var(--border-subtle); color: var(--text-main); padding: 14px; outline: none;">
+        </div>
+        <div style="display: flex; flex-direction: column; gap: 8px;">
+            <label style="font-size: 10px; letter-spacing: 0.25em; text-transform: uppercase; color: var(--gold);">Email</label>
+            <input type="email" name="email" required placeholder="your.email@example.com" style="background: var(--bg-card); border: 1px solid var(--border-subtle); color: var(--text-main); padding: 14px; outline: none;">
+        </div>
+        <div style="display: flex; flex-direction: column; gap: 8px;">
+            <label style="font-size: 10px; letter-spacing: 0.25em; text-transform: uppercase; color: var(--gold);">Custom Request / Sizing Details</label>
+            <textarea name="message" rows="5" required placeholder="Let us know what kind of belt, sheath, or custom leatherwork you are looking for..." style="background: var(--bg-card); border: 1px solid var(--border-subtle); color: var(--text-main); padding: 14px; outline: none;"></textarea>
+        </div>
+        <button type="submit" class="admin-btn" style="padding: 16px; margin-top: 10px;">Send Inquiry</button>
+    </form>
 </section>
 
 <footer>
-<div class="footer-brand">Tauris Leather</div>
-<div class="footer-meta">
-420 Higby Road, New Hartford, NY<br>
-Business: 315-794-6091 | Home: 315-733-6174<br>
-&copy; 2026 Tauris Leather. All Rights Reserved.
-</div>
-<div class="footer-links">
-<a href="https://www.facebook.com/TaurisLeather315/" target="_blank" rel="noopener">Facebook</a>
-<a href="https://www.instagram.com/taurisleather/" target="_blank" rel="noopener">Instagram</a>
-<a href="https://www.youtube.com/@TaurisBeltsAndCustomLeathers" target="_blank" rel="noopener">YouTube</a>
-</div>
+    <div class="footer-brand" editable>Tauris Leather</div>
+    <div class="footer-meta" editable>
+        420 Higby Road, New Hartford, NY<br>
+        Business: 315-794-6091 | Home: 315-733-6174<br>
+        &copy; 2026 Tauris Leather. All Rights Reserved.
+    </div>
+    <div class="footer-links">
+        <a href="#" onclick="toggleAdminMode(); return false;">Admin Mode</a>
+    </div>
 </footer>
 
+<!-- Lightbox Modal -->
 <div class="lightbox" id="lightbox" onclick="closeLightbox()">
-<span class="lightbox-close">Close [X]</span>
-<img id="lightbox-img" src="" alt="Enlarged View">
+    <span class="lightbox-close">Close [X]</span>
+    <img id="lightbox-img" src="" alt="Enlarged View">
+</div>
+
+<!-- Floating Admin Toolbar -->
+<div id="admin-bar">
+    <span style="font-size: 11px; color: var(--gold);">Admin Mode ACTIVE</span>
+    <button class="admin-btn" onclick="saveToLocal()">Save Draft</button>
+    <button class="admin-btn secondary" onclick="exportHTML()">Export HTML</button>
+    <button class="admin-btn secondary" onclick="toggleAdminMode()">Exit Admin</button>
 </div>
 
 <script>
-window.addEventListener('scroll', () => {
-const header = document.getElementById('header');
-if (window.scrollY > 40) {
-header.classList.add('scrolled');
-} else {
-header.classList.remove('scrolled');
+let galleryData = [
+    { src: 'images/IMG_4499.jpeg', title: 'Custom Work' },
+    { src: 'images/IMG_5012.jpeg', title: 'Handcrafted Straps' },
+    { src: 'images/IMG_5039.jpg', title: 'Full-Grain Belts' },
+    { src: 'images/IMG_5615.jpg', title: 'Belt Collection' },
+    { src: 'images/IMG_5616.jpg', title: 'Custom Straps' },
+    { src: 'images/IMG_5617.jpg', title: 'Heavy Duty Belts' },
+    { src: 'images/IMG_5618.jpg', title: 'Heirloom Goods' },
+    { src: 'images/IMG_5620.jpg', title: 'Belt Racks' },
+    { src: 'images/IMG_5621.jpg', title: 'Atelier Selection' },
+    { src: 'images/IMG_5622.jpg', title: 'Custom Finishes' },
+    { src: 'images/IMG_5623.jpg', title: 'Double Layer Belts' },
+    { src: 'images/IMG_5624.jpg', title: 'Stitched Edges' }
+];
+
+let isAdmin = false;
+
+function initGallery() {
+    const saved = localStorage.getItem('tauris_gallery');
+    if (saved) {
+        try { galleryData = JSON.parse(saved); } catch(e) {}
+    }
+    renderGallery();
 }
-});
+
+function renderGallery() {
+    const grid = document.getElementById('gallery-grid');
+    grid.innerHTML = '';
+    galleryData.forEach((item, index) => {
+        const div = document.createElement('div');
+        div.className = 'gallery-item';
+        div.onclick = (e) => {
+            if (!isAdmin) openLightbox(item.src);
+        };
+        div.innerHTML = `
+            <img src="${item.src}" alt="${item.title}" onerror="this.style.opacity='0.2'">
+            <div class="gallery-caption">
+                <span>${item.title}</span>
+            </div>
+            <div class="card-admin-controls">
+                <button class="card-admin-btn" onclick="editCard(${index}, event)">Edit</button>
+                <button class="card-admin-btn" onclick="deleteCard(${index}, event)">Delete</button>
+            </div>
+        `;
+        grid.appendChild(div);
+    });
+}
+
+function toggleAdminMode() {
+    if (!isAdmin) {
+        const pass = prompt("Enter Admin Password:");
+        if (pass !== "Wow1910$") {
+            alert("Access Denied");
+            return;
+        }
+    }
+
+    isAdmin = !isAdmin;
+    const body = document.getElementById('page-body');
+    const adminBar = document.getElementById('admin-bar');
+    const addContainer = document.getElementById('add-photo-container');
+
+    if (isAdmin) {
+        body.classList.add('body-admin-active');
+        adminBar.classList.add('active');
+        addContainer.style.display = 'block';
+        document.querySelectorAll('[editable]').forEach(el => el.setAttribute('contenteditable', 'true'));
+    } else {
+        body.classList.remove('body-admin-active');
+        adminBar.classList.remove('active');
+        addContainer.style.display = 'none';
+        document.querySelectorAll('[editable]').forEach(el => el.removeAttribute('contenteditable'));
+    }
+}
+
+function editCard(index, e) {
+    e.stopPropagation();
+    const item = galleryData[index];
+    const newSrc = prompt("Image Path / Filename:", item.src);
+    if (newSrc !== null) {
+        const newTitle = prompt("Caption Title:", item.title);
+        galleryData[index] = { src: newSrc, title: newTitle || '' };
+        renderGallery();
+        saveToLocal();
+    }
+}
+
+function deleteCard(index, e) {
+    e.stopPropagation();
+    if (confirm("Remove this photo from gallery?")) {
+        galleryData.splice(index, 1);
+        renderGallery();
+        saveToLocal();
+    }
+}
+
+function addNewGalleryItem() {
+    const src = prompt("Enter Image Path (e.g., images/IMG_5615.jpg):", "images/");
+    if (src) {
+        const title = prompt("Enter Caption Title:", "Custom Work");
+        galleryData.push({ src, title: title || 'Custom Leather' });
+        renderGallery();
+        saveToLocal();
+    }
+}
+
+function saveToLocal() {
+    localStorage.setItem('tauris_gallery', JSON.stringify(galleryData));
+    alert("Draft saved!");
+}
+
+function exportHTML() {
+    if (isAdmin) toggleAdminMode();
+    
+    let htmlContent = "<!DOCTYPE html>\n" + document.documentElement.outerHTML;
+    
+    const blob = new Blob([htmlContent], { type: 'text/html' });
+    const a = document.createElement('a');
+    a.href = URL.createObjectURL(blob);
+    a.download = 'index.html';
+    a.click();
+}
 
 function openLightbox(src) {
-document.getElementById('lightbox-img').src = src;
-document.getElementById('lightbox').classList.add('open');
+    document.getElementById('lightbox-img').src = src;
+    document.getElementById('lightbox').classList.add('open');
 }
 
 function closeLightbox() {
-document.getElementById('lightbox').classList.remove('open');
+    document.getElementById('lightbox').classList.remove('open');
 }
+
+window.addEventListener('DOMContentLoaded', initGallery);
 </script>
 
 </body>
