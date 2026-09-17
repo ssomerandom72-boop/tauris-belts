@@ -28,7 +28,7 @@ body {
     -webkit-text-size-adjust: 100%;
 }
 
-/* Admin Bar */
+/* Admin Bar - Hidden by default */
 #admin-bar {
     display: none;
     position: fixed;
@@ -40,11 +40,12 @@ body {
     padding: 12px 20px;
     border-radius: 8px;
     box-shadow: 0 10px 30px rgba(0,0,0,0.8);
-    display: flex;
     gap: 12px;
     align-items: center;
 }
-#admin-bar.active { display: flex; }
+#admin-bar.active { 
+    display: flex; 
+}
 .admin-btn {
     background: var(--gold);
     color: #000;
@@ -338,16 +339,7 @@ footer { padding: 60px 24px; background: var(--bg-deep); display: flex; flex-dir
 let galleryData = [
     { src: 'images/IMG_4499.jpeg', title: 'Custom Work' },
     { src: 'images/IMG_5012.jpeg', title: 'Handcrafted Straps' },
-    { src: 'images/IMG_5039.jpg', title: 'Full-Grain Belts' },
-    { src: 'images/IMG_5615.jpg', title: 'Custom Belts' },
-    { src: 'images/IMG_5616.jpg', title: 'Heirloom Goods' },
-    { src: 'images/IMG_5617.jpg', title: 'Duty Belts' },
-    { src: 'images/IMG_5618.jpg', title: 'Atelier Selection' },
-    { src: 'images/IMG_5619.jpg', title: 'Classic Finishes' },
-    { src: 'images/IMG_5620.jpg', title: 'Leather Stock' },
-    { src: 'images/IMG_5621.jpg', title: 'Custom Orders' },
-    { src: 'images/IMG_5622.jpg', title: 'Atelier Rack' },
-    { src: 'images/IMG_5623.jpg', title: 'Double Layer' }
+    { src: 'images/IMG_5039.jpg', title: 'Full-Grain Belts' }
 ];
 
 let isAdmin = false;
@@ -387,7 +379,7 @@ function toggleAdminMode() {
     if (!isAdmin) {
         const pass = prompt("Enter Admin Password:");
         if (pass !== "Wow1910$") {
-            alert("Wrong password");
+            alert("Access Denied");
             return;
         }
     }
@@ -443,7 +435,7 @@ function addNewGalleryItem() {
 
 function saveToLocal() {
     localStorage.setItem('tauris_gallery', JSON.stringify(galleryData));
-    alert("Draft saved to browser storage!");
+    alert("Draft saved!");
 }
 
 function exportHTML() {
