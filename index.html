@@ -167,7 +167,7 @@ header {
 }
 .gallery-caption span { font-size: 9px; letter-spacing: 0.25em; color: var(--gold); text-transform: uppercase; }
 
-/* Admin Overlay on Gallery Cards */
+/* Admin Overlay on Image Containers */
 .card-admin-controls {
     display: none;
     position: absolute;
@@ -182,9 +182,11 @@ header {
     color: var(--gold);
     border: 1px solid var(--gold);
     font-size: 10px;
-    padding: 4px 8px;
+    padding: 6px 10px;
     cursor: pointer;
     border-radius: 3px;
+    font-family: inherit;
+    letter-spacing: 0.05em;
 }
 
 /* Content Editable Styles */
@@ -275,6 +277,9 @@ footer { padding: 60px 24px; background: var(--bg-deep); display: flex; flex-dir
 <section class="hero-editorial">
     <div class="hero-image-wrap">
         <img id="hero-img" src="images/IMG_4499.jpeg" alt="Tauris Leather Goods">
+        <div class="card-admin-controls">
+            <button class="card-admin-btn" onclick="changeStaticImg('hero-img')">Change Image</button>
+        </div>
     </div>
     <div class="hero-content-wrap">
         <span class="hero-subtitle" editable>Est. 1978 · Upstate New York</span>
@@ -293,8 +298,18 @@ footer { padding: 60px 24px; background: var(--bg-deep); display: flex; flex-dir
             <p editable>While collaborating with Michael—who also served as the Deputy Chief of the Utica Police Department—Philip developed a firm conviction based on his own experience on the force: there was a vital need for every officer and legal weapon carrier to have a high-quality leather belt to properly contain any holster or apparatus carrying their weapon.</p>
         </div>
         <div class="vertical-imgs">
-            <img id="heritage-img-1" src="images/IMG_5012.jpeg" alt="Leather Detail">
-            <img id="heritage-img-2" src="images/IMG_5039.jpg" alt="Crafted Leather Belts">
+            <div style="position: relative; width: 100%;">
+                <img id="heritage-img-1" src="images/IMG_5012.jpeg" alt="Leather Detail">
+                <div class="card-admin-controls">
+                    <button class="card-admin-btn" onclick="changeStaticImg('heritage-img-1')">Change Image</button>
+                </div>
+            </div>
+            <div style="position: relative; width: 100%;">
+                <img id="heritage-img-2" src="images/IMG_5039.jpg" alt="Crafted Leather Belts">
+                <div class="card-admin-controls">
+                    <button class="card-admin-btn" onclick="changeStaticImg('heritage-img-2')">Change Image</button>
+                </div>
+            </div>
         </div>
     </div>
 </section>
@@ -475,6 +490,16 @@ function toggleAdminMode() {
         adminBar.classList.remove('active');
         addContainer.style.display = 'none';
         document.querySelectorAll('[editable]').forEach(el => el.removeAttribute('contenteditable'));
+    }
+}
+
+function changeStaticImg(imgId) {
+    const img = document.getElementById(imgId);
+    if (!img) return;
+    const newSrc = prompt("Enter image path (e.g., images/IMG_5615.jpg):", img.getAttribute('src'));
+    if (newSrc) {
+        img.src = newSrc;
+        img.setAttribute('src', newSrc);
     }
 }
 
