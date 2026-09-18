@@ -1,725 +1,421 @@
 <!DOCTYPE html>
 <html lang="en" class="scroll-smooth">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Tauris Belts & Custom Leathers | Handcrafted Bespoke Leatherwear Since 1978</title>
-    <script src="https://cdn.tailwindcss.com"></script>
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400..900;1,400..900&family=Plus+Jakarta+Sans:ital,wght@0,200..800;1,200..800&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Tauris Belts & Custom Leathers | Handcrafted Heritage</title>
+  
+  <!-- Tailwind CSS -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  
+  <!-- Font Awesome Icons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 
-    <script>
-        tailwind.config = {
-            theme: {
-                extend: {
-                    colors: {
-                        espresso: '#120C0A',
-                        'espresso-light': '#1E1613',
-                        'espresso-card': '#251D1A',
-                        brass: '#D4AF37',
-                        'brass-light': '#F3E5AB',
-                        'brass-dark': '#AA820A',
-                        cream: '#F7F4EF',
-                        'cream-dark': '#E2DDD5',
-                        leather: '#6E2C1A',
-                        'saddle-tan': '#8C4D2A',
-                    },
-                    fontFamily: {
-                        serif: ['"Playfair Display"', 'serif'],
-                        sans: ['"Plus Jakarta Sans"', 'sans-serif'],
-                    }
-                }
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            brand: {
+              gold: '#C5A059',
+              goldhover: '#B38F46',
+              dark: '#12100E',
+              card: '#1A1715',
+              border: '#2C2723',
+              accent: '#8B0000',
+              cream: '#F4EFEB'
             }
+          },
+          fontFamily: {
+            serif: ['"Playfair Display"', 'serif'],
+            sans: ['"Plus Jakarta Sans"', 'sans-serif'],
+          }
         }
-    </script>
+      }
+    }
+  </script>
+  
+  <style>
+    body {
+      background-color: #0D0B0A;
+      color: #E2DCD5;
+      font-family: 'Plus Jakarta Sans', sans-serif;
+    }
+    
+    .gold-gradient {
+      background: linear-gradient(135deg, #DFBA73 0%, #C5A059 50%, #9E7B3B 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
 
-    <style>
-        body {
-            background-color: #120C0A;
-            color: #F7F4EF;
-            font-family: 'Plus Jakarta Sans', sans-serif;
-            overflow-x: hidden;
-        }
+    .gold-bg-gradient {
+      background: linear-gradient(135deg, #DFBA73 0%, #C5A059 100%);
+    }
 
-        .brass-gradient-text {
-            background: linear-gradient(135deg, #F3E5AB 0%, #D4AF37 50%, #AA820A 100%);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-        }
-
-        .hero-pattern {
-            background: linear-gradient(rgba(18, 12, 10, 0.88), rgba(18, 12, 10, 0.95)), url("images/IMG_5615.jpg");
-            background-size: cover;
-            background-position: center;
-        }
-
-        .img-fallback {
-            background-color: #1E1613;
-            background-image: radial-gradient(#251D1A 1px, transparent 1px);
-            background-size: 16px 16px;
-        }
-
-        .custom-radio:checked + label {
-            border-color: #D4AF37;
-            background-color: rgba(212, 175, 55, 0.08);
-        }
-    </style>
+    [contenteditable="true"] {
+      outline: 2px dashed #C5A059 !important;
+      background-color: rgba(197, 160, 89, 0.1) !important;
+      padding: 2px 4px;
+      border-radius: 4px;
+    }
+  </style>
 </head>
-<body class="antialiased selection:bg-brass selection:text-espresso">
+<body class="antialiased selection:bg-brand-gold selection:text-black">
 
-    <div class="bg-gradient-to-r from-espresso-light via-[#2A1F1B] to-espresso-light border-b border-brass/20 py-2.5 px-4 text-center relative z-50">
-        <p class="text-xs tracking-widest uppercase font-medium text-cream/80 flex items-center justify-center gap-2">
-            <span class="inline-block w-2 h-2 rounded-full bg-brass animate-pulse"></span>
-            <span>Bespoke Handcrafted Orders Only — Zero Ready-to-Ship Retail Stock</span>
-            <span class="hidden md:inline text-brass/50">•</span>
-            <span class="hidden md:inline text-brass">Built to Order in Utica, NY</span>
+  <!-- Admin Bar (Hidden by default until logged in) -->
+  <div id="admin-bar" class="hidden fixed top-0 left-0 right-0 bg-brand-gold text-black z-50 py-2 px-6 flex justify-between items-center shadow-lg font-bold">
+    <div class="flex items-center space-x-3">
+      <i class="fa-solid fa-lock-open"></i>
+      <span>Admin Edit Mode Active</span>
+    </div>
+    <div class="flex space-x-3">
+      <button id="toggle-edit-btn" onclick="toggleTextEditing()" class="bg-black text-white px-3 py-1 rounded text-sm hover:bg-neutral-800 transition">
+        Enable Text Editing
+      </button>
+      <button onclick="saveAdminChanges()" class="bg-emerald-800 text-white px-3 py-1 rounded text-sm hover:bg-emerald-900 transition">
+        Save Changes
+      </button>
+      <button onclick="logoutAdmin()" class="bg-brand-accent text-white px-3 py-1 rounded text-sm hover:bg-red-900 transition">
+        Exit Admin
+      </button>
+    </div>
+  </div>
+
+  <!-- Navigation -->
+  <nav class="sticky top-0 z-40 bg-brand-dark/95 backdrop-blur border-b border-brand-border">
+    <div class="max-w-7xl mx-auto px-6 py-4 flex items-center justify-between">
+      <a href="#" class="flex items-center space-x-3">
+        <div class="w-10 h-10 rounded-full border border-brand-gold flex items-center justify-center font-serif text-brand-gold font-bold text-xl">T</div>
+        <span class="font-serif text-xl md:text-2xl font-bold tracking-wider text-white">TAURIS <span class="text-brand-gold font-light">LEATHER</span></span>
+      </a>
+
+      <div class="hidden md:flex items-center space-x-8 text-sm font-medium uppercase tracking-widest text-neutral-300">
+        <a href="#about" class="hover:text-brand-gold transition">Our Story</a>
+        <a href="#portfolio" class="hover:text-brand-gold transition">Craftsmanship Portfolio</a>
+        <a href="#order" class="hover:text-brand-gold transition">Bespoke Order</a>
+        <a href="#contact" class="hover:text-brand-gold transition">Contact</a>
+      </div>
+
+      <a href="#order" class="hidden sm:inline-block border border-brand-gold text-brand-gold px-5 py-2 rounded text-xs uppercase tracking-widest font-semibold hover:bg-brand-gold hover:text-black transition">
+        Request Custom Order
+      </a>
+    </div>
+  </nav>
+
+  <!-- Hero Section -->
+  <section class="relative py-24 md:py-32 overflow-hidden border-b border-brand-border">
+    <div class="max-w-7xl mx-auto px-6 grid md:grid-cols-2 gap-12 items-center">
+      <div>
+        <span class="inline-block px-3 py-1 border border-brand-gold/40 text-brand-gold text-xs uppercase tracking-widest rounded-full mb-6">Established 1978 &bull; Utica, NY</span>
+        <h1 class="font-serif text-4xl md:text-6xl font-bold text-white leading-tight mb-6 editable" id="hero-title">
+          Handcrafted Duty Belts & Custom Leather Goods.
+        </h1>
+        <p class="text-neutral-300 text-lg leading-relaxed mb-8 editable" id="hero-subtitle">
+          Built for law enforcement officers, armed professionals, and discerning individuals who require uncompromising durability, timeless elegance, and precision fit.
         </p>
+        <div class="flex flex-col sm:flex-row gap-4">
+          <a href="#order" class="gold-bg-gradient text-black font-semibold text-center px-8 py-4 rounded text-sm uppercase tracking-widest shadow-lg hover:opacity-95 transition">
+            Begin Custom Order
+          </a>
+          <a href="#about" class="border border-brand-border text-center px-8 py-4 rounded text-sm uppercase tracking-widest hover:border-brand-gold hover:text-brand-gold transition">
+            Read Our Heritage
+          </a>
+        </div>
+      </div>
+      <div class="relative">
+        <div class="aspect-[4/3] rounded-lg overflow-hidden border border-brand-border bg-brand-card shadow-2xl">
+          <img src="images/IMG_5615.jpg" alt="Tauris Custom Leather Belt" class="w-full h-full object-cover">
+        </div>
+        <div class="absolute -bottom-6 -left-6 bg-brand-card border border-brand-gold/30 p-4 rounded-lg hidden sm:block shadow-xl">
+          <p class="font-serif text-brand-gold font-bold text-lg">100% Custom Made</p>
+          <p class="text-xs text-neutral-400">Zero Mass Production. Built to Your Measurements.</p>
+        </div>
+      </div>
     </div>
+  </section>
 
-    <header class="sticky top-0 z-40 bg-espresso/90 backdrop-blur-md border-b border-brass/10 transition-all duration-300" id="main-header">
-        <div class="max-w-7xl mx-auto px-6 lg:px-12 h-24 flex items-center justify-between">
-            <a href="#" class="flex items-center gap-3 group">
-                <div class="w-12 h-12 rounded-full border border-brass/40 flex items-center justify-center bg-espresso-light group-hover:border-brass transition-colors duration-300">
-                    <span class="font-serif text-xl font-bold brass-gradient-text">T</span>
-                </div>
-                <div class="flex flex-col">
-                    <span class="font-serif text-xl lg:text-2xl font-bold tracking-tight text-cream group-hover:text-brass transition-colors">TAURIS</span>
-                    <span class="text-[9px] tracking-[0.25em] text-brass/80 uppercase">Belts & Custom Leathers</span>
-                </div>
-            </a>
+  <!-- Story Section -->
+  <section id="about" class="py-24 bg-brand-card/50 border-b border-brand-border">
+    <div class="max-w-5xl mx-auto px-6">
+      <div class="text-center mb-12">
+        <h2 class="font-serif text-3xl md:text-4xl font-bold text-white mb-4">Our Heritage</h2>
+        <div class="w-24 h-1 gold-bg-gradient mx-auto"></div>
+      </div>
 
-            <nav class="hidden md:flex items-center space-x-8 text-sm uppercase tracking-widest text-cream/70 font-medium">
-                <a href="#heritage" class="hover:text-brass transition-colors duration-200">Our Heritage</a>
-                <a href="#craftsmanship" class="hover:text-brass transition-colors duration-200">Craftsmanship</a>
-                <a href="#portfolio" class="hover:text-brass transition-colors duration-200">Example Portfolio</a>
-                <a href="#specs" class="hover:text-brass transition-colors duration-200">Sizing Guide</a>
-            </nav>
-
-            <div class="hidden sm:flex items-center space-x-4">
-                <a href="#order-form" class="px-6 py-3 border border-brass/60 text-brass text-xs uppercase tracking-widest rounded-sm hover:bg-brass hover:text-espresso transition-all duration-300 font-semibold shadow-sm hover:shadow-brass/20">
-                    Commission Custom Belt
-                </a>
-            </div>
-
-            <button id="mobile-menu-btn" class="md:hidden text-cream hover:text-brass focus:outline-none p-2" aria-label="Toggle Navigation">
-                <i class="fa-solid fa-bars text-xl"></i>
-            </button>
+      <div class="bg-brand-card border border-brand-border p-8 md:p-12 rounded-xl relative shadow-2xl">
+        <i class="fa-solid fa-quote-left text-4xl text-brand-gold/20 absolute top-6 left-6"></i>
+        <blockquote class="text-lg md:text-xl text-neutral-200 leading-relaxed font-serif italic mb-6 editable" id="story-text">
+          "Tauris Belts and Custom Leathers was established in 1978 by Philip P. Taurisano, a former Utica, New York police officer. Philip worked alongside his brother, Michael P. Taurisano, who has operated the Tauris Holsters brand since the mid-1960s. While collaborating with Michael, who also served as the Deputy Chief of the Utica Police Department, Philip developed a firm conviction based on his own experience on the force: there was a vital need for every officer and legal weapon carrier to have a high-quality leather belt to properly contain any holster or apparatus carrying their weapon."
+        </blockquote>
+        <div class="text-right border-t border-brand-border/60 pt-4">
+          <p class="text-brand-gold font-semibold tracking-wider">Philip P. Taurisano</p>
+          <p class="text-xs text-neutral-400 uppercase tracking-widest">Founder & Master Craftsman</p>
         </div>
-
-        <div id="mobile-menu" class="hidden md:hidden bg-espresso-light border-b border-brass/20 px-6 py-6 transition-all">
-            <nav class="flex flex-col space-y-4 text-sm uppercase tracking-widest text-cream/80">
-                <a href="#heritage" class="mobile-link py-2 border-b border-white/5 hover:text-brass">Our Heritage</a>
-                <a href="#craftsmanship" class="mobile-link py-2 border-b border-white/5 hover:text-brass">Craftsmanship</a>
-                <a href="#portfolio" class="mobile-link py-2 border-b border-white/5 hover:text-brass">Example Portfolio</a>
-                <a href="#specs" class="mobile-link py-2 border-b border-white/5 hover:text-brass">Sizing Guide</a>
-                <a href="#order-form" class="mobile-link mt-4 text-center px-6 py-3 bg-brass text-espresso font-bold text-xs uppercase tracking-widest rounded-sm">
-                    Commission Custom Belt
-                </a>
-            </nav>
-        </div>
-    </header>
-
-    <section class="relative min-h-[85vh] flex items-center justify-center hero-pattern py-20 overflow-hidden img-fallback">
-        <div class="max-w-5xl mx-auto px-6 lg:px-12 text-center relative z-10 flex flex-col items-center">
-            <div class="inline-flex items-center gap-3 px-4 py-1.5 rounded-full border border-brass/30 bg-espresso/80 backdrop-blur-md mb-8">
-                <i class="fa-solid fa-shield-halved text-brass text-xs"></i>
-                <span class="text-xs uppercase tracking-[0.2em] text-cream/90 font-medium">Est. 1978 • Utica, New York</span>
-            </div>
-
-            <h1 class="font-serif text-4xl sm:text-6xl md:text-7xl lg:text-8xl font-bold tracking-tight text-cream leading-[1.1] mb-8">
-                Uncompromising Support.<br/>
-                <span class="italic font-normal brass-gradient-text">Handcrafted to Order.</span>
-            </h1>
-
-            <p class="max-w-2xl text-lg sm:text-xl text-cream-dark/80 font-light leading-relaxed mb-10">
-                We maintain no ready-made inventory. Every belt is individually cut, bevelled, and stitched by hand to comfortably contain your holster and gear without sagging.
-            </p>
-
-            <div class="flex flex-col sm:flex-row gap-5 w-full sm:w-auto">
-                <a href="#order-form" class="px-8 py-4 bg-brass text-espresso font-semibold text-xs sm:text-sm uppercase tracking-[0.2em] rounded-sm hover:bg-brass-light transition-all duration-300 shadow-lg hover:shadow-brass/20 flex items-center justify-center gap-3 group">
-                    <span>Submit Custom Inquiry</span>
-                    <i class="fa-solid fa-arrow-right text-xs group-hover:translate-x-1 transition-transform"></i>
-                </a>
-                <a href="#heritage" class="px-8 py-4 border border-cream/20 text-cream text-xs sm:text-sm uppercase tracking-[0.2em] rounded-sm hover:border-brass hover:text-brass transition-all duration-300 flex items-center justify-center">
-                    Explore Our Heritage
-                </a>
-            </div>
-
-            <div class="mt-16 grid grid-cols-2 md:grid-cols-4 gap-8 pt-10 border-t border-brass/15 w-full">
-                <div>
-                    <span class="block font-serif text-3xl font-bold brass-gradient-text">1978</span>
-                    <span class="text-xs uppercase tracking-widest text-cream/50 mt-1 block">Founded in Utica, NY</span>
-                </div>
-                <div>
-                    <span class="block font-serif text-3xl font-bold brass-gradient-text">100%</span>
-                    <span class="text-xs uppercase tracking-widest text-cream/50 mt-1 block">Full-Grain Bullhide</span>
-                </div>
-                <div>
-                    <span class="block font-serif text-3xl font-bold brass-gradient-text">Zero Sag</span>
-                    <span class="text-xs uppercase tracking-widest text-cream/50 mt-1 block">Holster Containment</span>
-                </div>
-                <div>
-                    <span class="block font-serif text-3xl font-bold brass-gradient-text">Custom</span>
-                    <span class="text-xs uppercase tracking-widest text-cream/50 mt-1 block">Handcrafted per Client</span>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <section id="heritage" class="py-24 bg-espresso-light relative border-t border-b border-brass/10">
-        <div class="max-w-7xl mx-auto px-6 lg:px-12">
-            <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16 items-center">
-                
-                <div class="lg:col-span-5 relative">
-                    <div class="relative z-10 rounded-sm overflow-hidden border border-brass/30 shadow-2xl img-fallback">
-                        <img src="images/IMG_5616.jpg" alt="Tauris Belts Workshop Craftsmanship" class="w-full h-[500px] object-cover object-center filter contrast-105 hover:scale-105 transition-all duration-700" onerror="this.onerror=null; this.src='images/IMG_5615.jpg';">
-                        <div class="absolute inset-0 bg-gradient-to-t from-espresso via-transparent to-transparent opacity-80"></div>
-                        <div class="absolute bottom-6 left-6 right-6 p-6 bg-espresso/90 backdrop-blur-md border border-brass/20 rounded-sm">
-                            <p class="font-serif italic text-brass text-base">"A proper belt is a piece of life-saving equipment for those who carry."</p>
-                            <p class="text-xs uppercase tracking-widest text-cream/60 mt-2">— Tauris Belts & Custom Leathers</p>
-                        </div>
-                    </div>
-                    <div class="absolute -bottom-6 -right-6 w-full h-full border border-brass/20 rounded-sm -z-0 hidden sm:block"></div>
-                </div>
-
-                <div class="lg:col-span-7 flex flex-col justify-center">
-                    <div class="inline-flex items-center gap-2 text-brass text-xs uppercase tracking-[0.25em] mb-4">
-                        <i class="fa-solid fa-star text-[10px]"></i>
-                        <span>The Founders' Story</span>
-                    </div>
-
-                    <h2 class="font-serif text-3xl sm:text-5xl font-bold text-cream mb-8 leading-tight">
-                        Rooted in Law Enforcement Experience
-                    </h2>
-
-                    <!-- VERBATIM HERITAGE STORY AS REQUESTED -->
-                    <div class="bg-espresso-card p-8 sm:p-10 rounded-sm border-l-4 border-brass mb-8 relative shadow-lg">
-                        <p class="text-cream/90 text-lg sm:text-xl font-serif leading-relaxed italic">
-                            "Tauris Belts and Custom Leathers was established in 1978 by Philip P. Taurisano, a former Utica, New York police officer. Philip worked alongside his brother, Michael P. Taurisano, who has operated the Tauris Holsters brand since the mid-1960s. While collaborating with Michael, who also served as the Deputy Chief of the Utica Police Department, Philip developed a firm conviction based on his own experience on the force: there was a vital need for every officer and legal weapon carrier to have a high-quality leather belt to properly contain any holster or apparatus carrying their weapon."
-                        </p>
-                    </div>
-
-                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-6 text-cream-dark/70 text-sm leading-relaxed">
-                        <div class="flex gap-4">
-                            <div class="w-10 h-10 rounded bg-espresso border border-brass/30 flex-shrink-0 flex items-center justify-center text-brass">
-                                <i class="fa-solid fa-shield-halved"></i>
-                            </div>
-                            <div>
-                                <h4 class="font-serif text-cream font-semibold mb-1">Utica Police Roots</h4>
-                                <p>Formed out of real duty experience in Utica, NY to solve holster roll and fatigue.</p>
-                            </div>
-                        </div>
-
-                        <div class="flex gap-4">
-                            <div class="w-10 h-10 rounded bg-espresso border border-brass/30 flex-shrink-0 flex items-center justify-center text-brass">
-                                <i class="fa-solid fa-hammer"></i>
-                            </div>
-                            <div>
-                                <h4 class="font-serif text-cream font-semibold mb-1">Brotherhood in Craft</h4>
-                                <p>Designed in harmony with Tauris Holsters brand for seamless weapon containment.</p>
-                            </div>
-                        </div>
-                    </div>
-
-                </div>
-
-            </div>
-        </div>
-    </section>
-
-    <section id="craftsmanship" class="py-24 bg-espresso relative">
-        <div class="max-w-7xl mx-auto px-6 lg:px-12">
-            
-            <div class="text-center max-w-3xl mx-auto mb-16">
-                <span class="text-brass text-xs uppercase tracking-[0.25em] block mb-3">Custom Standards</span>
-                <h2 class="font-serif text-3xl sm:text-5xl font-bold text-cream mb-6">Engineered for Holster Support</h2>
-                <p class="text-cream/70 text-base leading-relaxed">
-                    Commercial belts fail under weapon weight because they use filler and bonded leather. Every custom piece built in our workshop uses prime full-grain hides engineered to retain structural memory.
-                </p>
-            </div>
-
-            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
-                <div class="bg-espresso-light border border-brass/15 p-8 rounded-sm hover:border-brass/40 transition-all duration-300 group">
-                    <div class="w-14 h-14 rounded-full bg-espresso border border-brass/30 flex items-center justify-center text-brass mb-6 group-hover:scale-110 transition-transform">
-                        <i class="fa-solid fa-layer-group text-xl"></i>
-                    </div>
-                    <h3 class="font-serif text-xl font-bold text-cream mb-3">10-12 oz Full-Grain Hide</h3>
-                    <p class="text-cream/60 text-sm leading-relaxed mb-4">
-                        Single and dual-layer bullhide cuts that prevent vertical collapse and roll when carrying holsters, magazine pouches, or duty tools.
-                    </p>
-                    <ul class="text-xs text-brass/80 space-y-2 border-t border-brass/10 pt-4">
-                        <li class="flex items-center gap-2"><i class="fa-solid fa-check text-[10px]"></i> Zero Bonded Fillers</li>
-                        <li class="flex items-center gap-2"><i class="fa-solid fa-check text-[10px]"></i> Heavy Bullhide Density</li>
-                    </ul>
-                </div>
-
-                <div class="bg-espresso-light border border-brass/15 p-8 rounded-sm hover:border-brass/40 transition-all duration-300 group">
-                    <div class="w-14 h-14 rounded-full bg-espresso border border-brass/30 flex items-center justify-center text-brass mb-6 group-hover:scale-110 transition-transform">
-                        <i class="fa-solid fa-scissors text-xl"></i>
-                    </div>
-                    <h3 class="font-serif text-xl font-bold text-cream mb-3">Hand Burnished & Stitched</h3>
-                    <p class="text-cream/60 text-sm leading-relaxed mb-4">
-                        Edges are bevelled, sealed, and burnished by hand. Dual-layer models are stitched with heavy bonded nylon to ensure lifetime durability.
-                    </p>
-                    <ul class="text-xs text-brass/80 space-y-2 border-t border-brass/10 pt-4">
-                        <li class="flex items-center gap-2"><i class="fa-solid fa-check text-[10px]"></i> Hand Bevelled Edges</li>
-                        <li class="flex items-center gap-2"><i class="fa-solid fa-check text-[10px]"></i> Heavy Bonded Thread</li>
-                    </ul>
-                </div>
-
-                <div class="bg-espresso-light border border-brass/15 p-8 rounded-sm hover:border-brass/40 transition-all duration-300 group">
-                    <div class="w-14 h-14 rounded-full bg-espresso border border-brass/30 flex items-center justify-center text-brass mb-6 group-hover:scale-110 transition-transform">
-                        <i class="fa-solid fa-gear text-xl"></i>
-                    </div>
-                    <h3 class="font-serif text-xl font-bold text-cream mb-3">Chicago Screw Fastening</h3>
-                    <p class="text-cream/60 text-sm leading-relaxed mb-4">
-                        Secured with heavy Chicago screws rather than permanent rivets, allowing easy hardware swapping while offering maximum tensile strength.
-                    </p>
-                    <ul class="text-xs text-brass/80 space-y-2 border-t border-brass/10 pt-4">
-                        <li class="flex items-center gap-2"><i class="fa-solid fa-check text-[10px]"></i> Solid Brass Hardware</li>
-                        <li class="flex items-center gap-2"><i class="fa-solid fa-check text-[10px]"></i> Swappable Buckle Rigging</li>
-                    </ul>
-                </div>
-            </div>
-
-        </div>
-    </section>
-
-    <section id="portfolio" class="py-24 bg-espresso-light border-t border-brass/10">
-        <div class="max-w-7xl mx-auto px-6 lg:px-12">
-            
-            <div class="flex flex-col md:flex-row md:items-end justify-between mb-12">
-                <div>
-                    <span class="text-brass text-xs uppercase tracking-[0.25em] block mb-2">Craftsmanship Gallery</span>
-                    <h2 class="font-serif text-3xl sm:text-5xl font-bold text-cream">Example Work Showcase</h2>
-                </div>
-                <div class="mt-4 md:mt-0 text-left md:text-right">
-                    <span class="inline-block px-3 py-1 bg-brass/10 border border-brass/30 text-brass text-xs uppercase tracking-widest rounded">
-                        Strictly Built to Order
-                    </span>
-                    <p class="text-cream/50 text-xs mt-2">No pre-made inventory. Photos showcase past commissioned work.</p>
-                </div>
-            </div>
-
-            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-                
-                <div class="bg-espresso border border-brass/20 rounded-sm overflow-hidden flex flex-col group hover:border-brass/60 transition-all duration-300">
-                    <div class="h-64 overflow-hidden relative img-fallback">
-                        <img src="images/IMG_5617.jpg" alt="Custom Dual Layer Belt Example" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
-                        <div class="absolute top-3 right-3 bg-espresso/90 border border-brass/30 px-3 py-1 rounded text-[10px] text-brass uppercase font-semibold">
-                            Example Build
-                        </div>
-                    </div>
-                    <div class="p-6 flex flex-col flex-grow">
-                        <h3 class="font-serif text-xl font-bold text-cream mb-2">Tactical Carry Belt</h3>
-                        <p class="text-cream/60 text-xs leading-relaxed mb-6 flex-grow">
-                            Dual-layer reinforced bullhide designed for IWB/OWB holster containment with zero edge roll.
-                        </p>
-                        <a href="#order-form" onclick="preselectCategory('Tactical Carry Belt')" class="text-brass text-xs font-semibold uppercase tracking-widest flex items-center justify-between hover:text-brass-light pt-4 border-t border-brass/10">
-                            <span>Request Custom Build</span>
-                            <i class="fa-solid fa-chevron-right text-[10px]"></i>
-                        </a>
-                    </div>
-                </div>
-
-                <div class="bg-espresso border border-brass/20 rounded-sm overflow-hidden flex flex-col group hover:border-brass/60 transition-all duration-300">
-                    <div class="h-64 overflow-hidden relative img-fallback">
-                        <img src="images/IMG_5618.jpg" alt="Law Enforcement Duty Belt Example" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
-                        <div class="absolute top-3 right-3 bg-espresso/90 border border-brass/30 px-3 py-1 rounded text-[10px] text-brass uppercase font-semibold">
-                            Example Build
-                        </div>
-                    </div>
-                    <div class="p-6 flex flex-col flex-grow">
-                        <h3 class="font-serif text-xl font-bold text-cream mb-2">Utica Law Duty Belt</h3>
-                        <p class="text-cream/60 text-xs leading-relaxed mb-6 flex-grow">
-                            2.0" heavy duty officer belt specification engineered to support full tactical duty loads and apparatus.
-                        </p>
-                        <a href="#order-form" onclick="preselectCategory('Utica Law Duty Belt')" class="text-brass text-xs font-semibold uppercase tracking-widest flex items-center justify-between hover:text-brass-light pt-4 border-t border-brass/10">
-                            <span>Request Custom Build</span>
-                            <i class="fa-solid fa-chevron-right text-[10px]"></i>
-                        </a>
-                    </div>
-                </div>
-
-                <div class="bg-espresso border border-brass/20 rounded-sm overflow-hidden flex flex-col group hover:border-brass/60 transition-all duration-300">
-                    <div class="h-64 overflow-hidden relative img-fallback">
-                        <img src="images/IMG_5620.jpg" alt="Dress Leather Belt Example" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
-                        <div class="absolute top-3 right-3 bg-espresso/90 border border-brass/30 px-3 py-1 rounded text-[10px] text-brass uppercase font-semibold">
-                            Example Build
-                        </div>
-                    </div>
-                    <div class="p-6 flex flex-col flex-grow">
-                        <h3 class="font-serif text-xl font-bold text-cream mb-2">Gentleman Classic</h3>
-                        <p class="text-cream/60 text-xs leading-relaxed mb-6 flex-grow">
-                            Tapered dress profile with hidden internal rigidity. Perfect for suit trousers with discreet carry support.
-                        </p>
-                        <a href="#order-form" onclick="preselectCategory('Gentleman Classic Belt')" class="text-brass text-xs font-semibold uppercase tracking-widest flex items-center justify-between hover:text-brass-light pt-4 border-t border-brass/10">
-                            <span>Request Custom Build</span>
-                            <i class="fa-solid fa-chevron-right text-[10px]"></i>
-                        </a>
-                    </div>
-                </div>
-
-                <div class="bg-espresso border border-brass/20 rounded-sm overflow-hidden flex flex-col group hover:border-brass/60 transition-all duration-300">
-                    <div class="h-64 overflow-hidden relative img-fallback">
-                        <img src="images/IMG_5621.jpg" alt="Custom Holster Accessories Example" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
-                        <div class="absolute top-3 right-3 bg-espresso/90 border border-brass/30 px-3 py-1 rounded text-[10px] text-brass uppercase font-semibold">
-                            Example Build
-                        </div>
-                    </div>
-                    <div class="p-6 flex flex-col flex-grow">
-                        <h3 class="font-serif text-xl font-bold text-cream mb-2">Custom Holster Accessories</h3>
-                        <p class="text-cream/60 text-xs leading-relaxed mb-6 flex-grow">
-                            Custom strap work, mag carrier loops, cuff cases, and leather backing loops custom dyed to match.
-                        </p>
-                        <a href="#order-form" onclick="preselectCategory('Custom Accessories')" class="text-brass text-xs font-semibold uppercase tracking-widest flex items-center justify-between hover:text-brass-light pt-4 border-t border-brass/10">
-                            <span>Request Custom Build</span>
-                            <i class="fa-solid fa-chevron-right text-[10px]"></i>
-                        </a>
-                    </div>
-                </div>
-
-            </div>
-
-            <!-- Additional Workshop Photos Grid using IMG_5622, IMG_5623, IMG_5624 -->
-            <div class="mt-12 grid grid-cols-1 md:grid-cols-3 gap-6">
-                <div class="h-64 rounded-sm overflow-hidden border border-brass/20 relative group img-fallback">
-                    <img src="images/IMG_5622.jpg" alt="Tauris Leathers Workshop Crafting" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
-                    <div class="absolute inset-0 bg-gradient-to-t from-espresso via-transparent to-transparent opacity-60"></div>
-                    <span class="absolute bottom-4 left-4 text-xs font-serif text-cream">Utica Workshop Detail</span>
-                </div>
-                <div class="h-64 rounded-sm overflow-hidden border border-brass/20 relative group img-fallback">
-                    <img src="images/IMG_5623.jpg" alt="Tauris Custom Leather Edge Work" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
-                    <div class="absolute inset-0 bg-gradient-to-t from-espresso via-transparent to-transparent opacity-60"></div>
-                    <span class="absolute bottom-4 left-4 text-xs font-serif text-cream">Hand-Burnished Edges</span>
-                </div>
-                <div class="h-64 rounded-sm overflow-hidden border border-brass/20 relative group img-fallback">
-                    <img src="images/IMG_5624.jpg" alt="Tauris Custom Finished Rigging" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
-                    <div class="absolute inset-0 bg-gradient-to-t from-espresso via-transparent to-transparent opacity-60"></div>
-                    <span class="absolute bottom-4 left-4 text-xs font-serif text-cream">Heavy Duty Fasteners</span>
-                </div>
-            </div>
-
-        </div>
-    </section>
-
-    <section id="specs" class="py-20 bg-espresso">
-        <div class="max-w-7xl mx-auto px-6 lg:px-12">
-            <div class="bg-espresso-card border border-brass/30 p-8 lg:p-12 rounded-sm">
-                <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
-                    <div class="lg:col-span-7">
-                        <div class="inline-flex items-center gap-2 text-brass text-xs uppercase tracking-widest mb-3">
-                            <i class="fa-solid fa-ruler-horizontal"></i>
-                            <span>Measurement Standard</span>
-                        </div>
-                        <h3 class="font-serif text-2xl sm:text-4xl font-bold text-cream mb-4">How We Size Your Custom Belt</h3>
-                        <p class="text-cream/70 text-sm leading-relaxed mb-6">
-                            Because each belt is hand-cut individually to your body and equipment, <strong class="text-brass font-normal">never use your trouser/pant size</strong>. Measure an existing belt from the buckle fold line directly to the hole you currently use.
-                        </p>
-                        <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 text-xs text-cream/80">
-                            <div class="flex items-start gap-3 bg-espresso p-4 border border-brass/10 rounded">
-                                <span class="text-brass font-bold text-lg">1.</span>
-                                <span>Measure existing belt from fold to used hole in inches.</span>
-                            </div>
-                            <div class="flex items-start gap-3 bg-espresso p-4 border border-brass/10 rounded">
-                                <span class="text-brass font-bold text-lg">2.</span>
-                                <span>Add 1 inch if sizing for an Inside-the-Waistband (IWB) holster.</span>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="lg:col-span-5 border-t lg:border-t-0 lg:border-l border-brass/20 pt-6 lg:pt-0 lg:pl-8 flex flex-col justify-center">
-                        <div class="p-6 bg-espresso rounded border border-brass/20 text-center">
-                            <i class="fa-solid fa-phone-volume text-brass text-3xl mb-3"></i>
-                            <h4 class="font-serif text-cream font-bold text-lg mb-2">Personal Measurement Verification</h4>
-                            <p class="text-cream/60 text-xs mb-4">Every order specification is reviewed directly before hide cutting starts.</p>
-                            <span class="text-brass text-xs font-semibold uppercase tracking-wider">Workshop Phone: (315) 797-1978</span>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <section id="order-form" class="py-24 bg-espresso-light border-t border-brass/20 relative">
-        <div class="max-w-5xl mx-auto px-6 lg:px-12">
-            
-            <div class="text-center max-w-3xl mx-auto mb-16">
-                <span class="text-brass text-xs uppercase tracking-[0.25em] block mb-3">Direct Commission Request</span>
-                <h2 class="font-serif text-3xl sm:text-5xl font-bold text-cream mb-4">Custom Order Request Form</h2>
-                <p class="text-cream/70 text-sm leading-relaxed">
-                    There are no direct purchases or automated checkout carts on this site. Complete your custom build specifications below, and our workshop will contact you directly to confirm details and build lead times.
-                </p>
-            </div>
-
-            <form id="bespoke-form" onsubmit="handleFormSubmit(event)" class="bg-espresso border border-brass/30 p-8 sm:p-12 rounded-sm shadow-2xl space-y-12">
-                
-                <div>
-                    <div class="flex items-center gap-3 border-b border-brass/20 pb-4 mb-6">
-                        <span class="w-8 h-8 rounded-full bg-brass/20 text-brass border border-brass/40 flex items-center justify-center font-serif font-bold text-sm">1</span>
-                        <h3 class="font-serif text-xl text-cream font-bold">Contact Details</h3>
-                    </div>
-
-                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-                        <div>
-                            <label class="block text-xs uppercase tracking-widest text-cream/70 mb-2">Full Name *</label>
-                            <input type="text" id="form-name" required placeholder="e.g. Officer John Miller" class="w-full bg-espresso-light border border-brass/20 rounded px-4 py-3 text-cream text-sm focus:outline-none focus:border-brass transition-colors">
-                        </div>
-                        <div>
-                            <label class="block text-xs uppercase tracking-widest text-cream/70 mb-2">Email Address *</label>
-                            <input type="email" id="form-email" required placeholder="john@example.com" class="w-full bg-espresso-light border border-brass/20 rounded px-4 py-3 text-cream text-sm focus:outline-none focus:border-brass transition-colors">
-                        </div>
-                        <div>
-                            <label class="block text-xs uppercase tracking-widest text-cream/70 mb-2">Phone Number *</label>
-                            <input type="tel" id="form-phone" required placeholder="(315) 555-0198" class="w-full bg-espresso-light border border-brass/20 rounded px-4 py-3 text-cream text-sm focus:outline-none focus:border-brass transition-colors">
-                        </div>
-                        <div>
-                            <label class="block text-xs uppercase tracking-widest text-cream/70 mb-2">City & State</label>
-                            <input type="text" id="form-location" placeholder="Utica, NY" class="w-full bg-espresso-light border border-brass/20 rounded px-4 py-3 text-cream text-sm focus:outline-none focus:border-brass transition-colors">
-                        </div>
-                    </div>
-                </div>
-
-                <div>
-                    <div class="flex items-center gap-3 border-b border-brass/20 pb-4 mb-6">
-                        <span class="w-8 h-8 rounded-full bg-brass/20 text-brass border border-brass/40 flex items-center justify-center font-serif font-bold text-sm">2</span>
-                        <h3 class="font-serif text-xl text-cream font-bold">Leather Build Specifications</h3>
-                    </div>
-
-                    <div class="space-y-6">
-                        <div>
-                            <label class="block text-xs uppercase tracking-widest text-cream/70 mb-3">Model Style *</label>
-                            <select id="model-select" class="w-full bg-espresso-light border border-brass/20 rounded px-4 py-3 text-cream text-sm focus:outline-none focus:border-brass transition-colors">
-                                <option value="Tactical Carry Belt">Tactical Carry Belt (Double-Layer Gun Belt)</option>
-                                <option value="Utica Law Duty Belt">Utica Law Duty Belt (2.0" Heavy Duty Rig)</option>
-                                <option value="Gentleman Classic Belt">Gentleman Classic Belt (1.25" / 1.5" Dress Wear)</option>
-                                <option value="Custom Accessories">Custom Holster Accessories & Strapwork</option>
-                            </select>
-                        </div>
-
-                        <div>
-                            <label class="block text-xs uppercase tracking-widest text-cream/70 mb-3">Leather Dye Finish *</label>
-                            <div class="grid grid-cols-2 sm:grid-cols-4 gap-4">
-                                <div>
-                                    <input type="radio" id="color-mahogany" name="leather-color" value="Mahogany Brown" class="hidden custom-radio" checked>
-                                    <label for="color-mahogany" class="flex flex-col items-center justify-center p-4 border border-brass/20 bg-espresso-light rounded cursor-pointer hover:border-brass/50 transition-all">
-                                        <span class="w-8 h-8 rounded-full bg-[#4A1E1B] border border-white/20 mb-2"></span>
-                                        <span class="text-xs text-cream font-medium">Mahogany</span>
-                                    </label>
-                                </div>
-                                <div>
-                                    <input type="radio" id="color-black" name="leather-color" value="Onyx Black" class="hidden custom-radio">
-                                    <label for="color-black" class="flex flex-col items-center justify-center p-4 border border-brass/20 bg-espresso-light rounded cursor-pointer hover:border-brass/50 transition-all">
-                                        <span class="w-8 h-8 rounded-full bg-[#121212] border border-white/20 mb-2"></span>
-                                        <span class="text-xs text-cream font-medium">Onyx Black</span>
-                                    </label>
-                                </div>
-                                <div>
-                                    <input type="radio" id="color-saddle" name="leather-color" value="Saddle Tan" class="hidden custom-radio">
-                                    <label for="color-saddle" class="flex flex-col items-center justify-center p-4 border border-brass/20 bg-espresso-light rounded cursor-pointer hover:border-brass/50 transition-all">
-                                        <span class="w-8 h-8 rounded-full bg-[#8C4D2A] border border-white/20 mb-2"></span>
-                                        <span class="text-xs text-cream font-medium">Saddle Tan</span>
-                                    </label>
-                                </div>
-                                <div>
-                                    <input type="radio" id="color-walnut" name="leather-color" value="Walnut Dark" class="hidden custom-radio">
-                                    <label for="color-walnut" class="flex flex-col items-center justify-center p-4 border border-brass/20 bg-espresso-light rounded cursor-pointer hover:border-brass/50 transition-all">
-                                        <span class="w-8 h-8 rounded-full bg-[#2E1A11] border border-white/20 mb-2"></span>
-                                        <span class="text-xs text-cream font-medium">Walnut Dark</span>
-                                    </label>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
-                            <div>
-                                <label class="block text-xs uppercase tracking-widest text-cream/70 mb-2">Hardware Material *</label>
-                                <select id="form-hardware" class="w-full bg-espresso-light border border-brass/20 rounded px-4 py-3 text-cream text-sm focus:outline-none focus:border-brass transition-colors">
-                                    <option value="Solid Brass">Solid Forged Brass</option>
-                                    <option value="Brushed Nickel">Brushed Stainless Nickel</option>
-                                    <option value="Antique Bronze">Antique Bronze</option>
-                                    <option value="Matte Black Duty">Matte Black Duty Finish</option>
-                                </select>
-                            </div>
-
-                            <div>
-                                <label class="block text-xs uppercase tracking-widest text-cream/70 mb-2">Belt Width *</label>
-                                <select id="form-width" class="w-full bg-espresso-light border border-brass/20 rounded px-4 py-3 text-cream text-sm focus:outline-none focus:border-brass transition-colors">
-                                    <option value="1.5 inch Standard">1.5 Inches (Standard Concealed Carry)</option>
-                                    <option value="1.75 inch Heavy">1.75 Inches (Tactical Carry)</option>
-                                    <option value="2.0 inch Full Duty">2.0 Inches (Full Law Duty Rig)</option>
-                                    <option value="1.25 inch Dress">1.25 Inches (Formal Trousers)</option>
-                                </select>
-                            </div>
-                        </div>
-
-                        <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
-                            <div>
-                                <label class="block text-xs uppercase tracking-widest text-cream/70 mb-2">Belt Measurement (Inches fold-to-hole) *</label>
-                                <input type="text" id="form-size" required placeholder="e.g. 38 Inches" class="w-full bg-espresso-light border border-brass/20 rounded px-4 py-3 text-cream text-sm focus:outline-none focus:border-brass transition-colors">
-                            </div>
-                            <div>
-                                <label class="block text-xs uppercase tracking-widest text-cream/70 mb-2">Primary Carry Intent</label>
-                                <select id="form-intent" class="w-full bg-espresso-light border border-brass/20 rounded px-4 py-3 text-cream text-sm focus:outline-none focus:border-brass transition-colors">
-                                    <option value="Inside Waistband (IWB)">Inside Waistband (IWB) Holster</option>
-                                    <option value="Outside Waistband (OWB)">Outside Waistband (OWB) Holster</option>
-                                    <option value="Law Enforcement Duty">Law Enforcement Duty Apparatus</option>
-                                    <option value="Everyday Dress Wear">Everyday Non-Weapon Wear</option>
-                                </select>
-                            </div>
-                        </div>
-
-                        <div>
-                            <label class="block text-xs uppercase tracking-widest text-cream/70 mb-2">Holster Model / Custom Stamping / Special Instructions</label>
-                            <textarea id="form-notes" rows="4" placeholder="Specify holster brand/model, custom initials, thread color preference, or special waist fitting requirements..." class="w-full bg-espresso-light border border-brass/20 rounded p-4 text-cream text-sm focus:outline-none focus:border-brass transition-colors"></textarea>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="border-t border-brass/20 pt-8 flex flex-col sm:flex-row items-center justify-between gap-6">
-                    <div class="flex items-center gap-3 text-xs text-cream/60">
-                        <i class="fa-solid fa-lock text-brass"></i>
-                        <span>No immediate payment required. We will respond with pricing & build timeline.</span>
-                    </div>
-
-                    <button type="submit" class="w-full sm:w-auto px-10 py-4 bg-brass text-espresso font-bold text-xs uppercase tracking-[0.2em] rounded-sm hover:bg-brass-light transition-all shadow-lg hover:shadow-brass/20 flex items-center justify-center gap-2">
-                        <i class="fa-solid fa-paper-plane"></i>
-                        <span>Submit Order Inquiry</span>
-                    </button>
-                </div>
-
-            </form>
-        </div>
-    </section>
-
-    <div id="confirmation-modal" class="fixed inset-0 z-50 bg-espresso/90 backdrop-blur-md flex items-center justify-center p-4 hidden">
-        <div class="bg-espresso-card border border-brass rounded-sm max-w-xl w-full p-8 relative shadow-2xl text-left">
-            <div class="w-12 h-12 rounded-full bg-brass/20 border border-brass flex items-center justify-center text-brass text-xl mb-4">
-                <i class="fa-solid fa-check"></i>
-            </div>
-            <h3 class="font-serif text-2xl font-bold text-cream mb-1">Custom Order Inquiry Received</h3>
-            <p class="text-xs uppercase tracking-widest text-brass mb-6">Tauris Belts Workshop • Utica, New York</p>
-            
-            <div class="bg-espresso p-4 rounded border border-brass/10 mb-6 text-xs text-cream/80 space-y-2" id="summary-content">
-            </div>
-
-            <p class="text-cream/70 text-xs leading-relaxed mb-6">
-                Philip or a master craftsman will review your measurement and holster support specifications before contacting you via phone or email to confirm final pricing and build scheduling.
-            </p>
-            
-            <button onclick="closeModal()" class="w-full py-3 bg-brass text-espresso font-bold text-xs uppercase tracking-widest rounded-sm hover:bg-brass-light transition-colors">
-                Close & Return to Site
-            </button>
-        </div>
+      </div>
     </div>
+  </section>
 
-    <footer class="bg-espresso-light border-t border-brass/20 py-16 text-cream/60 text-xs">
-        <div class="max-w-7xl mx-auto px-6 lg:px-12">
-            <div class="grid grid-cols-1 md:grid-cols-12 gap-10 pb-12 border-b border-brass/10">
-                
-                <div class="md:col-span-5 space-y-4">
-                    <div class="flex items-center gap-3">
-                        <div class="w-8 h-8 rounded-full border border-brass flex items-center justify-center bg-espresso">
-                            <span class="font-serif text-sm font-bold text-brass">T</span>
-                        </div>
-                        <span class="font-serif text-lg font-bold text-cream tracking-tight">TAURIS BELTS & CUSTOM LEATHERS</span>
-                    </div>
-                    <p class="text-cream/60 leading-relaxed max-w-sm">
-                        Established in 1978 in Utica, NY by Philip P. Taurisano. Handcrafting bespoke leather gun belts and holster-support leatherwear for legal weapon carriers and officers.
-                    </p>
-                    <p class="text-brass text-[11px] uppercase tracking-widest">
-                        Collaborating with Tauris Holsters Brand (Est. mid-1960s)
-                    </p>
-                </div>
+  <!-- Portfolio / Showcase Section -->
+  <section id="portfolio" class="py-24 border-b border-brand-border">
+    <div class="max-w-7xl mx-auto px-6">
+      <div class="text-center mb-16">
+        <span class="text-brand-gold text-xs uppercase tracking-widest font-semibold">Exemplary Craftsmanship</span>
+        <h2 class="font-serif text-3xl md:text-5xl font-bold text-white mt-2 mb-4">Sample Work Portfolio</h2>
+        <p class="text-neutral-400 max-w-2xl mx-auto editable" id="portfolio-subtitle">
+          We do not hold premade inventory. Every belt and holster rig is custom built from scratch upon order placement.
+        </p>
+      </div>
 
-                <div class="md:col-span-3 space-y-3">
-                    <h4 class="font-serif text-cream font-semibold text-sm uppercase tracking-wider mb-4">Workshop Standards</h4>
-                    <ul class="space-y-2">
-                        <li><a href="#craftsmanship" class="hover:text-brass transition-colors">Full-Grain Bullhide</a></li>
-                        <li><a href="#craftsmanship" class="hover:text-brass transition-colors">Saddle Hand Stitching</a></li>
-                        <li><a href="#specs" class="hover:text-brass transition-colors">Sizing & Measurement Guide</a></li>
-                        <li><a href="#heritage" class="hover:text-brass transition-colors">Utica Police Roots</a></li>
-                    </ul>
-                </div>
-
-                <div class="md:col-span-4 space-y-3">
-                    <h4 class="font-serif text-cream font-semibold text-sm uppercase tracking-wider mb-4">Workshop Location</h4>
-                    <p class="leading-relaxed">
-                        <i class="fa-solid fa-location-dot text-brass mr-2"></i> Utica, New York State<br>
-                        <i class="fa-solid fa-phone text-brass mr-2"></i> Phone Consultations: (315) 797-1978<br>
-                        <i class="fa-solid fa-envelope text-brass mr-2"></i> Direct Inquiries: order@taurisbelts.com
-                    </p>
-                </div>
-
-            </div>
-
-            <div class="pt-8 flex flex-col sm:flex-row items-center justify-between gap-4 text-[11px] text-cream/40">
-                <p>&copy; <span id="current-year">2026</span> Tauris Belts and Custom Leathers. All rights reserved.</p>
-                <p class="uppercase tracking-widest">Utica, NY • Custom Orders Only • No Mass Inventory</p>
-            </div>
+      <!-- Image Grid matching GitHub image files -->
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+        <div class="bg-brand-card border border-brand-border rounded-lg overflow-hidden group">
+          <div class="aspect-square overflow-hidden bg-neutral-900">
+            <img src="images/IMG_5616.jpg" alt="Custom Duty Belt" class="w-full h-full object-cover group-hover:scale-105 transition duration-500">
+          </div>
+          <div class="p-6">
+            <h3 class="font-serif text-xl font-bold text-white mb-2">Heavy-Duty Tactical Belt</h3>
+            <p class="text-neutral-400 text-sm">Reinforced dual-layer hide engineered for maximum firearm and gear load support.</p>
+          </div>
         </div>
-    </footer>
 
-    <script>
-        document.getElementById('current-year').textContent = new Date().getFullYear();
+        <div class="bg-brand-card border border-brand-border rounded-lg overflow-hidden group">
+          <div class="aspect-square overflow-hidden bg-neutral-900">
+            <img src="images/IMG_5617.jpg" alt="Custom Dress Belt" class="w-full h-full object-cover group-hover:scale-105 transition duration-500">
+          </div>
+          <div class="p-6">
+            <h3 class="font-serif text-xl font-bold text-white mb-2">Heritage Dress Belt</h3>
+            <p class="text-neutral-400 text-sm">Polished finish with burnished edges, ideal for formal wear or everyday carry.</p>
+          </div>
+        </div>
 
-        const mobileMenuBtn = document.getElementById('mobile-menu-btn');
-        const mobileMenu = document.getElementById('mobile-menu');
+        <div class="bg-brand-card border border-brand-border rounded-lg overflow-hidden group">
+          <div class="aspect-square overflow-hidden bg-neutral-900">
+            <img src="images/IMG_5618.jpg" alt="Custom Holster Rig" class="w-full h-full object-cover group-hover:scale-105 transition duration-500">
+          </div>
+          <div class="p-6">
+            <h3 class="font-serif text-xl font-bold text-white mb-2">Custom Holster Integration</h3>
+            <p class="text-neutral-400 text-sm">Form-fitted custom holster companion build designed for zero sag.</p>
+          </div>
+        </div>
 
-        mobileMenuBtn.addEventListener('click', () => {
-            mobileMenu.classList.toggle('hidden');
+        <div class="bg-brand-card border border-brand-border rounded-lg overflow-hidden group">
+          <div class="aspect-square overflow-hidden bg-neutral-900">
+            <img src="images/IMG_5620.jpg" alt="Custom Leather Work" class="w-full h-full object-cover group-hover:scale-105 transition duration-500">
+          </div>
+          <div class="p-6">
+            <h3 class="font-serif text-xl font-bold text-white mb-2">Hand-Stitched Detail</h3>
+            <p class="text-neutral-400 text-sm">Precision edge beveling and heavy wax thread stitching built to last generations.</p>
+          </div>
+        </div>
+
+        <div class="bg-brand-card border border-brand-border rounded-lg overflow-hidden group">
+          <div class="aspect-square overflow-hidden bg-neutral-900">
+            <img src="images/IMG_5621.jpg" alt="Leather Buckle Rig" class="w-full h-full object-cover group-hover:scale-105 transition duration-500">
+          </div>
+          <div class="p-6">
+            <h3 class="font-serif text-xl font-bold text-white mb-2">Solid Brass Hardware Rig</h3>
+            <p class="text-neutral-400 text-sm">Heavy brass and stainless steel hardware selections mounted with reinforced Chicago screws.</p>
+          </div>
+        </div>
+
+        <div class="bg-brand-card border border-brand-border rounded-lg overflow-hidden group">
+          <div class="aspect-square overflow-hidden bg-neutral-900">
+            <img src="images/IMG_5622.jpg" alt="Custom Belt Craftsmanship" class="w-full h-full object-cover group-hover:scale-105 transition duration-500">
+          </div>
+          <div class="p-6">
+            <h3 class="font-serif text-xl font-bold text-white mb-2">Custom Width Carry Belt</h3>
+            <p class="text-neutral-400 text-sm">Sized specifically to user waist measurements and holster attachment specs.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Custom Order Form Section -->
+  <section id="order" class="py-24 bg-brand-card/30">
+    <div class="max-w-4xl mx-auto px-6">
+      <div class="text-center mb-12">
+        <span class="text-brand-gold text-xs uppercase tracking-widest font-semibold">Direct Commission</span>
+        <h2 class="font-serif text-3xl md:text-5xl font-bold text-white mt-2 mb-4">Request A Custom Order</h2>
+        <p class="text-neutral-400 editable" id="order-subtitle">
+          Fill out your build specifications below. Philip will review your inquiry and reach out directly regarding lead times and final sizing verification.
+        </p>
+      </div>
+
+      <form id="custom-order-form" onsubmit="submitOrder(event)" class="bg-brand-card border border-brand-border p-8 md:p-12 rounded-xl shadow-2xl space-y-6">
+        <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
+          <div>
+            <label class="block text-xs uppercase tracking-widest text-neutral-300 font-semibold mb-2">Full Name *</label>
+            <input type="text" required class="w-full bg-brand-dark border border-brand-border rounded px-4 py-3 text-white focus:border-brand-gold focus:outline-none">
+          </div>
+          <div>
+            <label class="block text-xs uppercase tracking-widest text-neutral-300 font-semibold mb-2">Phone Number *</label>
+            <input type="tel" required class="w-full bg-brand-dark border border-brand-border rounded px-4 py-3 text-white focus:border-brand-gold focus:outline-none">
+          </div>
+        </div>
+
+        <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
+          <div>
+            <label class="block text-xs uppercase tracking-widest text-neutral-300 font-semibold mb-2">Email Address *</label>
+            <input type="email" required class="w-full bg-brand-dark border border-brand-border rounded px-4 py-3 text-white focus:border-brand-gold focus:outline-none">
+          </div>
+          <div>
+            <label class="block text-xs uppercase tracking-widest text-neutral-300 font-semibold mb-2">Item Type *</label>
+            <select required class="w-full bg-brand-dark border border-brand-border rounded px-4 py-3 text-white focus:border-brand-gold focus:outline-none">
+              <option value="">Select Custom Build Type</option>
+              <option value="duty-belt">Law Enforcement / Duty Belt</option>
+              <option value="ccw-belt">CCW Gun Belt</option>
+              <option value="dress-belt">Custom Dress Belt</option>
+              <option value="holster-rig">Custom Leather Holster Rig</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="grid grid-cols-1 sm:grid-cols-3 gap-6">
+          <div>
+            <label class="block text-xs uppercase tracking-widest text-neutral-300 font-semibold mb-2">Exact Belt Size (Inches)</label>
+            <input type="text" placeholder="e.g., 36 Inches" class="w-full bg-brand-dark border border-brand-border rounded px-4 py-3 text-white focus:border-brand-gold focus:outline-none">
+          </div>
+          <div>
+            <label class="block text-xs uppercase tracking-widest text-neutral-300 font-semibold mb-2">Preferred Width</label>
+            <select class="w-full bg-brand-dark border border-brand-border rounded px-4 py-3 text-white focus:border-brand-gold focus:outline-none">
+              <option value="1.25">1.25 Inches</option>
+              <option value="1.5" selected>1.5 Inches (Standard)</option>
+              <option value="1.75">1.75 Inches (Duty)</option>
+              <option value="2.0">2.0 Inches</option>
+            </select>
+          </div>
+          <div>
+            <label class="block text-xs uppercase tracking-widest text-neutral-300 font-semibold mb-2">Hardware Finish</label>
+            <select class="w-full bg-brand-dark border border-brand-border rounded px-4 py-3 text-white focus:border-brand-gold focus:outline-none">
+              <option value="solid-brass">Solid Brass</option>
+              <option value="nickel">Nickel / Stainless</option>
+              <option value="black">Matte Black</option>
+            </select>
+          </div>
+        </div>
+
+        <div>
+          <label class="block text-xs uppercase tracking-widest text-neutral-300 font-semibold mb-2">Custom Order Notes & Holster Specifications</label>
+          <textarea rows="4" placeholder="Detail your preferred leather color, holster carry setup, or specific duty requirements..." class="w-full bg-brand-dark border border-brand-border rounded px-4 py-3 text-white focus:border-brand-gold focus:outline-none"></textarea>
+        </div>
+
+        <button type="submit" class="w-full gold-bg-gradient text-black font-bold uppercase tracking-widest py-4 rounded hover:opacity-95 transition">
+          Submit Custom Inquiry
+        </button>
+
+        <p id="form-success" class="hidden text-center text-emerald-400 font-semibold pt-2">
+          <i class="fa-solid fa-check-circle mr-2"></i> Your inquiry has been submitted! Philip will contact you shortly.
+        </p>
+      </form>
+    </div>
+  </section>
+
+  <!-- Contact Section -->
+  <section id="contact" class="py-24 border-b border-brand-border">
+    <div class="max-w-7xl mx-auto px-6 text-center">
+      <h2 class="font-serif text-3xl md:text-4xl font-bold text-white mb-6">Contact The Workshop</h2>
+      <p class="text-neutral-400 max-w-xl mx-auto mb-12 editable" id="contact-text">
+        Located in New Hartford / Utica, New York. Call us directly to discuss custom leather belt and holster orders.
+      </p>
+
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-3xl mx-auto">
+        <div class="bg-brand-card border border-brand-border p-8 rounded-xl flex flex-col items-center">
+          <i class="fa-solid fa-phone text-3xl text-brand-gold mb-4"></i>
+          <h3 class="font-serif text-lg font-bold text-white mb-2">Business Line</h3>
+          <a href="tel:3157946091" class="text-xl font-bold text-brand-gold hover:underline">315-794-6091</a>
+        </div>
+
+        <div class="bg-brand-card border border-brand-border p-8 rounded-xl flex flex-col items-center">
+          <i class="fa-solid fa-house text-3xl text-brand-gold mb-4"></i>
+          <h3 class="font-serif text-lg font-bold text-white mb-2">Home Line</h3>
+          <a href="tel:3157336174" class="text-xl font-bold text-brand-gold hover:underline">315-733-6174</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="py-12 bg-black border-t border-brand-border/40 text-xs text-neutral-500">
+    <div class="max-w-7xl mx-auto px-6 flex flex-col md:flex-row justify-between items-center gap-4">
+      <p>&copy; 1978 - <span id="year"></span> Tauris Belts and Custom Leathers. All rights reserved.</p>
+      <div class="flex space-x-6">
+        <span>Utica, NY</span>
+        <span>&bull;</span>
+        <button onclick="promptAdminLogin()" class="hover:text-brand-gold transition">Admin Login</button>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Admin Script -->
+  <script>
+    document.getElementById('year').textContent = new Date().getFullYear();
+
+    const ADMIN_PASS = "Wow1910$";
+    let isAdmin = false;
+    let isEditing = false;
+
+    // Load saved edits from localStorage on page load
+    window.addEventListener('DOMContentLoaded', () => {
+      const savedContent = localStorage.getItem('tauris_site_edits');
+      if (savedContent) {
+        const edits = JSON.parse(savedContent);
+        Object.keys(edits).forEach(id => {
+          const el = document.getElementById(id);
+          if (el) el.innerHTML = edits[id];
         });
+      }
+    });
 
-        document.querySelectorAll('.mobile-link').forEach(link => {
-            link.addEventListener('click', () => {
-                mobileMenu.classList.add('hidden');
-            });
-        });
+    function promptAdminLogin() {
+      const pass = prompt("Enter Admin Password:");
+      if (pass === ADMIN_PASS) {
+        isAdmin = true;
+        document.getElementById('admin-bar').classList.remove('hidden');
+        alert("Admin logged in. Click 'Enable Text Editing' to edit any text on the page.");
+      } else if (pass !== null) {
+        alert("Incorrect password.");
+      }
+    }
 
-        function preselectCategory(categoryName) {
-            const selectElement = document.getElementById('model-select');
-            if (selectElement) {
-                selectElement.value = categoryName;
-            }
-        }
+    function toggleTextEditing() {
+      if (!isAdmin) return;
+      isEditing = !isEditing;
+      const editables = document.querySelectorAll('.editable');
+      editables.forEach(el => {
+        el.contentEditable = isEditing ? "true" : "false";
+      });
+      document.getElementById('toggle-edit-btn').textContent = isEditing ? "Disable Text Editing" : "Enable Text Editing";
+    }
 
-        function handleFormSubmit(event) {
-            event.preventDefault();
+    function saveAdminChanges() {
+      if (!isAdmin) return;
+      const editables = document.querySelectorAll('.editable');
+      const edits = {};
+      editables.forEach(el => {
+        if (el.id) edits[el.id] = el.innerHTML;
+      });
+      localStorage.setItem('tauris_site_edits', JSON.stringify(edits));
+      alert("All text changes saved successfully!");
+    }
 
-            const name = document.getElementById('form-name').value;
-            const model = document.getElementById('model-select').value;
-            const size = document.getElementById('form-size').value;
-            const hardware = document.getElementById('form-hardware').value;
-            const width = document.getElementById('form-width').value;
-            const selectedColor = document.querySelector('input[name="leather-color"]:checked').value;
+    function logoutAdmin() {
+      isAdmin = false;
+      isEditing = false;
+      document.querySelectorAll('.editable').forEach(el => el.contentEditable = "false");
+      document.getElementById('admin-bar').classList.add('hidden');
+    }
 
-            const summaryHtml = `
-                <p class="text-brass font-semibold border-b border-brass/20 pb-1">Submission Summary:</p>
-                <p><span class="text-cream/50">Client:</span> ${name}</p>
-                <p><span class="text-cream/50">Model:</span> ${model}</p>
-                <p><span class="text-cream/50">Dye Finish:</span> ${selectedColor}</p>
-                <p><span class="text-cream/50">Belt Measurement:</span> ${size}</p>
-                <p><span class="text-cream/50">Width & Hardware:</span> ${width} | ${hardware}</p>
-            `;
-
-            document.getElementById('summary-content').innerHTML = summaryHtml;
-            document.getElementById('confirmation-modal').classList.remove('hidden');
-        }
-
-        function closeModal() {
-            document.getElementById('confirmation-modal').classList.add('hidden');
-            document.getElementById('bespoke-form').reset();
-        }
-
-        window.addEventListener('scroll', () => {
-            const header = document.getElementById('main-header');
-            if (window.scrollY > 50) {
-                header.classList.add('shadow-xl', 'bg-espresso');
-            } else {
-                header.classList.remove('shadow-xl');
-            }
-        });
-    </script>
+    function submitOrder(e) {
+      e.preventDefault();
+      document.getElementById('form-success').classList.remove('hidden');
+      e.target.reset();
+    }
+  </script>
 </body>
 </html>
