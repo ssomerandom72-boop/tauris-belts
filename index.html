@@ -150,7 +150,7 @@
       <div class="bg-brand-card border border-brand-border p-8 md:p-12 rounded-xl relative shadow-2xl">
         <i class="fa-solid fa-quote-left text-4xl text-brand-gold/20 absolute top-6 left-6"></i>
         <blockquote class="text-lg md:text-xl text-neutral-200 leading-relaxed font-serif italic mb-6 editable" id="story-text">
-          "Tauris Belts and Custom Leathers was established in 1978 by Philip P. Taurisano, a former Utica, New York police officer. Philip worked alongside his brother, Michael P. Taurisano, who has operated the Tauris Holsters brand since the mid-1960s. While collaborating with Michael, who also served as the Deputy Chief of the Utica Police Department, Philip developed a firm conviction based on his own experience on the force: there was a vital need for every officer and legal weapon carrier to have a high-quality leather belt to properly contain any holster or apparatus carrying their weapon.[span_0](start_span)"[span_0](end_span)
+          "Tauris Belts and Custom Leathers was established in 1978 by Philip P. Taurisano, a former Utica, New York police officer. Philip worked alongside his brother, Michael P. Taurisano, who operated Tauris Holsters from the mid-1960s. While collaborating with Michael, who also served as Deputy Chief of the Utica Police Department, Philip developed a firm conviction based on his experience on the force: there was a vital need for every officer and individual to have a high-quality leather belt to properly support their equipment and last for years to come."
         </blockquote>
         <div class="text-right border-t border-brand-border/60 pt-4">
           <p class="text-brand-gold font-semibold tracking-wider">Philip P. Taurisano</p>
@@ -170,7 +170,7 @@
         </p>
       </div>
 
-      <!-- Pure Image Showcase Grid using your repository files -->
+      <!-- Pure Image Showcase Grid using repository files -->
       <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
         <div class="bg-brand-card border border-brand-border rounded-lg overflow-hidden">
           <div class="aspect-square overflow-hidden bg-neutral-900">
@@ -240,30 +240,30 @@
         </p>
       </div>
 
-      <form id="custom-order-form" onsubmit="submitOrder(event)" class="bg-brand-card border border-brand-border p-8 md:p-12 rounded-xl shadow-2xl space-y-6">
+      <form id="custom-order-form" action="https://formspree.io/f/xyknzovk" method="POST" class="bg-brand-card border border-brand-border p-8 md:p-12 rounded-xl shadow-2xl space-y-6">
         <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
           <div>
             <label class="block text-xs uppercase tracking-widest text-neutral-300 font-semibold mb-2">Full Name *</label>
-            <input type="text" required class="w-full bg-brand-dark border border-brand-border rounded px-4 py-3 text-white focus:border-brand-gold focus:outline-none">
+            <input type="text" name="name" required class="w-full bg-brand-dark border border-brand-border rounded px-4 py-3 text-white focus:border-brand-gold focus:outline-none">
           </div>
           <div>
             <label class="block text-xs uppercase tracking-widest text-neutral-300 font-semibold mb-2">Phone Number *</label>
-            <input type="tel" required class="w-full bg-brand-dark border border-brand-border rounded px-4 py-3 text-white focus:border-brand-gold focus:outline-none">
+            <input type="tel" name="phone" required class="w-full bg-brand-dark border border-brand-border rounded px-4 py-3 text-white focus:border-brand-gold focus:outline-none">
           </div>
         </div>
 
         <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
           <div>
             <label class="block text-xs uppercase tracking-widest text-neutral-300 font-semibold mb-2">Email Address *</label>
-            <input type="email" required class="w-full bg-brand-dark border border-brand-border rounded px-4 py-3 text-white focus:border-brand-gold focus:outline-none">
+            <input type="email" name="email" required class="w-full bg-brand-dark border border-brand-border rounded px-4 py-3 text-white focus:border-brand-gold focus:outline-none">
           </div>
           <div>
             <label class="block text-xs uppercase tracking-widest text-neutral-300 font-semibold mb-2">Belt / Work Type *</label>
-            <select required class="w-full bg-brand-dark border border-brand-border rounded px-4 py-3 text-white focus:border-brand-gold focus:outline-none">
+            <select name="work_type" required class="w-full bg-brand-dark border border-brand-border rounded px-4 py-3 text-white focus:border-brand-gold focus:outline-none">
               <option value="">Select Custom Order Type</option>
-              <option value="custom-belt">Custom Duty / Gun Belt</option>
-              <option value="dress-belt">Custom Dress Belt</option>
-              <option value="other">Other Custom Leatherwork</option>
+              <option value="Custom Duty / Gun Belt">Custom Duty / Gun Belt</option>
+              <option value="Custom Dress Belt">Custom Dress Belt</option>
+              <option value="Other Custom Leatherwork">Other Custom Leatherwork</option>
             </select>
           </div>
         </div>
@@ -271,22 +271,22 @@
         <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
           <div>
             <label class="block text-xs uppercase tracking-widest text-neutral-300 font-semibold mb-2">Belt Size (Inches)</label>
-            <input type="text" placeholder="e.g. 36" class="w-full bg-brand-dark border border-brand-border rounded px-4 py-3 text-white focus:border-brand-gold focus:outline-none">
+            <input type="text" name="belt_size" placeholder="e.g. 36" class="w-full bg-brand-dark border border-brand-border rounded px-4 py-3 text-white focus:border-brand-gold focus:outline-none">
           </div>
           <div>
             <label class="block text-xs uppercase tracking-widest text-neutral-300 font-semibold mb-2">Width</label>
-            <select class="w-full bg-brand-dark border border-brand-border rounded px-4 py-3 text-white focus:border-brand-gold focus:outline-none">
-              <option value="1.25">1.25 Inches</option>
-              <option value="1.5" selected>1.5 Inches</option>
-              <option value="1.75">1.75 Inches</option>
-              <option value="2.0">2.0 Inches</option>
+            <select name="width" class="w-full bg-brand-dark border border-brand-border rounded px-4 py-3 text-white focus:border-brand-gold focus:outline-none">
+              <option value="1.25 Inches">1.25 Inches</option>
+              <option value="1.5 Inches" selected>1.5 Inches</option>
+              <option value="1.75 Inches">1.75 Inches</option>
+              <option value="2.0 Inches">2.0 Inches</option>
             </select>
           </div>
         </div>
 
         <div>
           <label class="block text-xs uppercase tracking-widest text-neutral-300 font-semibold mb-2">Order Details & Notes</label>
-          <textarea rows="4" placeholder="Describe what you need built..." class="w-full bg-brand-dark border border-brand-border rounded px-4 py-3 text-white focus:border-brand-gold focus:outline-none"></textarea>
+          <textarea name="notes" rows="4" placeholder="Describe what you need built..." class="w-full bg-brand-dark border border-brand-border rounded px-4 py-3 text-white focus:border-brand-gold focus:outline-none"></textarea>
         </div>
 
         <button type="submit" class="w-full gold-bg-gradient text-black font-bold uppercase tracking-widest py-4 rounded hover:opacity-95 transition">
@@ -394,11 +394,25 @@
       document.getElementById('admin-bar').classList.add('hidden');
     }
 
-    function submitOrder(e) {
+    // AJAX Formspree handler so the page doesn't redirect
+    const form = document.getElementById('custom-order-form');
+    form.addEventListener('submit', async function(e) {
       e.preventDefault();
-      document.getElementById('form-success').classList.remove('hidden');
-      e.target.reset();
-    }
+      const data = new FormData(form);
+      const response = await fetch(form.action, {
+        method: form.method,
+        body: data,
+        headers: {
+          'Accept': 'application/json'
+        }
+      });
+      if (response.ok) {
+        document.getElementById('form-success').classList.remove('hidden');
+        form.reset();
+      } else {
+        alert("There was an error submitting your order. Please try again or call us directly.");
+      }
+    });
   </script>
 </body>
 </html>
