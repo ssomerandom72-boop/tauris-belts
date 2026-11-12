@@ -43,7 +43,9 @@ body {
     gap: 12px;
     align-items: center;
 }
-#admin-bar.active { display: flex; }
+#admin-bar.active { 
+    display: flex; 
+}
 .admin-btn {
     background: var(--gold);
     color: #000;
@@ -165,7 +167,7 @@ header {
 }
 .gallery-caption span { font-size: 9px; letter-spacing: 0.25em; color: var(--gold); text-transform: uppercase; }
 
-/* Admin Overlay on Gallery Cards */
+/* Admin Overlay on Image Containers */
 .card-admin-controls {
     display: none;
     position: absolute;
@@ -180,9 +182,11 @@ header {
     color: var(--gold);
     border: 1px solid var(--gold);
     font-size: 10px;
-    padding: 4px 8px;
+    padding: 6px 10px;
     cursor: pointer;
     border-radius: 3px;
+    font-family: inherit;
+    letter-spacing: 0.05em;
 }
 
 /* Content Editable Styles */
@@ -192,36 +196,32 @@ header {
     border-radius: 2px;
 }
 
-/* Inquiry Form Section */
-.inquiry-section { background: var(--bg-surface); border-top: 1px solid var(--border-subtle); border-bottom: 1px solid var(--border-subtle); padding: 80px 24px; }
-.inquiry-form { max-width: 600px; margin: 40px auto 0 auto; display: flex; flex-direction: column; gap: 20px; }
-.form-group { display: flex; flex-direction: column; gap: 8px; }
-.form-group label { font-size: 10px; letter-spacing: 0.25em; text-transform: uppercase; color: var(--gold); }
-.form-group input, .form-group textarea {
-    background: var(--bg-card);
-    border: 1px solid var(--border-subtle);
-    color: var(--text-main);
-    padding: 14px;
-    font-size: 13px;
-    outline: none;
-    font-family: inherit;
-    transition: border-color 0.3s ease;
+/* Shows Section */
+.shows-list { max-width: 800px; margin: 0 auto; display: flex; flex-direction: column; gap: 20px; }
+.show-item { 
+    display: flex; 
+    align-items: center; 
+    justify-content: space-between; 
+    padding: 24px; 
+    background: var(--bg-surface); 
+    border: 1px solid var(--border-subtle); 
+    transition: border-color 0.3s ease; 
+    gap: 20px; 
 }
-.form-group input:focus, .form-group textarea:focus { border-color: var(--gold); }
-.submit-btn {
-    background: var(--gold);
-    color: var(--bg-deep);
-    border: none;
-    padding: 16px;
-    font-size: 10px;
-    letter-spacing: 0.25em;
-    text-transform: uppercase;
-    cursor: pointer;
-    font-weight: 600;
-    margin-top: 10px;
-    transition: background 0.3s ease;
+.show-item:hover { border-color: var(--gold); }
+.show-date { 
+    text-align: center; 
+    border-right: 1px solid var(--border-subtle); 
+    padding-right: 24px; 
+    min-width: 90px; 
 }
-.submit-btn:hover { background: #e5be48; }
+.show-date .month { display: block; font-size: 10px; letter-spacing: 0.2em; text-transform: uppercase; color: var(--gold); }
+.show-date .day { display: block; font-family: 'Cormorant Garamond', serif; font-size: 24px; color: var(--text-main); margin-top: 5px; }
+.show-details { flex: 1; }
+.show-details h3 { font-family: 'Cormorant Garamond', serif; font-size: 22px; font-weight: 400; margin-bottom: 5px; }
+.show-details p { font-size: 12px; color: var(--text-muted); }
+.show-details .sub-info { font-size: 11px; color: var(--gold); margin-top: 4px; opacity: 0.8; }
+.inquire-btn { font-size: 10px; letter-spacing: 0.25em; text-transform: uppercase; color: var(--text-main); text-decoration: none; border-bottom: 1px solid var(--gold); padding-bottom: 2px; }
 
 /* Lightbox Modal */
 .lightbox { display: none; position: fixed; inset: 0; background: rgba(10,7,5,0.97); z-index: 1000; align-items: center; justify-content: center; padding: 20px; }
@@ -257,13 +257,14 @@ footer { padding: 60px 24px; background: var(--bg-deep); display: flex; flex-dir
 <body id="page-body">
 
 <div class="event-banner">
-    <span>Catch us live at upcoming regional exhibitions &amp; custom showings.</span>
+    <span>Catch us live! Check out the <a href="https://www.svcraftshow.com" target="_blank" rel="noopener">Sauquoit Valley Fine Arts &amp; Crafts Show</a> &amp; <a href="https://www.nystrappers.org/convention-thank-you/" target="_blank" rel="noopener">Trapper's Convention</a></span>
 </div>
 
 <header id="header">
     <div class="header-left">
         <a href="#heritage">Heritage</a>
         <a href="#gallery">Gallery</a>
+        <a href="#shows">Shows</a>
         <a href="#inquiry">Inquire</a>
         <a href="#" onclick="toggleAdminMode(); return false;" style="color: var(--gold);">[ Admin ]</a>
     </div>
@@ -275,7 +276,10 @@ footer { padding: 60px 24px; background: var(--bg-deep); display: flex; flex-dir
 
 <section class="hero-editorial">
     <div class="hero-image-wrap">
-        <img src="images/IMG_4499.jpeg" alt="Tauris Leather Goods">
+        <img id="hero-img" src="images/IMG_4499.jpeg" alt="Tauris Leather Goods">
+        <div class="card-admin-controls">
+            <button class="card-admin-btn" onclick="changeStaticImg('hero-img')">Change Image</button>
+        </div>
     </div>
     <div class="hero-content-wrap">
         <span class="hero-subtitle" editable>Est. 1978 · Upstate New York</span>
@@ -294,8 +298,18 @@ footer { padding: 60px 24px; background: var(--bg-deep); display: flex; flex-dir
             <p editable>While collaborating with Michael—who also served as the Deputy Chief of the Utica Police Department—Philip developed a firm conviction based on his own experience on the force: there was a vital need for every officer and legal weapon carrier to have a high-quality leather belt to properly contain any holster or apparatus carrying their weapon.</p>
         </div>
         <div class="vertical-imgs">
-            <img src="images/IMG_5012.jpeg" alt="Leather Detail">
-            <img src="images/IMG_5039.jpg" alt="Crafted Leather Belts">
+            <div style="position: relative; width: 100%;">
+                <img id="heritage-img-1" src="images/IMG_5012.jpeg" alt="Leather Detail">
+                <div class="card-admin-controls">
+                    <button class="card-admin-btn" onclick="changeStaticImg('heritage-img-1')">Change Image</button>
+                </div>
+            </div>
+            <div style="position: relative; width: 100%;">
+                <img id="heritage-img-2" src="images/IMG_5039.jpg" alt="Crafted Leather Belts">
+                <div class="card-admin-controls">
+                    <button class="card-admin-btn" onclick="changeStaticImg('heritage-img-2')">Change Image</button>
+                </div>
+            </div>
         </div>
     </div>
 </section>
@@ -315,30 +329,65 @@ footer { padding: 60px 24px; background: var(--bg-deep); display: flex; flex-dir
     </div>
 </section>
 
-<section class="inquiry-section" id="inquiry">
+<section class="editorial-section" id="shows" style="padding-top: 40px; padding-bottom: 40px;">
+    <div style="text-align: center; margin-bottom: 50px;">
+        <span class="hero-subtitle" editable>Live Exhibitions</span>
+        <h2 style="font-family: 'Cormorant Garamond', serif; font-size: clamp(34px, 4vw, 48px); font-weight: 300;" editable>Upcoming Shows</h2>
+    </div>
+    
+    <div class="shows-list">
+        <div class="show-item">
+            <div class="show-date">
+                <span class="month">Sep</span>
+                <span class="day">3–5</span>
+            </div>
+            <div class="show-details">
+                <h3 editable>Trapper's Convention &amp; Sportsman Show</h3>
+                <p editable>Herkimer County Fairgrounds, 135 Cemetery St, Frankfort, NY</p>
+                <div class="sub-info" editable>Thu &amp; Fri: 8am–5pm | Sat: 8am–3pm</div>
+            </div>
+            <div class="show-action">
+                <a href="https://www.nystrappers.org/convention-thank-you/" target="_blank" rel="noopener" class="inquire-btn">Event Details</a>
+            </div>
+        </div>
+
+        <div class="show-item">
+            <div class="show-date">
+                <span class="month">Nov</span>
+                <span class="day">21–22</span>
+            </div>
+            <div class="show-details">
+                <h3 editable>46th Sauquoit Valley Fine Arts &amp; Craft Show</h3>
+                <p editable>Sauquoit Middle School, 2648 Sulphur Spring Rd, Sauquoit, NY</p>
+                <div class="sub-info" editable>10am–4pm | $5 Admission (12 &amp; under free)</div>
+            </div>
+            <div class="show-action">
+                <a href="https://www.svcraftshow.com" target="_blank" rel="noopener" class="inquire-btn">Event Details</a>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section class="inquiry-section" id="inquiry" style="padding: 80px 24px; background: var(--bg-surface);">
     <div style="text-align: center;">
         <span class="hero-subtitle" editable>Custom Orders &amp; Fitting</span>
         <h2 style="font-family: 'Cormorant Garamond', serif; font-size: clamp(34px, 4vw, 48px); font-weight: 300;" editable>Submit an Inquiry</h2>
     </div>
 
-    <form class="inquiry-form" action="https://formspree.io/f/xyknzovk" method="POST">
-        <div class="form-group">
-            <label for="name">Name</label>
-            <input type="text" id="name" name="name" required placeholder="Your full name">
+    <form class="inquiry-form" action="https://formspree.io/f/xyknzovk" method="POST" style="max-width: 600px; margin: 40px auto 0 auto; display: flex; flex-direction: column; gap: 20px;">
+        <div style="display: flex; flex-direction: column; gap: 8px;">
+            <label style="font-size: 10px; letter-spacing: 0.25em; text-transform: uppercase; color: var(--gold);">Name</label>
+            <input type="text" name="name" required placeholder="Your full name" style="background: var(--bg-card); border: 1px solid var(--border-subtle); color: var(--text-main); padding: 14px; outline: none;">
         </div>
-        <div class="form-group">
-            <label for="email">Email</label>
-            <input type="email" id="email" name="email" required placeholder="your.email@example.com">
+        <div style="display: flex; flex-direction: column; gap: 8px;">
+            <label style="font-size: 10px; letter-spacing: 0.25em; text-transform: uppercase; color: var(--gold);">Email</label>
+            <input type="email" name="email" required placeholder="your.email@example.com" style="background: var(--bg-card); border: 1px solid var(--border-subtle); color: var(--text-main); padding: 14px; outline: none;">
         </div>
-        <div class="form-group">
-            <label for="phone">Phone (Optional)</label>
-            <input type="tel" id="phone" name="phone" placeholder="(315) 000-0000">
+        <div style="display: flex; flex-direction: column; gap: 8px;">
+            <label style="font-size: 10px; letter-spacing: 0.25em; text-transform: uppercase; color: var(--gold);">Custom Request / Sizing Details</label>
+            <textarea name="message" rows="5" required placeholder="Let us know what kind of belt, sheath, or custom leatherwork you are looking for..." style="background: var(--bg-card); border: 1px solid var(--border-subtle); color: var(--text-main); padding: 14px; outline: none;"></textarea>
         </div>
-        <div class="form-group">
-            <label for="message">Custom Request / Sizing Details</label>
-            <textarea id="message" name="message" rows="5" required placeholder="Let us know what kind of belt, sheath, or custom leatherwork you are looking for..."></textarea>
-        </div>
-        <button type="submit" class="submit-btn">Send Inquiry</button>
+        <button type="submit" class="admin-btn" style="padding: 16px; margin-top: 10px;">Send Inquiry</button>
     </form>
 </section>
 
@@ -350,13 +399,11 @@ footer { padding: 60px 24px; background: var(--bg-deep); display: flex; flex-dir
         &copy; 2026 Tauris Leather. All Rights Reserved.
     </div>
     <div class="footer-links">
-        <a href="https://www.facebook.com/TaurisLeather315/" target="_blank" rel="noopener">Facebook</a>
-        <a href="https://www.instagram.com/taurisleather/" target="_blank" rel="noopener">Instagram</a>
-        <a href="https://www.youtube.com/@TaurisBeltsAndCustomLeathers" target="_blank" rel="noopener">YouTube</a>
         <a href="#" onclick="toggleAdminMode(); return false;">Admin Mode</a>
     </div>
 </footer>
 
+<!-- Lightbox Modal -->
 <div class="lightbox" id="lightbox" onclick="closeLightbox()">
     <span class="lightbox-close">Close [X]</span>
     <img id="lightbox-img" src="" alt="Enlarged View">
@@ -375,15 +422,15 @@ let galleryData = [
     { src: 'images/IMG_4499.jpeg', title: 'Custom Work' },
     { src: 'images/IMG_5012.jpeg', title: 'Handcrafted Straps' },
     { src: 'images/IMG_5039.jpg', title: 'Full-Grain Belts' },
-    { src: 'images/IMG_5615.jpg', title: 'Custom Belts' },
-    { src: 'images/IMG_5616.jpg', title: 'Heirloom Goods' },
-    { src: 'images/IMG_5617.jpg', title: 'Duty Belts' },
-    { src: 'images/IMG_5618.jpg', title: 'Atelier Selection' },
-    { src: 'images/IMG_5619.jpg', title: 'Classic Finishes' },
-    { src: 'images/IMG_5620.jpg', title: 'Leather Stock' },
-    { src: 'images/IMG_5621.jpg', title: 'Custom Orders' },
-    { src: 'images/IMG_5622.jpg', title: 'Atelier Rack' },
-    { src: 'images/IMG_5623.jpg', title: 'Double Layer' }
+    { src: 'images/IMG_5615.jpg', title: 'Belt Collection' },
+    { src: 'images/IMG_5616.jpg', title: 'Custom Straps' },
+    { src: 'images/IMG_5617.jpg', title: 'Heavy Duty Belts' },
+    { src: 'images/IMG_5618.jpg', title: 'Heirloom Goods' },
+    { src: 'images/IMG_5620.jpg', title: 'Belt Racks' },
+    { src: 'images/IMG_5621.jpg', title: 'Atelier Selection' },
+    { src: 'images/IMG_5622.jpg', title: 'Custom Finishes' },
+    { src: 'images/IMG_5623.jpg', title: 'Double Layer Belts' },
+    { src: 'images/IMG_5624.jpg', title: 'Stitched Edges' }
 ];
 
 let isAdmin = false;
@@ -446,6 +493,16 @@ function toggleAdminMode() {
     }
 }
 
+function changeStaticImg(imgId) {
+    const img = document.getElementById(imgId);
+    if (!img) return;
+    const newSrc = prompt("Enter image path (e.g., images/IMG_5615.jpg):", img.getAttribute('src'));
+    if (newSrc) {
+        img.src = newSrc;
+        img.setAttribute('src', newSrc);
+    }
+}
+
 function editCard(index, e) {
     e.stopPropagation();
     const item = galleryData[index];
@@ -468,7 +525,7 @@ function deleteCard(index, e) {
 }
 
 function addNewGalleryItem() {
-    const src = prompt("Enter Image Path (e.g., images/IMG_5033.jpg):", "images/");
+    const src = prompt("Enter Image Path (e.g., images/IMG_5615.jpg):", "images/");
     if (src) {
         const title = prompt("Enter Caption Title:", "Custom Work");
         galleryData.push({ src, title: title || 'Custom Leather' });
