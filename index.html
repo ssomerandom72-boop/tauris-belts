@@ -2,566 +2,142 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#0f0a07">
+<meta name="description" content="Tauris Leather — handcrafted custom leather belts and goods, established in 1978 in Upstate New York.">
 <title>TAURIS LEATHER | Handcrafted Custom Leathers</title>
-<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,400&family=Plus+Jakarta+Sans:wght@200;300;400;600&display=swap" rel="stylesheet">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,400&family=Plus+Jakarta+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
 <style>
-*, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
-:root { 
-    --bg-deep: #0f0a07;
-    --bg-surface: #18110c;
-    --bg-card: #201710;
-    --text-main: #f5efe6;
-    --text-muted: #9e8d7c;
-    --gold: #d4af37;
-    --gold-dim: rgba(212, 175, 55, 0.2);
-    --border-subtle: rgba(212, 175, 55, 0.12);
-}
-
-html { scroll-behavior: smooth; }
-body { 
-    font-family: 'Plus Jakarta Sans', sans-serif; 
-    background: var(--bg-deep); 
-    color: var(--text-main); 
-    overflow-x: hidden;
-    letter-spacing: 0.04em;
-    -webkit-text-size-adjust: 100%;
-}
-
-/* Admin Bar - Hidden by default */
-#admin-bar {
-    display: none;
-    position: fixed;
-    bottom: 20px;
-    right: 20px;
-    z-index: 9999;
-    background: #111;
-    border: 1px solid var(--gold);
-    padding: 12px 20px;
-    border-radius: 8px;
-    box-shadow: 0 10px 30px rgba(0,0,0,0.8);
-    gap: 12px;
-    align-items: center;
-}
-#admin-bar.active { 
-    display: flex; 
-}
-.admin-btn {
-    background: var(--gold);
-    color: #000;
-    border: none;
-    padding: 8px 14px;
-    font-size: 11px;
-    font-weight: 600;
-    letter-spacing: 0.1em;
-    text-transform: uppercase;
-    cursor: pointer;
-    border-radius: 4px;
-}
-.admin-btn.secondary {
-    background: transparent;
-    color: var(--gold);
-    border: 1px solid var(--gold);
-}
-
-/* Announcement Banner */
-.event-banner {
-    background: var(--gold);
-    color: var(--bg-deep);
-    padding: 10px 20px;
-    text-align: center;
-    font-size: 10px;
-    letter-spacing: 0.2em;
-    text-transform: uppercase;
-    font-weight: 500;
-    position: fixed;
-    top: 0; left: 0; right: 0;
-    z-index: 101;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    gap: 15px;
-}
-.event-banner a { color: var(--bg-deep); text-decoration: underline; font-weight: 600; }
-
-header { 
-    position: fixed; 
-    top: 37px; left: 0; right: 0; 
-    z-index: 100; 
-    display: flex;
-    justify-content: space-between;
-    align-items: center; 
-    padding: 20px 24px; 
-    background: rgba(15,10,7,0.95);
-    backdrop-filter: blur(8px);
-    border-bottom: 1px solid var(--border-subtle);
-}
-.header-left { display: flex; gap: 20px; }
-.header-left a { font-size: 10px; letter-spacing: 0.25em; text-transform: uppercase; color: var(--text-muted); text-decoration: none; }
-.header-logo { 
-    font-family: 'Cormorant Garamond', serif; 
-    font-size: 16px; 
-    letter-spacing: 0.3em; 
-    text-transform: uppercase; 
-    color: var(--text-main);
-    text-decoration: none;
-}
-.header-right { display: flex; align-items: center; gap: 20px; }
-.header-btn { 
-    font-size: 10px; 
-    letter-spacing: 0.25em; 
-    text-transform: uppercase; 
-    color: var(--gold); 
-    background: transparent; 
-    border: 1px solid var(--gold); 
-    padding: 6px 14px; 
-    text-decoration: none;
-}
-
-/* Hero Section */
-.hero-editorial { min-height: 100vh; display: flex; flex-direction: column; padding-top: 107px; }
-.hero-image-wrap { position: relative; width: 100%; height: 50vh; overflow: hidden; }
-.hero-image-wrap img { width: 100%; height: 100%; object-fit: cover; filter: sepia(20%) brightness(0.7); }
-.hero-content-wrap { display: flex; flex-direction: column; justify-content: center; padding: 40px 24px; background: var(--bg-deep); flex: 1; }
-.hero-subtitle { font-size: 9px; letter-spacing: 0.4em; text-transform: uppercase; color: var(--gold); margin-bottom: 15px; }
-.hero-main-title { font-family: 'Cormorant Garamond', serif; font-size: 40px; font-weight: 300; line-height: 1.1; margin-bottom: 20px; }
-.hero-main-title em { font-style: italic; color: var(--gold); }
-.hero-desc { font-size: 13px; line-height: 2.2; color: var(--text-muted); margin-bottom: 30px; }
-
-/* Sections */
-.editorial-section { padding: 80px 24px; max-width: 1500px; margin: 0 auto; }
-.split-layout { display: flex; flex-direction: column; gap: 40px; }
-.editorial-text h2 { font-family: 'Cormorant Garamond', serif; font-size: 34px; font-weight: 300; line-height: 1.15; margin-bottom: 20px; }
-.editorial-text p { font-size: 13px; line-height: 2.2; color: var(--text-muted); margin-bottom: 15px; }
-.vertical-imgs { display: flex; flex-direction: column; gap: 16px; }
-.vertical-imgs img { width: 100%; height: 320px; object-fit: cover; filter: sepia(15%) brightness(0.8); }
-
-/* Gallery Grid */
-.gallery-grid { 
-    display: grid; 
-    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); 
-    gap: 20px; 
-    padding: 0 24px; 
-    max-width: 1400px; 
-    margin: 0 auto; 
-}
-.gallery-item { 
-    position: relative; 
-    overflow: hidden; 
-    background: var(--bg-card); 
-    border: 1px solid var(--border-subtle); 
-    height: 320px; 
-    cursor: pointer;
-    transition: border-color 0.3s ease, transform 0.3s ease;
-}
-.gallery-item:hover { border-color: var(--gold); transform: translateY(-3px); }
-.gallery-item img { width: 100%; height: 100%; object-fit: cover; filter: sepia(10%) brightness(0.85); }
-.gallery-caption { 
-    position: absolute; 
-    bottom: 0; left: 0; right: 0; 
-    padding: 16px 20px; 
-    background: linear-gradient(to top, rgba(15,10,7,0.95), transparent); 
-    display: flex; 
-    justify-content: space-between; 
-    align-items: flex-end; 
-}
-.gallery-caption span { font-size: 9px; letter-spacing: 0.25em; color: var(--gold); text-transform: uppercase; }
-
-/* Admin Overlay on Image Containers */
-.card-admin-controls {
-    display: none;
-    position: absolute;
-    top: 10px;
-    right: 10px;
-    z-index: 10;
-    gap: 6px;
-}
-.body-admin-active .card-admin-controls { display: flex; }
-.card-admin-btn {
-    background: rgba(0,0,0,0.85);
-    color: var(--gold);
-    border: 1px solid var(--gold);
-    font-size: 10px;
-    padding: 6px 10px;
-    cursor: pointer;
-    border-radius: 3px;
-    font-family: inherit;
-    letter-spacing: 0.05em;
-}
-
-/* Content Editable Styles */
-.body-admin-active [contenteditable="true"] {
-    outline: 1px dashed var(--gold) !important;
-    padding: 2px 4px;
-    border-radius: 2px;
-}
-
-/* Shows Section */
-.shows-list { max-width: 800px; margin: 0 auto; display: flex; flex-direction: column; gap: 20px; }
-.show-item { 
-    display: flex; 
-    align-items: center; 
-    justify-content: space-between; 
-    padding: 24px; 
-    background: var(--bg-surface); 
-    border: 1px solid var(--border-subtle); 
-    transition: border-color 0.3s ease; 
-    gap: 20px; 
-}
-.show-item:hover { border-color: var(--gold); }
-.show-date { 
-    text-align: center; 
-    border-right: 1px solid var(--border-subtle); 
-    padding-right: 24px; 
-    min-width: 90px; 
-}
-.show-date .month { display: block; font-size: 10px; letter-spacing: 0.2em; text-transform: uppercase; color: var(--gold); }
-.show-date .day { display: block; font-family: 'Cormorant Garamond', serif; font-size: 24px; color: var(--text-main); margin-top: 5px; }
-.show-details { flex: 1; }
-.show-details h3 { font-family: 'Cormorant Garamond', serif; font-size: 22px; font-weight: 400; margin-bottom: 5px; }
-.show-details p { font-size: 12px; color: var(--text-muted); }
-.show-details .sub-info { font-size: 11px; color: var(--gold); margin-top: 4px; opacity: 0.8; }
-.inquire-btn { font-size: 10px; letter-spacing: 0.25em; text-transform: uppercase; color: var(--text-main); text-decoration: none; border-bottom: 1px solid var(--gold); padding-bottom: 2px; }
-
-/* Lightbox Modal */
-.lightbox { display: none; position: fixed; inset: 0; background: rgba(10,7,5,0.97); z-index: 1000; align-items: center; justify-content: center; padding: 20px; }
-.lightbox.open { display: flex; }
-.lightbox img { max-width: 85vw; max-height: 85vh; object-fit: contain; }
-.lightbox-close { position: absolute; top: 30px; right: 40px; font-size: 10px; letter-spacing: 0.3em; text-transform: uppercase; color: var(--text-muted); cursor: pointer; }
-
-/* Footer */
-footer { padding: 60px 24px; background: var(--bg-deep); display: flex; flex-direction: column; gap: 30px; text-align: center; border-top: 1px solid var(--border-subtle); align-items: center; }
-.footer-brand { font-family: 'Cormorant Garamond', serif; font-size: 16px; letter-spacing: 0.3em; text-transform: uppercase; }
-.footer-meta { font-size: 11px; letter-spacing: 0.1em; color: var(--text-muted); line-height: 1.8; }
-.footer-links { display: flex; gap: 20px; flex-wrap: wrap; justify-content: center; }
-.footer-links a { font-size: 9px; letter-spacing: 0.2em; text-transform: uppercase; color: var(--text-muted); text-decoration: none; }
-
-@media (min-width: 1024px) {
-    header { padding: 35px 50px; display: grid; grid-template-columns: 1fr auto 1fr; top: 37px; }
-    .header-left { gap: 30px; }
-    .header-logo { font-size: 22px; letter-spacing: 0.35em; text-align: center; }
-    .header-right { justify-content: flex-end; }
-    .hero-editorial { height: 100vh; min-height: auto; display: grid; grid-template-columns: 1.2fr 0.8fr; padding-top: 137px; }
-    .hero-image-wrap { height: 100%; }
-    .hero-content-wrap { padding: 80px; flex: unset; }
-    .hero-main-title { font-size: clamp(48px, 6vw, 84px); margin-bottom: 35px; }
-    .editorial-section { padding: 160px 80px; }
-    .split-layout { display: grid; grid-template-columns: 1fr 1fr; gap: 100px; align-items: center; }
-    .vertical-imgs { display: grid; grid-template-columns: 1.2fr 0.8fr; gap: 20px; align-items: center; }
-    .vertical-imgs img { height: 480px; }
-    .vertical-imgs img:nth-child(2) { height: 380px; transform: translateY(40px); }
-    footer { padding: 80px 50px; flex-direction: row; justify-content: space-between; text-align: left; }
-}
+:root{--bg-deep:#0f0a07;--bg-surface:#18110c;--bg-card:#201710;--text-main:#f5efe6;--text-muted:#b2a290;--gold:#d4af37;--border-subtle:rgba(212,175,55,.18)}
+*,*::before,*::after{box-sizing:border-box}html{scroll-behavior:smooth;scroll-padding-top:125px}body{margin:0;background:var(--bg-deep);color:var(--text-main);font-family:'Plus Jakarta Sans',sans-serif;letter-spacing:.035em;overflow-x:hidden}a{color:inherit}button,input,textarea{font:inherit}button{cursor:pointer}img{display:block;max-width:100%}:focus-visible{outline:2px solid var(--gold);outline-offset:3px}
+.event-banner{background:var(--gold);color:var(--bg-deep);padding:11px 18px;text-align:center;font-size:10px;letter-spacing:.12em;text-transform:uppercase;line-height:1.6;font-weight:600}.event-banner a{color:inherit;text-decoration:underline}
+header{position:sticky;top:0;z-index:100;display:grid;grid-template-columns:1fr auto 1fr;align-items:center;gap:20px;min-height:84px;padding:15px 5%;background:rgba(15,10,7,.96);backdrop-filter:blur(14px);border-bottom:1px solid var(--border-subtle)}.header-left,.header-right{display:flex;align-items:center;gap:22px}.header-left a,.footer-links a{color:var(--text-muted);text-decoration:none;font-size:10px;letter-spacing:.16em;text-transform:uppercase;white-space:nowrap}.header-left a:hover,.footer-links a:hover{color:var(--gold)}.header-logo,.footer-brand{font-family:'Cormorant Garamond',serif;font-size:24px;letter-spacing:.24em;text-transform:uppercase;text-decoration:none;white-space:nowrap}.header-right{justify-content:flex-end}.header-btn,.outline-btn{border:1px solid var(--gold);color:var(--gold);text-decoration:none;background:transparent;padding:11px 17px;text-transform:uppercase;letter-spacing:.16em;font-size:10px;white-space:nowrap}.header-btn:hover,.outline-btn:hover{background:var(--gold);color:var(--bg-deep)}
+.hero-editorial{display:grid;grid-template-columns:1.12fr .88fr;min-height:min(750px,86vh)}.hero-image-wrap{position:relative;min-height:480px;overflow:hidden}.hero-image-wrap>img{width:100%;height:100%;position:absolute;inset:0;object-fit:cover;filter:sepia(12%) brightness(.73)}.hero-content-wrap{display:flex;flex-direction:column;align-items:flex-start;justify-content:center;padding:clamp(40px,6vw,105px);background:radial-gradient(ellipse at 90% 10%,#281a0d,var(--bg-deep) 70%)}.hero-subtitle{display:block;font-size:10px;font-weight:600;letter-spacing:.3em;color:var(--gold);text-transform:uppercase;margin-bottom:18px;line-height:1.8}.hero-main-title{font-family:'Cormorant Garamond',serif;font-size:clamp(46px,5.8vw,92px);line-height:1.02;letter-spacing:-.025em;font-weight:300;margin:0 0 25px}.hero-main-title em{color:var(--gold);font-weight:400}.hero-desc,.editorial-text p{font-size:13px;line-height:2.05;color:var(--text-muted);max-width:590px}.hero-desc{margin:0 0 32px}.inquire-btn{display:inline-block;color:var(--text-main);text-decoration:none;text-transform:uppercase;font-size:10px;letter-spacing:.19em;border-bottom:1px solid var(--gold);padding-bottom:7px}
+.editorial-section{padding:110px 5%;max-width:1500px;margin:auto}.split-layout{display:grid;grid-template-columns:1fr 1fr;align-items:center;gap:clamp(40px,7vw,110px)}.editorial-text h2,.section-title{font-family:'Cormorant Garamond',serif;font-size:clamp(38px,4vw,60px);font-weight:300;line-height:1.1;letter-spacing:0;margin:0 0 26px}.editorial-text p{margin:0 0 16px}.vertical-imgs{display:grid;grid-template-columns:1.15fr .85fr;align-items:center;gap:15px}.image-block{position:relative;min-width:0}.vertical-imgs img{width:100%;height:420px;object-fit:cover;filter:sepia(10%) brightness(.84)}.vertical-imgs .image-block:nth-child(2){transform:translateY(36px)}.vertical-imgs .image-block:nth-child(2) img{height:335px}
+.section-heading{text-align:center;margin-bottom:40px}.section-heading .section-title{margin:0}.gallery-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:19px}.gallery-item{position:relative;overflow:hidden;aspect-ratio:4/4.4;background:var(--bg-card);border:1px solid var(--border-subtle);cursor:pointer;transition:transform .25s,border-color .25s}.gallery-item:hover{transform:translateY(-4px);border-color:var(--gold)}.gallery-item>img{width:100%;height:100%;object-fit:cover;filter:sepia(8%) brightness(.85);transition:transform .5s}.gallery-item:hover>img{transform:scale(1.04)}.gallery-caption{position:absolute;inset:auto 0 0;padding:35px 19px 18px;background:linear-gradient(transparent,rgba(15,10,7,.92));pointer-events:none}.gallery-caption span{font-size:10px;letter-spacing:.2em;color:var(--gold);text-transform:uppercase}
+.shows-list{max-width:920px;margin:auto;display:grid;gap:18px}.show-item{display:flex;align-items:center;gap:24px;background:var(--bg-surface);border:1px solid var(--border-subtle);padding:26px}.show-date{flex:0 0 88px;text-align:center;border-right:1px solid var(--border-subtle);padding-right:24px}.show-date .month{display:block;color:var(--gold);font-size:10px;letter-spacing:.2em;text-transform:uppercase}.show-date .day{display:block;font:400 29px 'Cormorant Garamond',serif;margin-top:4px}.show-details{flex:1}.show-details h3{font:400 26px 'Cormorant Garamond',serif;margin:0 0 7px}.show-details p,.sub-info{font-size:11px;line-height:1.7;color:var(--text-muted);margin:0}.sub-info{color:var(--gold);margin-top:5px}.show-action{flex-shrink:0}
+.inquiry-section{padding:95px 5%;background:var(--bg-surface)}.inquiry-form{max-width:620px;margin:45px auto 0;display:grid;gap:20px}.form-field{display:grid;gap:9px}.form-field label{font-size:10px;letter-spacing:.2em;color:var(--gold);text-transform:uppercase}.form-field input,.form-field textarea{width:100%;background:var(--bg-card);border:1px solid var(--border-subtle);border-radius:0;color:var(--text-main);padding:17px;outline:none}.form-field input:focus,.form-field textarea:focus{border-color:var(--gold)}.form-field textarea{resize:vertical}.primary-btn,.admin-btn{border:0;background:var(--gold);color:#161008;padding:16px 24px;font-size:11px;font-weight:600;letter-spacing:.15em;text-transform:uppercase}.primary-btn:hover,.admin-btn:hover{background:#f2d46f}
+footer{padding:65px 5%;display:flex;align-items:center;justify-content:space-between;gap:28px;border-top:1px solid var(--border-subtle)}.footer-brand{font-size:21px}.footer-meta{color:var(--text-muted);font-size:11px;line-height:2}.footer-links{display:flex;gap:20px}
+.lightbox{display:none;position:fixed;inset:0;z-index:1000;background:rgba(10,7,5,.97);align-items:center;justify-content:center;padding:60px 20px 25px}.lightbox.open{display:flex}.lightbox img{max-width:95vw;max-height:83vh;object-fit:contain}.lightbox-close{position:absolute;right:25px;top:22px;background:transparent;color:var(--gold);border:0;font-size:11px;text-transform:uppercase;letter-spacing:.2em}
+#admin-bar{display:none;position:fixed;bottom:18px;right:18px;left:18px;max-width:max-content;margin-left:auto;z-index:1200;background:#111;border:1px solid var(--gold);padding:12px;box-shadow:0 10px 32px #0009;align-items:center;gap:9px;flex-wrap:wrap}#admin-bar.active{display:flex}#admin-bar>span{color:var(--gold);font-size:11px}.admin-btn{padding:10px 13px;font-size:10px}.admin-btn.secondary{background:transparent;color:var(--gold);border:1px solid var(--gold)}.card-admin-controls{display:none;position:absolute;top:10px;right:10px;z-index:3;gap:5px}.body-admin-active .card-admin-controls{display:flex}.card-admin-btn{background:#0f0a07ed;color:var(--gold);border:1px solid var(--gold);padding:9px 10px;font-size:10px}.body-admin-active [contenteditable=true]{outline:1px dashed var(--gold);outline-offset:3px}#add-photo-container{display:none;text-align:center;margin:0 0 30px}.image-error{display:grid;place-items:center;min-height:100%;background:var(--bg-card);color:var(--text-muted);padding:15px;text-align:center;font-size:12px}
+@media(max-width:1050px){header{grid-template-columns:1fr auto;gap:12px}.header-logo{grid-column:1;grid-row:1;font-size:21px}.header-right{grid-column:2;grid-row:1}.header-left{grid-column:1/-1;grid-row:2;justify-content:center;flex-wrap:wrap;gap:16px}.hero-editorial{grid-template-columns:1fr 1fr}.hero-content-wrap{padding:42px}.gallery-grid{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media(max-width:700px){html{scroll-padding-top:145px}.event-banner{font-size:9px;letter-spacing:.06em}header{padding:14px 18px;min-height:0}.header-logo{font-size:18px;letter-spacing:.16em}.header-btn{font-size:9px;padding:10px}.header-left{gap:clamp(9px,3vw,22px)}.header-left a{font-size:9px;letter-spacing:.09em}.hero-editorial{display:flex;flex-direction:column;min-height:0}.hero-image-wrap{height:53vh;min-height:300px}.hero-content-wrap{padding:55px 25px 65px}.hero-main-title{font-size:clamp(43px,10vw,64px)}.editorial-section{padding:75px 23px}.split-layout{display:flex;flex-direction:column;gap:30px}.vertical-imgs{width:100%;gap:10px}.vertical-imgs img{height:300px}.vertical-imgs .image-block:nth-child(2) img{height:230px}.vertical-imgs .image-block:nth-child(2){transform:translateY(20px)}.gallery-grid{gap:12px}.gallery-item{aspect-ratio:3/4}.gallery-caption{padding:28px 10px 11px}.gallery-caption span{font-size:9px;letter-spacing:.08em}.show-item{flex-wrap:wrap;padding:18px;gap:14px}.show-date{flex-basis:65px;padding-right:12px}.show-details{flex-basis:calc(100% - 85px)}.show-details h3{font-size:22px}.show-action{margin-left:79px}.inquiry-section{padding:75px 23px}footer{padding:55px 23px;flex-direction:column;text-align:center}#admin-bar{left:8px;right:8px;bottom:8px;max-width:none;justify-content:center}.admin-btn{padding:10px;font-size:9px}}
+@media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}*,*::before,*::after{transition:none!important}}
 </style>
 </head>
 <body id="page-body">
-
-<div class="event-banner">
-    <span>Catch us live! Check out the <a href="https://www.svcraftshow.com" target="_blank" rel="noopener">SV Craft Show</a> &amp; <a href="https://www.nystrappers.org/convention-thank-you/" target="_blank" rel="noopener">Trapper's Convention</a></span>
-</div>
-
-<header id="header">
-    <div class="header-left">
-        <a href="#heritage">Heritage</a>
-        <a href="#gallery">Gallery</a>
-        <a href="#shows">Shows</a>
-        <a href="#inquiry">Inquire</a>
-        <a href="#" onclick="toggleAdminMode(); return false;" style="color: var(--gold);">[ Admin ]</a>
-    </div>
-    <a href="#" class="header-logo" editable>Tauris Leather</a>
-    <div class="header-right">
-        <a href="#inquiry" class="header-btn">Custom Order</a>
-    </div>
+<div class="event-banner">Catch us at the <a href="https://www.svcraftshow.com" target="_blank" rel="noopener noreferrer">Sauquoit Valley Craft Show</a> · November 21–22</div>
+<header>
+<nav class="header-left" aria-label="Main navigation"><a href="#heritage">Heritage</a><a href="#gallery">Gallery</a><a href="#shows">Shows</a><a href="#inquiry">Inquire</a></nav>
+<a href="#page-body" class="header-logo" editable>Tauris Leather</a>
+<div class="header-right"><a href="#inquiry" class="header-btn">Custom Order</a></div>
 </header>
-
-<section class="hero-editorial">
-    <div class="hero-image-wrap">
-        <img id="hero-img" src="images/IMG_4499.jpeg" alt="Tauris Leather Goods">
-        <div class="card-admin-controls">
-            <button class="card-admin-btn" onclick="changeStaticImg('hero-img')">Change Image</button>
-        </div>
-    </div>
-    <div class="hero-content-wrap">
-        <span class="hero-subtitle" editable>Est. 1978 · Upstate New York</span>
-        <h1 class="hero-main-title" editable>Legacy <em>Leathers</em>, Uncompromising Craft.</h1>
-        <p class="hero-desc" editable>Rooted in decades of heirloom leatherwork from upstate New York. Built slow, finished by hand, and structured to age into absolute perfection.</p>
-        <a href="#gallery" class="inquire-btn" style="align-self: flex-start;">Explore Gallery</a>
-    </div>
+<main>
+<section class="hero-editorial" aria-label="Introduction">
+<div class="hero-image-wrap"><img id="hero-img" src="images/IMG_5615.jpg" alt="Handcrafted Tauris leather products" fetchpriority="high"><div class="card-admin-controls"><button type="button" class="card-admin-btn" data-change-image="hero-img">Change Image</button></div></div>
+<div class="hero-content-wrap"><span class="hero-subtitle" editable>Est. 1978 · Upstate New York</span><h1 class="hero-main-title" editable>Legacy <em>Leathers</em>, Uncompromising Craft.</h1><p class="hero-desc" editable>Rooted in decades of heirloom leatherwork from upstate New York. Built slow, finished by hand, and structured to age into absolute perfection.</p><a href="#gallery" class="inquire-btn">Explore Gallery</a></div>
 </section>
-
-<section class="editorial-section" id="heritage">
-    <div class="split-layout">
-        <div class="editorial-text">
-            <span class="hero-subtitle" editable>The Origin</span>
-            <h2 editable>Forged on the Force</h2>
-            <p editable>Tauris Belts and Custom Leathers was established in 1978 by Philip P. Taurisano, a former Utica, New York police officer. Philip worked alongside his brother, Michael P. Taurisano, who operated the Tauris Holsters brand starting in the mid-1960s.</p>
-            <p editable>While collaborating with Michael—who also served as the Deputy Chief of the Utica Police Department—Philip developed a firm conviction based on his own experience on the force: there was a vital need for every officer and legal weapon carrier to have a high-quality leather belt to properly contain any holster or apparatus carrying their weapon.</p>
-        </div>
-        <div class="vertical-imgs">
-            <div style="position: relative; width: 100%;">
-                <img id="heritage-img-1" src="images/IMG_5012.jpeg" alt="Leather Detail">
-                <div class="card-admin-controls">
-                    <button class="card-admin-btn" onclick="changeStaticImg('heritage-img-1')">Change Image</button>
-                </div>
-            </div>
-            <div style="position: relative; width: 100%;">
-                <img id="heritage-img-2" src="images/IMG_5039.jpg" alt="Crafted Leather Belts">
-                <div class="card-admin-controls">
-                    <button class="card-admin-btn" onclick="changeStaticImg('heritage-img-2')">Change Image</button>
-                </div>
-            </div>
-        </div>
-    </div>
-</section>
-
-<section class="editorial-section" id="gallery" style="padding-top: 0;">
-    <div style="text-align: center; margin-bottom: 30px;">
-        <span class="hero-subtitle" editable>Handcrafted Pieces</span>
-        <h2 style="font-family: 'Cormorant Garamond', serif; font-size: clamp(34px, 4vw, 48px); font-weight: 300;" editable>Product Gallery</h2>
-    </div>
-
-    <div style="text-align: center; margin-bottom: 30px; display: none;" id="add-photo-container">
-        <button class="admin-btn" onclick="addNewGalleryItem()">+ Add New Photo</button>
-    </div>
-    
-    <div class="gallery-grid" id="gallery-grid">
-        <!-- Gallery items rendered dynamically -->
-    </div>
-</section>
-
-<section class="editorial-section" id="shows" style="padding-top: 40px; padding-bottom: 40px;">
-    <div style="text-align: center; margin-bottom: 50px;">
-        <span class="hero-subtitle" editable>Live Exhibitions</span>
-        <h2 style="font-family: 'Cormorant Garamond', serif; font-size: clamp(34px, 4vw, 48px); font-weight: 300;" editable>Upcoming Shows</h2>
-    </div>
-    
-    <div class="shows-list">
-        <div class="show-item">
-            <div class="show-date">
-                <span class="month">Sep</span>
-                <span class="day">3–5</span>
-            </div>
-            <div class="show-details">
-                <h3 editable>Trapper's Convention &amp; Sportsman Show</h3>
-                <p editable>Herkimer County Fairgrounds, 135 Cemetery St, Frankfort, NY</p>
-                <div class="sub-info" editable>Thu &amp; Fri: 8am–5pm | Sat: 8am–3pm</div>
-            </div>
-            <div class="show-action">
-                <a href="https://www.nystrappers.org/convention-thank-you/" target="_blank" rel="noopener" class="inquire-btn">Event Details</a>
-            </div>
-        </div>
-
-        <div class="show-item">
-            <div class="show-date">
-                <span class="month">Nov</span>
-                <span class="day">21–22</span>
-            </div>
-            <div class="show-details">
-                <h3 editable>46th Sauquoit Valley Fine Arts &amp; Craft Show</h3>
-                <p editable>Sauquoit Middle School, 2648 Sulphur Spring Rd, Sauquoit, NY</p>
-                <div class="sub-info" editable>10am–4pm | $5 Admission (12 &amp; under free)</div>
-            </div>
-            <div class="show-action">
-                <a href="https://www.svcraftshow.com" target="_blank" rel="noopener" class="inquire-btn">Event Details</a>
-            </div>
-        </div>
-    </div>
-</section>
-
-<section class="inquiry-section" id="inquiry" style="padding: 80px 24px; background: var(--bg-surface);">
-    <div style="text-align: center;">
-        <span class="hero-subtitle" editable>Custom Orders &amp; Fitting</span>
-        <h2 style="font-family: 'Cormorant Garamond', serif; font-size: clamp(34px, 4vw, 48px); font-weight: 300;" editable>Submit an Inquiry</h2>
-    </div>
-
-    <form class="inquiry-form" action="https://formspree.io/f/xyknzovk" method="POST" style="max-width: 600px; margin: 40px auto 0 auto; display: flex; flex-direction: column; gap: 20px;">
-        <div style="display: flex; flex-direction: column; gap: 8px;">
-            <label style="font-size: 10px; letter-spacing: 0.25em; text-transform: uppercase; color: var(--gold);">Name</label>
-            <input type="text" name="name" required placeholder="Your full name" style="background: var(--bg-card); border: 1px solid var(--border-subtle); color: var(--text-main); padding: 14px; outline: none;">
-        </div>
-        <div style="display: flex; flex-direction: column; gap: 8px;">
-            <label style="font-size: 10px; letter-spacing: 0.25em; text-transform: uppercase; color: var(--gold);">Email</label>
-            <input type="email" name="email" required placeholder="your.email@example.com" style="background: var(--bg-card); border: 1px solid var(--border-subtle); color: var(--text-main); padding: 14px; outline: none;">
-        </div>
-        <div style="display: flex; flex-direction: column; gap: 8px;">
-            <label style="font-size: 10px; letter-spacing: 0.25em; text-transform: uppercase; color: var(--gold);">Custom Request / Sizing Details</label>
-            <textarea name="message" rows="5" required placeholder="Let us know what kind of belt, sheath, or custom leatherwork you are looking for..." style="background: var(--bg-card); border: 1px solid var(--border-subtle); color: var(--text-main); padding: 14px; outline: none;"></textarea>
-        </div>
-        <button type="submit" class="admin-btn" style="padding: 16px; margin-top: 10px;">Send Inquiry</button>
-    </form>
-</section>
-
-<footer>
-    <div class="footer-brand" editable>Tauris Leather</div>
-    <div class="footer-meta" editable>
-        420 Higby Road, New Hartford, NY<br>
-        Business: 315-794-6091 | Home: 315-733-6174<br>
-        &copy; 2026 Tauris Leather. All Rights Reserved.
-    </div>
-    <div class="footer-links">
-        <a href="#" onclick="toggleAdminMode(); return false;">Admin Mode</a>
-    </div>
-</footer>
-
-<!-- Lightbox Modal -->
-<div class="lightbox" id="lightbox" onclick="closeLightbox()">
-    <span class="lightbox-close">Close [X]</span>
-    <img id="lightbox-img" src="" alt="Enlarged View">
-</div>
-
-<!-- Floating Admin Toolbar -->
-<div id="admin-bar">
-    <span style="font-size: 11px; color: var(--gold);">Admin Mode ACTIVE</span>
-    <button class="admin-btn" onclick="saveToLocal()">Save Draft</button>
-    <button class="admin-btn secondary" onclick="exportHTML()">Export HTML</button>
-    <button class="admin-btn secondary" onclick="toggleAdminMode()">Exit Admin</button>
-</div>
-
+<section class="editorial-section" id="heritage"><div class="split-layout"><div class="editorial-text"><span class="hero-subtitle" editable>The Origin</span><h2 editable>Forged on the Force</h2><p editable>Tauris Belts and Custom Leathers was established in 1978 by Philip P. Taurisano, a former Utica, New York police officer. Philip worked alongside his brother, Michael P. Taurisano, who operated the Tauris Holsters brand starting in the mid-1960s.</p><p editable>While collaborating with Michael—who also served as the Deputy Chief of the Utica Police Department—Philip developed a firm conviction based on his own experience on the force: there was a vital need for every officer and legal weapon carrier to have a high-quality leather belt to properly contain any holster or apparatus carrying their weapon.</p></div><div class="vertical-imgs"><div class="image-block"><img id="heritage-img-1" src="images/IMG_5616.jpg" alt="Custom leather craftsmanship" loading="lazy"><div class="card-admin-controls"><button type="button" class="card-admin-btn" data-change-image="heritage-img-1">Change Image</button></div></div><div class="image-block"><img id="heritage-img-2" src="images/IMG_5617.jpg" alt="Tauris handcrafted leather belts" loading="lazy"><div class="card-admin-controls"><button type="button" class="card-admin-btn" data-change-image="heritage-img-2">Change Image</button></div></div></div></div></section>
+<section class="editorial-section" id="gallery" style="padding-top:20px"><div class="section-heading"><span class="hero-subtitle" editable>Handcrafted Pieces</span><h2 class="section-title" editable>Product Gallery</h2></div><div id="add-photo-container"><button type="button" class="admin-btn" id="add-photo">+ Add New Photo</button></div><div class="gallery-grid" id="gallery-grid"></div></section>
+<section class="editorial-section" id="shows" style="padding-top:55px"><div class="section-heading"><span class="hero-subtitle" editable>Live Exhibitions</span><h2 class="section-title" editable>Upcoming Shows</h2></div><div class="shows-list"><div class="show-item"><div class="show-date"><span class="month">Nov</span><span class="day">21–22</span></div><div class="show-details"><h3 editable>46th Sauquoit Valley Fine Arts &amp; Craft Show</h3><p editable>Sauquoit Middle School, 2648 Sulphur Spring Rd, Sauquoit, NY</p><div class="sub-info" editable>10am–4pm | $5 Admission (12 &amp; under free)</div></div><div class="show-action"><a href="https://www.svcraftshow.com" target="_blank" rel="noopener noreferrer" class="inquire-btn">Event Details</a></div></div></div></section>
+<section class="inquiry-section" id="inquiry"><div class="section-heading"><span class="hero-subtitle" editable>Custom Orders &amp; Fitting</span><h2 class="section-title" editable>Submit an Inquiry</h2></div><form class="inquiry-form" action="https://formspree.io/f/xyknzovk" method="POST"><div class="form-field"><label for="customer-name">Name</label><input id="customer-name" type="text" name="name" autocomplete="name" required placeholder="Your full name"></div><div class="form-field"><label for="customer-email">Email</label><input id="customer-email" type="email" name="email" autocomplete="email" required placeholder="your.email@example.com"></div><div class="form-field"><label for="customer-message">Custom Request / Sizing Details</label><textarea id="customer-message" name="message" rows="5" required placeholder="Tell us what kind of belt, sheath, or custom leatherwork you are looking for..."></textarea></div><button type="submit" class="primary-btn">Send Inquiry</button></form></section>
+</main>
+<footer><div class="footer-brand" editable>Tauris Leather</div><div class="footer-meta" editable>420 Higby Road, New Hartford, NY<br>Business: 315-794-6091 | Home: 315-733-6174<br>&copy; 2026 Tauris Leather. All Rights Reserved.</div><div class="footer-links"><a href="#page-body" id="admin-toggle-footer">Admin Mode</a></div></footer>
+<div class="lightbox" id="lightbox" role="dialog" aria-modal="true" aria-label="Gallery photo" aria-hidden="true"><button type="button" class="lightbox-close" id="lightbox-close" aria-label="Close image">Close ✕</button><img id="lightbox-img" alt="Enlarged leatherwork photo"></div>
+<div id="admin-bar"><span>Admin Mode ACTIVE</span><button type="button" class="admin-btn" id="save-draft">Save Draft</button><button type="button" class="admin-btn secondary" id="export-html">Export HTML</button><button type="button" class="admin-btn secondary" id="exit-admin">Exit Admin</button></div>
 <script>
-let galleryData = [
-    { src: 'images/IMG_4499.jpeg', title: 'Custom Work' },
-    { src: 'images/IMG_5012.jpeg', title: 'Handcrafted Straps' },
-    { src: 'images/IMG_5039.jpg', title: 'Full-Grain Belts' },
-    { src: 'images/IMG_5615.jpg', title: 'Belt Collection' },
-    { src: 'images/IMG_5616.jpg', title: 'Custom Straps' },
-    { src: 'images/IMG_5617.jpg', title: 'Heavy Duty Belts' },
-    { src: 'images/IMG_5618.jpg', title: 'Heirloom Goods' },
-    { src: 'images/IMG_5620.jpg', title: 'Belt Racks' },
-    { src: 'images/IMG_5621.jpg', title: 'Atelier Selection' },
-    { src: 'images/IMG_5622.jpg', title: 'Custom Finishes' },
-    { src: 'images/IMG_5623.jpg', title: 'Double Layer Belts' },
-    { src: 'images/IMG_5624.jpg', title: 'Stitched Edges' }
+/* Files shown in the supplied images folder screenshot. Keep index.html alongside the images/ folder. */
+const defaultGallery = [
+  {src:'images/IMG_5615.jpg',title:'Belt Collection'},
+  {src:'images/IMG_5616.jpg',title:'Custom Straps'},
+  {src:'images/IMG_5617.jpg',title:'Heavy Duty Belts'},
+  {src:'images/IMG_5618.jpg',title:'Heirloom Goods'},
+  {src:'images/IMG_5620.jpg',title:'Belt Racks'},
+  {src:'images/IMG_5621.jpg',title:'Atelier Selection'},
+  {src:'images/IMG_5622.jpg',title:'Custom Finishes'},
+  {src:'images/IMG_5623.jpg',title:'Double Layer Belts'},
+  {src:'images/IMG_5624.jpg',title:'Stitched Edges'}
 ];
-
-let isAdmin = false;
-
-function initGallery() {
-    const saved = localStorage.getItem('tauris_gallery');
-    if (saved) {
-        try { galleryData = JSON.parse(saved); } catch(e) {}
-    }
-    renderGallery();
+const STORAGE_KEY='tauris_site_v3';
+let galleryData=defaultGallery.map(item=>({...item}));
+let isAdmin=false;
+const $=id=>document.getElementById(id);
+const editableNodes=()=>[...document.querySelectorAll('[editable]')];
+function normalizePath(src){
+  const path=String(src||'').trim().replaceAll('\\','/');
+  if(!path)return '';
+  if(/^https?:\/\//i.test(path))return path;
+  if(/^(?:javascript|data|file):/i.test(path))return '';
+  const normalized=path.replace(/^\.\//,'').replace(/^\/+/, '');
+  return normalized.includes('/')?normalized:'images/'+normalized;
 }
-
-function renderGallery() {
-    const grid = document.getElementById('gallery-grid');
-    grid.innerHTML = '';
-    galleryData.forEach((item, index) => {
-        const div = document.createElement('div');
-        div.className = 'gallery-item';
-        div.onclick = (e) => {
-            if (!isAdmin) openLightbox(item.src);
-        };
-        div.innerHTML = `
-            <img src="${item.src}" alt="${item.title}" onerror="this.style.opacity='0.2'">
-            <div class="gallery-caption">
-                <span>${item.title}</span>
-            </div>
-            <div class="card-admin-controls">
-                <button class="card-admin-btn" onclick="editCard(${index}, event)">Edit</button>
-                <button class="card-admin-btn" onclick="deleteCard(${index}, event)">Delete</button>
-            </div>
-        `;
-        grid.appendChild(div);
-    });
+function renderGallery(){
+  const grid=$('gallery-grid');grid.replaceChildren();
+  galleryData.forEach((item,index)=>{
+    const card=document.createElement('div');card.className='gallery-item';
+    card.tabIndex=isAdmin?-1:0;card.setAttribute('role','button');card.setAttribute('aria-label','View '+item.title);
+    const img=document.createElement('img');img.src=item.src;img.alt=item.title;img.loading='lazy';
+    img.addEventListener('error',()=>{img.style.opacity='.15';card.title='Missing image: '+item.src;});
+    const caption=document.createElement('div');caption.className='gallery-caption';
+    const title=document.createElement('span');title.textContent=item.title;caption.append(title);
+    const controls=document.createElement('div');controls.className='card-admin-controls';
+    const edit=document.createElement('button');edit.type='button';edit.className='card-admin-btn';edit.textContent='Edit';edit.addEventListener('click',e=>{e.stopPropagation();editCard(index)});
+    const del=document.createElement('button');del.type='button';del.className='card-admin-btn';del.textContent='Delete';del.addEventListener('click',e=>{e.stopPropagation();deleteCard(index)});
+    controls.append(edit,del);card.append(img,caption,controls);
+    card.addEventListener('click',()=>{if(!isAdmin)openLightbox(item.src,item.title)});
+    card.addEventListener('keydown',e=>{if(!isAdmin&&(e.key==='Enter'||e.key===' ')){e.preventDefault();openLightbox(item.src,item.title)}});
+    grid.append(card);
+  });
 }
-
-function toggleAdminMode() {
-    if (!isAdmin) {
-        const pass = prompt("Enter Admin Password:");
-        if (pass !== "Wow1910$") {
-            alert("Access Denied");
-            return;
-        }
-    }
-
-    isAdmin = !isAdmin;
-    const body = document.getElementById('page-body');
-    const adminBar = document.getElementById('admin-bar');
-    const addContainer = document.getElementById('add-photo-container');
-
-    if (isAdmin) {
-        body.classList.add('body-admin-active');
-        adminBar.classList.add('active');
-        addContainer.style.display = 'block';
-        document.querySelectorAll('[editable]').forEach(el => el.setAttribute('contenteditable', 'true'));
-    } else {
-        body.classList.remove('body-admin-active');
-        adminBar.classList.remove('active');
-        addContainer.style.display = 'none';
-        document.querySelectorAll('[editable]').forEach(el => el.removeAttribute('contenteditable'));
-    }
+function getEditableContent(){return editableNodes().map(node=>node.innerHTML)}
+function applySaved(){
+  try{
+    const saved=JSON.parse(localStorage.getItem(STORAGE_KEY)||'null');
+    if(!saved||typeof saved!=='object')return;
+    if(Array.isArray(saved.gallery))galleryData=saved.gallery.filter(x=>x&&typeof x.src==='string'&&typeof x.title==='string').map(x=>({src:normalizePath(x.src),title:x.title})).filter(x=>x.src);
+    if(saved.staticImages&&typeof saved.staticImages==='object')Object.entries(saved.staticImages).forEach(([id,src])=>{const el=$(id);if(el&&normalizePath(src))el.src=normalizePath(src)});
+    if(Array.isArray(saved.text))editableNodes().forEach((node,i)=>{if(typeof saved.text[i]==='string')node.innerHTML=saved.text[i]});
+  }catch(err){console.warn('Saved draft could not be loaded',err)}
 }
-
-function changeStaticImg(imgId) {
-    const img = document.getElementById(imgId);
-    if (!img) return;
-    const newSrc = prompt("Enter image path (e.g., images/IMG_5615.jpg):", img.getAttribute('src'));
-    if (newSrc) {
-        img.src = newSrc;
-        img.setAttribute('src', newSrc);
-    }
+function saveToLocal(showMessage=true){
+  const staticImages={};['hero-img','heritage-img-1','heritage-img-2'].forEach(id=>staticImages[id]=$(id).getAttribute('src'));
+  try{localStorage.setItem(STORAGE_KEY,JSON.stringify({gallery:galleryData,staticImages,text:getEditableContent()}));if(showMessage)alert('Draft saved in this browser. Export HTML to publish changes.')}catch(err){alert('Could not save draft. Try exporting HTML instead.')}
 }
-
-function editCard(index, e) {
-    e.stopPropagation();
-    const item = galleryData[index];
-    const newSrc = prompt("Image Path / Filename:", item.src);
-    if (newSrc !== null) {
-        const newTitle = prompt("Caption Title:", item.title);
-        galleryData[index] = { src: newSrc, title: newTitle || '' };
-        renderGallery();
-        saveToLocal();
-    }
+function toggleAdminMode(){
+  if(!isAdmin){const pass=prompt('Enter Admin Password:');if(pass===null)return;if(pass!=='Wow1910$'){alert('Access denied');return}}
+  isAdmin=!isAdmin;document.body.classList.toggle('body-admin-active',isAdmin);$('admin-bar').classList.toggle('active',isAdmin);$('add-photo-container').style.display=isAdmin?'block':'none';editableNodes().forEach(node=>{if(isAdmin)node.setAttribute('contenteditable','true');else node.removeAttribute('contenteditable')});renderGallery();
 }
-
-function deleteCard(index, e) {
-    e.stopPropagation();
-    if (confirm("Remove this photo from gallery?")) {
-        galleryData.splice(index, 1);
-        renderGallery();
-        saveToLocal();
-    }
+function changeStaticImg(id){if(!isAdmin)return;const el=$(id);const response=prompt('Enter image filename or path (e.g. IMG_5618.jpg):',el.getAttribute('src'));if(response===null)return;const path=normalizePath(response);if(path){el.src=path;saveToLocal(false)}}
+function editCard(index){if(!isAdmin)return;const item=galleryData[index];const src=prompt('Image filename or path:',item.src);if(src===null)return;const path=normalizePath(src);if(!path)return;const title=prompt('Caption title:',item.title);if(title===null)return;galleryData[index]={src:path,title:title.trim()||'Custom Leather'};renderGallery();saveToLocal(false)}
+function deleteCard(index){if(!isAdmin)return;if(confirm('Remove this photo from gallery?')){galleryData.splice(index,1);renderGallery();saveToLocal(false)}}
+function addNewGalleryItem(){if(!isAdmin)return;const src=prompt('Image filename or path (e.g. IMG_5624.jpg):','images/');if(src===null)return;const path=normalizePath(src);if(!path||path==='images/')return;const title=prompt('Caption title:','Custom Work');if(title===null)return;galleryData.push({src:path,title:title.trim()||'Custom Leather'});renderGallery();saveToLocal(false)}
+function exportHTML(){
+  /* Build an exported standalone HTML document with the current content baked in. */
+  const wasAdmin=isAdmin;if(wasAdmin)toggleAdminMode();
+  const doc=document.documentElement.cloneNode(true);
+  const grid=doc.querySelector('#gallery-grid');if(grid)grid.replaceChildren();
+  const script=doc.querySelector('script');
+  if(script){let content=script.textContent;
+    content=content.replace(/const defaultGallery = \[[\s\S]*?\];/, 'const defaultGallery = '+JSON.stringify(galleryData,null,2)+';');
+    content=content.replace("const STORAGE_KEY='tauris_site_v3';","const STORAGE_KEY='tauris_site_export_'+"+JSON.stringify(Date.now())+";");
+    script.textContent=content;
+  }
+  doc.querySelectorAll('[editable]').forEach((node,i)=>{node.innerHTML=editableNodes()[i].innerHTML;node.removeAttribute('contenteditable')});
+  ['hero-img','heritage-img-1','heritage-img-2'].forEach(id=>{const el=doc.querySelector('#'+id);if(el)el.setAttribute('src',$(id).getAttribute('src'))});
+  const html='<!DOCTYPE html>\n'+doc.outerHTML;
+  const blob=new Blob([html],{type:'text/html;charset=utf-8'});const url=URL.createObjectURL(blob);const a=document.createElement('a');a.href=url;a.download='index.html';document.body.append(a);a.click();a.remove();setTimeout(()=>URL.revokeObjectURL(url),1000);
 }
-
-function addNewGalleryItem() {
-    const src = prompt("Enter Image Path (e.g., images/IMG_5615.jpg):", "images/");
-    if (src) {
-        const title = prompt("Enter Caption Title:", "Custom Work");
-        galleryData.push({ src, title: title || 'Custom Leather' });
-        renderGallery();
-        saveToLocal();
-    }
-}
-
-function saveToLocal() {
-    localStorage.setItem('tauris_gallery', JSON.stringify(galleryData));
-    alert("Draft saved!");
-}
-
-function exportHTML() {
-    if (isAdmin) toggleAdminMode();
-    
-    let htmlContent = "<!DOCTYPE html>\n" + document.documentElement.outerHTML;
-    
-    const blob = new Blob([htmlContent], { type: 'text/html' });
-    const a = document.createElement('a');
-    a.href = URL.createObjectURL(blob);
-    a.download = 'index.html';
-    a.click();
-}
-
-function openLightbox(src) {
-    document.getElementById('lightbox-img').src = src;
-    document.getElementById('lightbox').classList.add('open');
-}
-
-function closeLightbox() {
-    document.getElementById('lightbox').classList.remove('open');
-}
-
-window.addEventListener('DOMContentLoaded', initGallery);
+function openLightbox(src,title){$('lightbox-img').src=src;$('lightbox-img').alt=title||'Enlarged photo';$('lightbox').classList.add('open');$('lightbox').setAttribute('aria-hidden','false');$('lightbox-close').focus();document.body.style.overflow='hidden'}
+function closeLightbox(){$('lightbox').classList.remove('open');$('lightbox').setAttribute('aria-hidden','true');document.body.style.overflow=''}
+$('lightbox-close').addEventListener('click',closeLightbox);
+$('lightbox').addEventListener('click',e=>{if(e.target===$('lightbox'))closeLightbox()});
+document.addEventListener('keydown',e=>{if(e.key==='Escape'&&$('lightbox').classList.contains('open'))closeLightbox()});
+$('admin-toggle-footer').addEventListener('click',e=>{e.preventDefault();toggleAdminMode()});
+$('exit-admin').addEventListener('click',toggleAdminMode);$('save-draft').addEventListener('click',()=>saveToLocal());$('export-html').addEventListener('click',exportHTML);$('add-photo').addEventListener('click',addNewGalleryItem);
+document.querySelectorAll('[data-change-image]').forEach(btn=>btn.addEventListener('click',()=>changeStaticImg(btn.dataset.changeImage)));
+applySaved();renderGallery();
 </script>
-
 </body>
 </html>
