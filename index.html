@@ -1,452 +1,552 @@
 <!DOCTYPE html>
-<html lang="en" class="scroll-smooth">
+<html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Tauris Belts & Custom Leathers | Handcrafted Heritage</title>
-  
-  <!-- Tailwind CSS -->
-  <script src="https://cdn.tailwindcss.com"></script>
-  
-  <!-- Google Fonts -->
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-  
-  <!-- Font Awesome Icons -->
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>TAURIS LEATHER | Handcrafted Custom Leathers</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,400&family=Plus+Jakarta+Sans:wght@200;300;400;600&display=swap" rel="stylesheet">
+<style>
+*, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+:root { 
+    --bg-deep: #0f0a07;
+    --bg-surface: #18110c;
+    --bg-card: #201710;
+    --text-main: #f5efe6;
+    --text-muted: #9e8d7c;
+    --gold: #d4af37;
+    --gold-dim: rgba(212, 175, 55, 0.2);
+    --border-subtle: rgba(212, 175, 55, 0.12);
+}
 
-  <script>
-    tailwind.config = {
-      theme: {
-        extend: {
-          colors: {
-            brand: {
-              gold: '#C5A059',
-              goldhover: '#B38F46',
-              dark: '#12100E',
-              card: '#1A1715',
-              border: '#2C2723',
-              accent: '#8B0000',
-              cream: '#F4EFEB'
-            }
-          },
-          fontFamily: {
-            serif: ['"Playfair Display"', 'serif'],
-            sans: ['"Plus Jakarta Sans"', 'sans-serif'],
-          }
-        }
-      }
-    }
-  </script>
-  
-  <style>
-    body {
-      background-color: #0D0B0A;
-      color: #E2DCD5;
-      font-family: 'Plus Jakarta Sans', sans-serif;
-    }
-    
-    .gold-gradient {
-      background: linear-gradient(135deg, #DFBA73 0%, #C5A059 50%, #9E7B3B 100%);
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-    }
+html { scroll-behavior: smooth; }
+body { 
+    font-family: 'Plus Jakarta Sans', sans-serif; 
+    background: var(--bg-deep); 
+    color: var(--text-main); 
+    overflow-x: hidden;
+    letter-spacing: 0.04em;
+    -webkit-text-size-adjust: 100%;
+}
 
-    .gold-bg-gradient {
-      background: linear-gradient(135deg, #DFBA73 0%, #C5A059 100%);
-    }
+/* Admin Bar - Hidden by default */
+#admin-bar {
+    display: none;
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    z-index: 9999;
+    background: #111;
+    border: 1px solid var(--gold);
+    padding: 12px 20px;
+    border-radius: 8px;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.8);
+    gap: 12px;
+    align-items: center;
+}
+#admin-bar.active { 
+    display: flex; 
+}
+.admin-btn {
+    background: var(--gold);
+    color: #000;
+    border: none;
+    padding: 8px 14px;
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    cursor: pointer;
+    border-radius: 4px;
+}
+.admin-btn.secondary {
+    background: transparent;
+    color: var(--gold);
+    border: 1px solid var(--gold);
+}
 
-    [contenteditable="true"] {
-      outline: 2px dashed #C5A059 !important;
-      background-color: rgba(197, 160, 89, 0.1) !important;
-      padding: 2px 4px;
-      border-radius: 4px;
-    }
-  </style>
+/* Announcement Banner */
+.event-banner {
+    background: var(--gold);
+    color: var(--bg-deep);
+    padding: 10px 20px;
+    text-align: center;
+    font-size: 10px;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    font-weight: 500;
+    position: fixed;
+    top: 0; left: 0; right: 0;
+    z-index: 101;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 15px;
+}
+.event-banner a { color: var(--bg-deep); text-decoration: underline; font-weight: 600; }
+
+header { 
+    position: fixed; 
+    top: 37px; left: 0; right: 0; 
+    z-index: 100; 
+    display: flex;
+    justify-content: space-between;
+    align-items: center; 
+    padding: 20px 24px; 
+    background: rgba(15,10,7,0.95);
+    backdrop-filter: blur(8px);
+    border-bottom: 1px solid var(--border-subtle);
+}
+.header-left { display: flex; gap: 20px; }
+.header-left a { font-size: 10px; letter-spacing: 0.25em; text-transform: uppercase; color: var(--text-muted); text-decoration: none; }
+.header-logo { 
+    font-family: 'Cormorant Garamond', serif; 
+    font-size: 16px; 
+    letter-spacing: 0.3em; 
+    text-transform: uppercase; 
+    color: var(--text-main);
+    text-decoration: none;
+}
+.header-right { display: flex; align-items: center; gap: 20px; }
+.header-btn { 
+    font-size: 10px; 
+    letter-spacing: 0.25em; 
+    text-transform: uppercase; 
+    color: var(--gold); 
+    background: transparent; 
+    border: 1px solid var(--gold); 
+    padding: 6px 14px; 
+    text-decoration: none;
+}
+
+/* Hero Section */
+.hero-editorial { min-height: 100vh; display: flex; flex-direction: column; padding-top: 107px; }
+.hero-image-wrap { position: relative; width: 100%; height: 50vh; overflow: hidden; }
+.hero-image-wrap img { width: 100%; height: 100%; object-fit: cover; filter: sepia(20%) brightness(0.7); }
+.hero-content-wrap { display: flex; flex-direction: column; justify-content: center; padding: 40px 24px; background: var(--bg-deep); flex: 1; }
+.hero-subtitle { font-size: 9px; letter-spacing: 0.4em; text-transform: uppercase; color: var(--gold); margin-bottom: 15px; }
+.hero-main-title { font-family: 'Cormorant Garamond', serif; font-size: 40px; font-weight: 300; line-height: 1.1; margin-bottom: 20px; }
+.hero-main-title em { font-style: italic; color: var(--gold); }
+.hero-desc { font-size: 13px; line-height: 2.2; color: var(--text-muted); margin-bottom: 30px; }
+
+/* Sections */
+.editorial-section { padding: 80px 24px; max-width: 1500px; margin: 0 auto; }
+.split-layout { display: flex; flex-direction: column; gap: 40px; }
+.editorial-text h2 { font-family: 'Cormorant Garamond', serif; font-size: 34px; font-weight: 300; line-height: 1.15; margin-bottom: 20px; }
+.editorial-text p { font-size: 13px; line-height: 2.2; color: var(--text-muted); margin-bottom: 15px; }
+.vertical-imgs { display: flex; flex-direction: column; gap: 16px; }
+.vertical-imgs img { width: 100%; height: 320px; object-fit: cover; filter: sepia(15%) brightness(0.8); }
+
+/* Gallery Grid */
+.gallery-grid { 
+    display: grid; 
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); 
+    gap: 20px; 
+    padding: 0 24px; 
+    max-width: 1400px; 
+    margin: 0 auto; 
+}
+.gallery-item { 
+    position: relative; 
+    overflow: hidden; 
+    background: var(--bg-card); 
+    border: 1px solid var(--border-subtle); 
+    height: 320px; 
+    cursor: pointer;
+    transition: border-color 0.3s ease, transform 0.3s ease;
+}
+.gallery-item:hover { border-color: var(--gold); transform: translateY(-3px); }
+.gallery-item img { width: 100%; height: 100%; object-fit: cover; filter: sepia(10%) brightness(0.85); }
+.gallery-caption { 
+    position: absolute; 
+    bottom: 0; left: 0; right: 0; 
+    padding: 16px 20px; 
+    background: linear-gradient(to top, rgba(15,10,7,0.95), transparent); 
+    display: flex; 
+    justify-content: space-between; 
+    align-items: flex-end; 
+}
+.gallery-caption span { font-size: 9px; letter-spacing: 0.25em; color: var(--gold); text-transform: uppercase; }
+
+/* Admin Overlay on Image Containers */
+.card-admin-controls {
+    display: none;
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    z-index: 10;
+    gap: 6px;
+}
+.body-admin-active .card-admin-controls { display: flex; }
+.card-admin-btn {
+    background: rgba(0,0,0,0.85);
+    color: var(--gold);
+    border: 1px solid var(--gold);
+    font-size: 10px;
+    padding: 6px 10px;
+    cursor: pointer;
+    border-radius: 3px;
+    font-family: inherit;
+    letter-spacing: 0.05em;
+}
+
+/* Content Editable Styles */
+.body-admin-active [contenteditable="true"] {
+    outline: 1px dashed var(--gold) !important;
+    padding: 2px 4px;
+    border-radius: 2px;
+}
+
+/* Shows Section */
+.shows-list { max-width: 800px; margin: 0 auto; display: flex; flex-direction: column; gap: 20px; }
+.show-item { 
+    display: flex; 
+    align-items: center; 
+    justify-content: space-between; 
+    padding: 24px; 
+    background: var(--bg-surface); 
+    border: 1px solid var(--border-subtle); 
+    transition: border-color 0.3s ease; 
+    gap: 20px; 
+}
+.show-item:hover { border-color: var(--gold); }
+.show-date { 
+    text-align: center; 
+    border-right: 1px solid var(--border-subtle); 
+    padding-right: 24px; 
+    min-width: 90px; 
+}
+.show-date .month { display: block; font-size: 10px; letter-spacing: 0.2em; text-transform: uppercase; color: var(--gold); }
+.show-date .day { display: block; font-family: 'Cormorant Garamond', serif; font-size: 24px; color: var(--text-main); margin-top: 5px; }
+.show-details { flex: 1; }
+.show-details h3 { font-family: 'Cormorant Garamond', serif; font-size: 22px; font-weight: 400; margin-bottom: 5px; }
+.show-details p { font-size: 12px; color: var(--text-muted); }
+.show-details .sub-info { font-size: 11px; color: var(--gold); margin-top: 4px; opacity: 0.8; }
+.inquire-btn { font-size: 10px; letter-spacing: 0.25em; text-transform: uppercase; color: var(--text-main); text-decoration: none; border-bottom: 1px solid var(--gold); padding-bottom: 2px; }
+
+/* Lightbox Modal */
+.lightbox { display: none; position: fixed; inset: 0; background: rgba(10,7,5,0.97); z-index: 1000; align-items: center; justify-content: center; padding: 20px; }
+.lightbox.open { display: flex; }
+.lightbox img { max-width: 85vw; max-height: 85vh; object-fit: contain; }
+.lightbox-close { position: absolute; top: 30px; right: 40px; font-size: 10px; letter-spacing: 0.3em; text-transform: uppercase; color: var(--text-muted); cursor: pointer; }
+
+/* Footer */
+footer { padding: 60px 24px; background: var(--bg-deep); display: flex; flex-direction: column; gap: 30px; text-align: center; border-top: 1px solid var(--border-subtle); align-items: center; }
+.footer-brand { font-family: 'Cormorant Garamond', serif; font-size: 16px; letter-spacing: 0.3em; text-transform: uppercase; }
+.footer-meta { font-size: 11px; letter-spacing: 0.1em; color: var(--text-muted); line-height: 1.8; }
+.footer-links { display: flex; gap: 20px; flex-wrap: wrap; justify-content: center; }
+.footer-links a { font-size: 9px; letter-spacing: 0.2em; text-transform: uppercase; color: var(--text-muted); text-decoration: none; }
+
+@media (min-width: 1024px) {
+    header { padding: 35px 50px; display: grid; grid-template-columns: 1fr auto 1fr; top: 37px; }
+    .header-left { gap: 30px; }
+    .header-logo { font-size: 22px; letter-spacing: 0.35em; text-align: center; }
+    .header-right { justify-content: flex-end; }
+    .hero-editorial { height: 100vh; min-height: auto; display: grid; grid-template-columns: 1.2fr 0.8fr; padding-top: 137px; }
+    .hero-image-wrap { height: 100%; }
+    .hero-content-wrap { padding: 80px; flex: unset; }
+    .hero-main-title { font-size: clamp(48px, 6vw, 84px); margin-bottom: 35px; }
+    .editorial-section { padding: 160px 80px; }
+    .split-layout { display: grid; grid-template-columns: 1fr 1fr; gap: 100px; align-items: center; }
+    .vertical-imgs { display: grid; grid-template-columns: 1.2fr 0.8fr; gap: 20px; align-items: center; }
+    .vertical-imgs img { height: 480px; }
+    .vertical-imgs img:nth-child(2) { height: 380px; transform: translateY(40px); }
+    footer { padding: 80px 50px; flex-direction: row; justify-content: space-between; text-align: left; }
+}
+</style>
 </head>
-<body class="antialiased selection:bg-brand-gold selection:text-black">
+<body id="page-body">
 
-  <!-- Admin Bar -->
-  <div id="admin-bar" class="hidden fixed top-0 left-0 right-0 bg-brand-gold text-black z-50 py-2 px-6 flex justify-between items-center shadow-lg font-bold">
-    <div class="flex items-center space-x-3">
-      <i class="fa-solid fa-lock-open"></i>
-      <span>Admin Edit Mode Active</span>
+<div class="event-banner">
+    <span>Catch us live! Check out the <a href="https://www.svcraftshow.com" target="_blank" rel="noopener">Sauquoit Valley Fine Arts &amp; Crafts Show</a></span>
+</div>
+
+<header id="header">
+    <div class="header-left">
+        <a href="#heritage">Heritage</a>
+        <a href="#gallery">Gallery</a>
+        <a href="#shows">Shows</a>
+        <a href="#inquiry">Inquire</a>
+        <a href="#" onclick="toggleAdminMode(); return false;" style="color: var(--gold);">[ Admin ]</a>
     </div>
-    <div class="flex space-x-3">
-      <button id="toggle-edit-btn" onclick="toggleTextEditing()" class="bg-black text-white px-3 py-1 rounded text-sm hover:bg-neutral-800 transition">
-        Enable Text Editing
-      </button>
-      <button onclick="saveAdminChanges()" class="bg-emerald-800 text-white px-3 py-1 rounded text-sm hover:bg-emerald-900 transition">
-        Save Changes
-      </button>
-      <button onclick="logoutAdmin()" class="bg-brand-accent text-white px-3 py-1 rounded text-sm hover:bg-red-900 transition">
-        Exit Admin
-      </button>
+    <a href="#" class="header-logo" editable>Tauris Leather</a>
+    <div class="header-right">
+        <a href="#inquiry" class="header-btn">Custom Order</a>
     </div>
-  </div>
+</header>
 
-  <!-- Event Banner -->
-  <div class="bg-brand-gold text-black text-center py-2.5 px-4 font-semibold text-xs sm:text-sm tracking-wide">
-    <i class="fa-solid fa-calendar-check mr-2"></i> Catch us at the <strong>Remsen Barn Festival</strong>! September 26–27 | 8:00 AM – 5:00 PM | Sections 305 & 307
-  </div>
-
-  <!-- Navigation -->
-  <nav class="sticky top-0 z-40 bg-brand-dark/95 backdrop-blur border-b border-brand-border">
-    <div class="max-w-7xl mx-auto px-6 py-4 flex items-center justify-between">
-      <a href="#" class="flex items-center space-x-3">
-        <div class="w-10 h-10 rounded-full border border-brand-gold flex items-center justify-center font-serif text-brand-gold font-bold text-xl">T</div>
-        <span class="font-serif text-xl md:text-2xl font-bold tracking-wider text-white">TAURIS <span class="text-brand-gold font-light">LEATHER</span></span>
-      </a>
-
-      <div class="hidden md:flex items-center space-x-8 text-sm font-medium uppercase tracking-widest text-neutral-300">
-        <a href="#about" class="hover:text-brand-gold transition">Our Story</a>
-        <a href="#events" class="hover:text-brand-gold transition">Upcoming Events</a>
-        <a href="#portfolio" class="hover:text-brand-gold transition">Work Showcase</a>
-        <a href="#order" class="hover:text-brand-gold transition">Order Form</a>
-        <a href="#contact" class="hover:text-brand-gold transition">Contact</a>
-      </div>
-
-      <a href="#order" class="hidden sm:inline-block border border-brand-gold text-brand-gold px-5 py-2 rounded text-xs uppercase tracking-widest font-semibold hover:bg-brand-gold hover:text-black transition">
-        Request Custom Order
-      </a>
+<section class="hero-editorial">
+    <div class="hero-image-wrap">
+        <img id="hero-img" src="images/IMG_4499.jpeg" alt="Tauris Leather Goods">
+        <div class="card-admin-controls">
+            <button class="card-admin-btn" onclick="changeStaticImg('hero-img')">Change Image</button>
+        </div>
     </div>
-  </nav>
-
-  <!-- Hero Section -->
-  <section class="relative py-24 md:py-32 overflow-hidden border-b border-brand-border">
-    <div class="max-w-7xl mx-auto px-6 grid md:grid-cols-2 gap-12 items-center">
-      <div>
-        <span class="inline-block px-3 py-1 border border-brand-gold/40 text-brand-gold text-xs uppercase tracking-widest rounded-full mb-6">Established 1978 &bull; Utica, NY</span>
-        <h1 class="font-serif text-4xl md:text-6xl font-bold text-white leading-tight mb-6 editable" id="hero-title">
-          Handcrafted Leather Belts & Custom Work.
-        </h1>
-        <p class="text-neutral-300 text-lg leading-relaxed mb-8 editable" id="hero-subtitle">
-          Custom built with uncompromising durability, quality leather, and precision fit.
-        </p>
-        <div class="flex flex-col sm:flex-row gap-4">
-          <a href="#order" class="gold-bg-gradient text-black font-semibold text-center px-8 py-4 rounded text-sm uppercase tracking-widest shadow-lg hover:opacity-95 transition">
-            Begin Custom Order
-          </a>
-          <a href="#events" class="border border-brand-border text-center px-8 py-4 rounded text-sm uppercase tracking-widest hover:border-brand-gold hover:text-brand-gold transition">
-            See Us at Remsen
-          </a>
-        </div>
-      </div>
-      <div class="relative">
-        <div class="aspect-[4/3] rounded-lg overflow-hidden border border-brand-border bg-brand-card shadow-2xl">
-          <img src="images/IMG_5615.jpg" alt="Tauris Custom Leather Belt" class="w-full h-full object-cover">
-        </div>
-        <div class="absolute -bottom-6 -left-6 bg-brand-card border border-brand-gold/30 p-4 rounded-lg hidden sm:block shadow-xl">
-          <p class="font-serif text-brand-gold font-bold text-lg">100% Custom Made</p>
-          <p class="text-xs text-neutral-400">Built to your exact specifications.</p>
-        </div>
-      </div>
+    <div class="hero-content-wrap">
+        <span class="hero-subtitle" editable>Est. 1978 · Upstate New York</span>
+        <h1 class="hero-main-title" editable>Legacy <em>Leathers</em>, Uncompromising Craft.</h1>
+        <p class="hero-desc" editable>Rooted in decades of heirloom leatherwork from upstate New York. Built slow, finished by hand, and structured to age into absolute perfection.</p>
+        <a href="#gallery" class="inquire-btn" style="align-self: flex-start;">Explore Gallery</a>
     </div>
-  </section>
+</section>
 
-  <!-- Event Section -->
-  <section id="events" class="py-20 border-b border-brand-border bg-brand-card/20">
-    <div class="max-w-5xl mx-auto px-6 text-center">
-      <span class="text-brand-gold text-xs uppercase tracking-widest font-semibold">Live Event Showcase</span>
-      <h2 class="font-serif text-3xl md:text-4xl font-bold text-white mt-2 mb-6">Find Us at Remsen Barn Festival</h2>
-      
-      <div class="bg-brand-card border border-brand-gold/40 p-8 rounded-xl max-w-2xl mx-auto shadow-2xl">
-        <p class="text-neutral-200 text-lg mb-6 leading-relaxed">
-          We will be displaying and selling our full lineup of handcrafted leather products live at the festival! Stop by our booth to check out our work in person or chat with us about custom commissions.
-        </p>
-        <div class="grid grid-cols-1 sm:grid-cols-3 gap-4 border-t border-brand-border pt-6 text-left">
-          <div>
-            <p class="text-xs uppercase tracking-widest text-brand-gold font-semibold">Dates</p>
-            <p class="text-white font-medium">Sept 26 & 27</p>
-          </div>
-          <div>
-            <p class="text-xs uppercase tracking-widest text-brand-gold font-semibold">Hours</p>
-            <p class="text-white font-medium">8:00 AM – 5:00 PM</p>
-          </div>
-          <div>
-            <p class="text-xs uppercase tracking-widest text-brand-gold font-semibold">Booth Location</p>
-            <p class="text-white font-medium">Sections 305 & 307</p>
-          </div>
+<section class="editorial-section" id="heritage">
+    <div class="split-layout">
+        <div class="editorial-text">
+            <span class="hero-subtitle" editable>The Origin</span>
+            <h2 editable>Forged on the Force</h2>
+            <p editable>Tauris Belts and Custom Leathers was established in 1978 by Philip P. Taurisano, a former Utica, New York police officer. Philip worked alongside his brother, Michael P. Taurisano, who operated the Tauris Holsters brand starting in the mid-1960s.</p>
+            <p editable>While collaborating with Michael—who also served as the Deputy Chief of the Utica Police Department—Philip developed a firm conviction based on his own experience on the force: there was a vital need for every officer and legal weapon carrier to have a high-quality leather belt to properly contain any holster or apparatus carrying their weapon.</p>
         </div>
-      </div>
+        <div class="vertical-imgs">
+            <div style="position: relative; width: 100%;">
+                <img id="heritage-img-1" src="images/IMG_5012.jpeg" alt="Leather Detail">
+                <div class="card-admin-controls">
+                    <button class="card-admin-btn" onclick="changeStaticImg('heritage-img-1')">Change Image</button>
+                </div>
+            </div>
+            <div style="position: relative; width: 100%;">
+                <img id="heritage-img-2" src="images/IMG_5039.jpg" alt="Crafted Leather Belts">
+                <div class="card-admin-controls">
+                    <button class="card-admin-btn" onclick="changeStaticImg('heritage-img-2')">Change Image</button>
+                </div>
+            </div>
+        </div>
     </div>
-  </section>
+</section>
 
-  <!-- Story Section -->
-  <section id="about" class="py-24 bg-brand-card/50 border-b border-brand-border">
-    <div class="max-w-5xl mx-auto px-6">
-      <div class="text-center mb-12">
-        <h2 class="font-serif text-3xl md:text-4xl font-bold text-white mb-4">Our History</h2>
-        <div class="w-24 h-1 gold-bg-gradient mx-auto"></div>
-      </div>
-
-      <div class="bg-brand-card border border-brand-border p-8 md:p-12 rounded-xl relative shadow-2xl">
-        <i class="fa-solid fa-quote-left text-4xl text-brand-gold/20 absolute top-6 left-6"></i>
-        <blockquote class="text-lg md:text-xl text-neutral-200 leading-relaxed font-serif italic mb-6 editable" id="story-text">
-          "Tauris Belts and Custom Leathers was established in 1978 by Philip P. Taurisano, a former Utica, New York police officer. Philip worked alongside his brother, Michael P. Taurisano, who operated Tauris Holsters from the mid-1960s. While collaborating with Michael, who also served as Deputy Chief of the Utica Police Department, Philip developed a firm conviction based on his experience on the force: there was a vital need for every officer and individual to have a high-quality leather belt to properly support their equipment and last for years to come."
-        </blockquote>
-        <div class="text-right border-t border-brand-border/60 pt-4">
-          <p class="text-brand-gold font-semibold tracking-wider">Philip P. Taurisano</p>
-          <p class="text-xs text-neutral-400 uppercase tracking-widest">Founder</p>
-        </div>
-      </div>
+<section class="editorial-section" id="gallery" style="padding-top: 0;">
+    <div style="text-align: center; margin-bottom: 30px;">
+        <span class="hero-subtitle" editable>Handcrafted Pieces</span>
+        <h2 style="font-family: 'Cormorant Garamond', serif; font-size: clamp(34px, 4vw, 48px); font-weight: 300;" editable>Product Gallery</h2>
     </div>
-  </section>
 
-  <!-- Clean Gallery Showcase Section -->
-  <section id="portfolio" class="py-24 border-b border-brand-border">
-    <div class="max-w-7xl mx-auto px-6">
-      <div class="text-center mb-16">
-        <h2 class="font-serif text-3xl md:text-5xl font-bold text-white mb-4">Custom Leather Showcase</h2>
-        <p class="text-neutral-400 max-w-2xl mx-auto editable" id="portfolio-subtitle">
-          Examples of past custom leatherwork. We do not sell pre-made inventory online—every item is custom built through our order form below or available at live shows.
-        </p>
-      </div>
-
-      <!-- Pure Image Showcase Grid -->
-      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-        <div class="bg-brand-card border border-brand-border rounded-lg overflow-hidden">
-          <div class="aspect-square overflow-hidden bg-neutral-900">
-            <img src="images/IMG_5615.jpg" alt="Custom Leather Example" class="w-full h-full object-cover">
-          </div>
-        </div>
-
-        <div class="bg-brand-card border border-brand-border rounded-lg overflow-hidden">
-          <div class="aspect-square overflow-hidden bg-neutral-900">
-            <img src="images/IMG_5616.jpg" alt="Custom Leather Example" class="w-full h-full object-cover">
-          </div>
-        </div>
-
-        <div class="bg-brand-card border border-brand-border rounded-lg overflow-hidden">
-          <div class="aspect-square overflow-hidden bg-neutral-900">
-            <img src="images/IMG_5617.jpg" alt="Custom Leather Example" class="w-full h-full object-cover">
-          </div>
-        </div>
-
-        <div class="bg-brand-card border border-brand-border rounded-lg overflow-hidden">
-          <div class="aspect-square overflow-hidden bg-neutral-900">
-            <img src="images/IMG_5618.jpg" alt="Custom Leather Example" class="w-full h-full object-cover">
-          </div>
-        </div>
-
-        <div class="bg-brand-card border border-brand-border rounded-lg overflow-hidden">
-          <div class="aspect-square overflow-hidden bg-neutral-900">
-            <img src="images/IMG_5620.jpg" alt="Custom Leather Example" class="w-full h-full object-cover">
-          </div>
-        </div>
-
-        <div class="bg-brand-card border border-brand-border rounded-lg overflow-hidden">
-          <div class="aspect-square overflow-hidden bg-neutral-900">
-            <img src="images/IMG_5621.jpg" alt="Custom Leather Example" class="w-full h-full object-cover">
-          </div>
-        </div>
-
-        <div class="bg-brand-card border border-brand-border rounded-lg overflow-hidden">
-          <div class="aspect-square overflow-hidden bg-neutral-900">
-            <img src="images/IMG_5622.jpg" alt="Custom Leather Example" class="w-full h-full object-cover">
-          </div>
-        </div>
-
-        <div class="bg-brand-card border border-brand-border rounded-lg overflow-hidden">
-          <div class="aspect-square overflow-hidden bg-neutral-900">
-            <img src="images/IMG_5623.jpg" alt="Custom Leather Example" class="w-full h-full object-cover">
-          </div>
-        </div>
-
-        <div class="bg-brand-card border border-brand-border rounded-lg overflow-hidden">
-          <div class="aspect-square overflow-hidden bg-neutral-900">
-            <img src="images/IMG_5624.jpg" alt="Custom Leather Example" class="w-full h-full object-cover">
-          </div>
-        </div>
-      </div>
+    <div style="text-align: center; margin-bottom: 30px; display: none;" id="add-photo-container">
+        <button class="admin-btn" onclick="addNewGalleryItem()">+ Add New Photo</button>
     </div>
-  </section>
-
-  <!-- Custom Order Form Section -->
-  <section id="order" class="py-24 bg-brand-card/30">
-    <div class="max-w-4xl mx-auto px-6">
-      <div class="text-center mb-12">
-        <span class="text-brand-gold text-xs uppercase tracking-widest font-semibold">Custom Commission</span>
-        <h2 class="font-serif text-3xl md:text-5xl font-bold text-white mt-2 mb-4">Order Form</h2>
-        <p class="text-neutral-400 editable" id="order-subtitle">
-          Submit your custom order details below and we will contact you directly regarding your specifications.
-        </p>
-      </div>
-
-      <form id="custom-order-form" action="https://formspree.io/f/xyknzovk" method="POST" class="bg-brand-card border border-brand-border p-8 md:p-12 rounded-xl shadow-2xl space-y-6">
-        <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
-          <div>
-            <label class="block text-xs uppercase tracking-widest text-neutral-300 font-semibold mb-2">Full Name *</label>
-            <input type="text" name="name" required class="w-full bg-brand-dark border border-brand-border rounded px-4 py-3 text-white focus:border-brand-gold focus:outline-none">
-          </div>
-          <div>
-            <label class="block text-xs uppercase tracking-widest text-neutral-300 font-semibold mb-2">Phone Number *</label>
-            <input type="tel" name="phone" required class="w-full bg-brand-dark border border-brand-border rounded px-4 py-3 text-white focus:border-brand-gold focus:outline-none">
-          </div>
-        </div>
-
-        <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
-          <div>
-            <label class="block text-xs uppercase tracking-widest text-neutral-300 font-semibold mb-2">Email Address *</label>
-            <input type="email" name="email" required class="w-full bg-brand-dark border border-brand-border rounded px-4 py-3 text-white focus:border-brand-gold focus:outline-none">
-          </div>
-          <div>
-            <label class="block text-xs uppercase tracking-widest text-neutral-300 font-semibold mb-2">Belt / Work Type *</label>
-            <select name="work_type" required class="w-full bg-brand-dark border border-brand-border rounded px-4 py-3 text-white focus:border-brand-gold focus:outline-none">
-              <option value="">Select Custom Order Type</option>
-              <option value="Custom Duty / Gun Belt">Custom Duty / Gun Belt</option>
-              <option value="Custom Dress Belt">Custom Dress Belt</option>
-              <option value="Other Custom Leatherwork">Other Custom Leatherwork</option>
-            </select>
-          </div>
-        </div>
-
-        <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
-          <div>
-            <label class="block text-xs uppercase tracking-widest text-neutral-300 font-semibold mb-2">Belt Size (Inches)</label>
-            <input type="text" name="belt_size" placeholder="e.g. 36" class="w-full bg-brand-dark border border-brand-border rounded px-4 py-3 text-white focus:border-brand-gold focus:outline-none">
-          </div>
-          <div>
-            <label class="block text-xs uppercase tracking-widest text-neutral-300 font-semibold mb-2">Width</label>
-            <select name="width" class="w-full bg-brand-dark border border-brand-border rounded px-4 py-3 text-white focus:border-brand-gold focus:outline-none">
-              <option value="1.25 Inches">1.25 Inches</option>
-              <option value="1.5 Inches" selected>1.5 Inches</option>
-              <option value="1.75 Inches">1.75 Inches</option>
-              <option value="2.0 Inches">2.0 Inches</option>
-            </select>
-          </div>
-        </div>
-
-        <div>
-          <label class="block text-xs uppercase tracking-widest text-neutral-300 font-semibold mb-2">Order Details & Notes</label>
-          <textarea name="notes" rows="4" placeholder="Describe what you need built..." class="w-full bg-brand-dark border border-brand-border rounded px-4 py-3 text-white focus:border-brand-gold focus:outline-none"></textarea>
-        </div>
-
-        <button type="submit" class="w-full gold-bg-gradient text-black font-bold uppercase tracking-widest py-4 rounded hover:opacity-95 transition">
-          Submit Custom Order Request
-        </button>
-
-        <p id="form-success" class="hidden text-center text-emerald-400 font-semibold pt-2">
-          <i class="fa-solid fa-check-circle mr-2"></i> Request submitted! We will contact you soon.
-        </p>
-      </form>
+    
+    <div class="gallery-grid" id="gallery-grid">
+        <!-- Gallery items rendered dynamically -->
     </div>
-  </section>
+</section>
 
-  <!-- Contact Section -->
-  <section id="contact" class="py-24 border-b border-brand-border">
-    <div class="max-w-7xl mx-auto px-6 text-center">
-      <h2 class="font-serif text-3xl md:text-4xl font-bold text-white mb-6">Contact Us</h2>
-      <p class="text-neutral-400 max-w-xl mx-auto mb-12 editable" id="contact-text">
-        Located in New Hartford / Utica, New York. Call us to discuss custom leather orders.
-      </p>
-
-      <div class="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-3xl mx-auto">
-        <div class="bg-brand-card border border-brand-border p-8 rounded-xl flex flex-col items-center">
-          <i class="fa-solid fa-phone text-3xl text-brand-gold mb-4"></i>
-          <h3 class="font-serif text-lg font-bold text-white mb-2">Business Line</h3>
-          <a href="tel:3157946091" class="text-xl font-bold text-brand-gold hover:underline">315-794-6091</a>
-        </div>
-
-        <div class="bg-brand-card border border-brand-border p-8 rounded-xl flex flex-col items-center">
-          <i class="fa-solid fa-house text-3xl text-brand-gold mb-4"></i>
-          <h3 class="font-serif text-lg font-bold text-white mb-2">Home Line</h3>
-          <a href="tel:3157336174" class="text-xl font-bold text-brand-gold hover:underline">315-733-6174</a>
-        </div>
-      </div>
+<section class="editorial-section" id="shows" style="padding-top: 40px; padding-bottom: 40px;">
+    <div style="text-align: center; margin-bottom: 50px;">
+        <span class="hero-subtitle" editable>Live Exhibitions</span>
+        <h2 style="font-family: 'Cormorant Garamond', serif; font-size: clamp(34px, 4vw, 48px); font-weight: 300;" editable>Upcoming Show</h2>
     </div>
-  </section>
-
-  <!-- Footer -->
-  <footer class="py-12 bg-black border-t border-brand-border/40 text-xs text-neutral-500">
-    <div class="max-w-7xl mx-auto px-6 flex flex-col md:flex-row justify-between items-center gap-4">
-      <p>&copy; 1978 - <span id="year"></span> Tauris Belts and Custom Leathers. All rights reserved.</p>
-      <div class="flex space-x-6">
-        <span>Utica, NY</span>
-        <span>&bull;</span>
-        <button onclick="promptAdminLogin()" class="hover:text-brand-gold transition">Admin Login</button>
-      </div>
+    
+    <div class="shows-list">
+        <div class="show-item">
+            <div class="show-date">
+                <span class="month">Nov</span>
+                <span class="day">21–22</span>
+            </div>
+            <div class="show-details">
+                <h3 editable>46th Sauquoit Valley Fine Arts &amp; Craft Show</h3>
+                <p editable>Sauquoit Middle School, 2648 Sulphur Spring Rd, Sauquoit, NY</p>
+                <div class="sub-info" editable>10am–4pm | $5 Admission (12 &amp; under free)</div>
+            </div>
+            <div class="show-action">
+                <a href="https://www.svcraftshow.com" target="_blank" rel="noopener" class="inquire-btn">Event Details</a>
+            </div>
+        </div>
     </div>
-  </footer>
+</section>
 
-  <!-- Admin & Form Script -->
-  <script>
-    document.getElementById('year').textContent = new Date().getFullYear();
+<section class="inquiry-section" id="inquiry" style="padding: 80px 24px; background: var(--bg-surface);">
+    <div style="text-align: center;">
+        <span class="hero-subtitle" editable>Custom Orders &amp; Fitting</span>
+        <h2 style="font-family: 'Cormorant Garamond', serif; font-size: clamp(34px, 4vw, 48px); font-weight: 300;" editable>Submit an Inquiry</h2>
+    </div>
 
-    const ADMIN_PASS = "Wow1910$";
-    let isAdmin = false;
-    let isEditing = false;
+    <form class="inquiry-form" action="https://formspree.io/f/xyknzovk" method="POST" style="max-width: 600px; margin: 40px auto 0 auto; display: flex; flex-direction: column; gap: 20px;">
+        <div style="display: flex; flex-direction: column; gap: 8px;">
+            <label style="font-size: 10px; letter-spacing: 0.25em; text-transform: uppercase; color: var(--gold);">Name</label>
+            <input type="text" name="name" required placeholder="Your full name" style="background: var(--bg-card); border: 1px solid var(--border-subtle); color: var(--text-main); padding: 14px; outline: none;">
+        </div>
+        <div style="display: flex; flex-direction: column; gap: 8px;">
+            <label style="font-size: 10px; letter-spacing: 0.25em; text-transform: uppercase; color: var(--gold);">Email</label>
+            <input type="email" name="email" required placeholder="your.email@example.com" style="background: var(--bg-card); border: 1px solid var(--border-subtle); color: var(--text-main); padding: 14px; outline: none;">
+        </div>
+        <div style="display: flex; flex-direction: column; gap: 8px;">
+            <label style="font-size: 10px; letter-spacing: 0.25em; text-transform: uppercase; color: var(--gold);">Custom Request / Sizing Details</label>
+            <textarea name="message" rows="5" required placeholder="Let us know what kind of belt, sheath, or custom leatherwork you are looking for..." style="background: var(--bg-card); border: 1px solid var(--border-subtle); color: var(--text-main); padding: 14px; outline: none;"></textarea>
+        </div>
+        <button type="submit" class="admin-btn" style="padding: 16px; margin-top: 10px;">Send Inquiry</button>
+    </form>
+</section>
 
-    window.addEventListener('DOMContentLoaded', () => {
-      const savedContent = localStorage.getItem('tauris_site_edits');
-      if (savedContent) {
-        const edits = JSON.parse(savedContent);
-        Object.keys(edits).forEach(id => {
-          const el = document.getElementById(id);
-          if (el) el.innerHTML = edits[id];
-        });
-      }
+<footer>
+    <div class="footer-brand" editable>Tauris Leather</div>
+    <div class="footer-meta" editable>
+        420 Higby Road, New Hartford, NY<br>
+        Business: 315-794-6091 | Home: 315-733-6174<br>
+        &copy; 2026 Tauris Leather. All Rights Reserved.
+    </div>
+    <div class="footer-links">
+        <a href="#" onclick="toggleAdminMode(); return false;">Admin Mode</a>
+    </div>
+</footer>
+
+<!-- Lightbox Modal -->
+<div class="lightbox" id="lightbox" onclick="closeLightbox()">
+    <span class="lightbox-close">Close [X]</span>
+    <img id="lightbox-img" src="" alt="Enlarged View">
+</div>
+
+<!-- Floating Admin Toolbar -->
+<div id="admin-bar">
+    <span style="font-size: 11px; color: var(--gold);">Admin Mode ACTIVE</span>
+    <button class="admin-btn" onclick="saveToLocal()">Save Draft</button>
+    <button class="admin-btn secondary" onclick="exportHTML()">Export HTML</button>
+    <button class="admin-btn secondary" onclick="toggleAdminMode()">Exit Admin</button>
+</div>
+
+<script>
+let galleryData = [
+    { src: 'images/IMG_4499.jpeg', title: 'Custom Work' },
+    { src: 'images/IMG_5012.jpeg', title: 'Handcrafted Straps' },
+    { src: 'images/IMG_5039.jpg', title: 'Full-Grain Belts' },
+    { src: 'images/IMG_5615.jpg', title: 'Belt Collection' },
+    { src: 'images/IMG_5616.jpg', title: 'Custom Straps' },
+    { src: 'images/IMG_5617.jpg', title: 'Heavy Duty Belts' },
+    { src: 'images/IMG_5618.jpg', title: 'Heirloom Goods' },
+    { src: 'images/IMG_5620.jpg', title: 'Belt Racks' },
+    { src: 'images/IMG_5621.jpg', title: 'Atelier Selection' },
+    { src: 'images/IMG_5622.jpg', title: 'Custom Finishes' },
+    { src: 'images/IMG_5623.jpg', title: 'Double Layer Belts' },
+    { src: 'images/IMG_5624.jpg', title: 'Stitched Edges' }
+];
+
+let isAdmin = false;
+
+function initGallery() {
+    const saved = localStorage.getItem('tauris_gallery');
+    if (saved) {
+        try { galleryData = JSON.parse(saved); } catch(e) {}
+    }
+    renderGallery();
+}
+
+function renderGallery() {
+    const grid = document.getElementById('gallery-grid');
+    grid.innerHTML = '';
+    galleryData.forEach((item, index) => {
+        const div = document.createElement('div');
+        div.className = 'gallery-item';
+        div.onclick = (e) => {
+            if (!isAdmin) openLightbox(item.src);
+        };
+        div.innerHTML = `
+            <img src="${item.src}" alt="${item.title}" onerror="this.style.opacity='0.2'">
+            <div class="gallery-caption">
+                <span>${item.title}</span>
+            </div>
+            <div class="card-admin-controls">
+                <button class="card-admin-btn" onclick="editCard(${index}, event)">Edit</button>
+                <button class="card-admin-btn" onclick="deleteCard(${index}, event)">Delete</button>
+            </div>
+        `;
+        grid.appendChild(div);
     });
+}
 
-    function promptAdminLogin() {
-      const pass = prompt("Enter Admin Password:");
-      if (pass === ADMIN_PASS) {
-        isAdmin = true;
-        document.getElementById('admin-bar').classList.remove('hidden');
-        alert("Admin logged in. Click 'Enable Text Editing' to edit any text on the page.");
-      } else if (pass !== null) {
-        alert("Incorrect password.");
-      }
-    }
-
-    function toggleTextEditing() {
-      if (!isAdmin) return;
-      isEditing = !isEditing;
-      const editables = document.querySelectorAll('.editable');
-      editables.forEach(el => {
-        el.contentEditable = isEditing ? "true" : "false";
-      });
-      document.getElementById('toggle-edit-btn').textContent = isEditing ? "Disable Text Editing" : "Enable Text Editing";
-    }
-
-    function saveAdminChanges() {
-      if (!isAdmin) return;
-      const editables = document.querySelectorAll('.editable');
-      const edits = {};
-      editables.forEach(el => {
-        if (el.id) edits[el.id] = el.innerHTML;
-      });
-      localStorage.setItem('tauris_site_edits', JSON.stringify(edits));
-      alert("All text changes saved successfully!");
-    }
-
-    function logoutAdmin() {
-      isAdmin = false;
-      isEditing = false;
-      document.querySelectorAll('.editable').forEach(el => el.contentEditable = "false");
-      document.getElementById('admin-bar').classList.add('hidden');
-    }
-
-    // AJAX Formspree handler so the page doesn't redirect
-    const form = document.getElementById('custom-order-form');
-    form.addEventListener('submit', async function(e) {
-      e.preventDefault();
-      const data = new FormData(form);
-      const response = await fetch(form.action, {
-        method: form.method,
-        body: data,
-        headers: {
-          'Accept': 'application/json'
+function toggleAdminMode() {
+    if (!isAdmin) {
+        const pass = prompt("Enter Admin Password:");
+        if (pass !== "Wow1910$") {
+            alert("Access Denied");
+            return;
         }
-      });
-      if (response.ok) {
-        document.getElementById('form-success').classList.remove('hidden');
-        form.reset();
-      } else {
-        alert("There was an error submitting your order. Please try again or call us directly.");
-      }
-    });
-  </script>
+    }
+
+    isAdmin = !isAdmin;
+    const body = document.getElementById('page-body');
+    const adminBar = document.getElementById('admin-bar');
+    const addContainer = document.getElementById('add-photo-container');
+
+    if (isAdmin) {
+        body.classList.add('body-admin-active');
+        adminBar.classList.add('active');
+        addContainer.style.display = 'block';
+        document.querySelectorAll('[editable]').forEach(el => el.setAttribute('contenteditable', 'true'));
+    } else {
+        body.classList.remove('body-admin-active');
+        adminBar.classList.remove('active');
+        addContainer.style.display = 'none';
+        document.querySelectorAll('[editable]').forEach(el => el.removeAttribute('contenteditable'));
+    }
+}
+
+function changeStaticImg(imgId) {
+    const img = document.getElementById(imgId);
+    if (!img) return;
+    const newSrc = prompt("Enter image path (e.g., images/IMG_5615.jpg):", img.getAttribute('src'));
+    if (newSrc) {
+        img.src = newSrc;
+        img.setAttribute('src', newSrc);
+    }
+}
+
+function editCard(index, e) {
+    e.stopPropagation();
+    const item = galleryData[index];
+    const newSrc = prompt("Image Path / Filename:", item.src);
+    if (newSrc !== null) {
+        const newTitle = prompt("Caption Title:", item.title);
+        galleryData[index] = { src: newSrc, title: newTitle || '' };
+        renderGallery();
+        saveToLocal();
+    }
+}
+
+function deleteCard(index, e) {
+    e.stopPropagation();
+    if (confirm("Remove this photo from gallery?")) {
+        galleryData.splice(index, 1);
+        renderGallery();
+        saveToLocal();
+    }
+}
+
+function addNewGalleryItem() {
+    const src = prompt("Enter Image Path (e.g., images/IMG_5615.jpg):", "images/");
+    if (src) {
+        const title = prompt("Enter Caption Title:", "Custom Work");
+        galleryData.push({ src, title: title || 'Custom Leather' });
+        renderGallery();
+        saveToLocal();
+    }
+}
+
+function saveToLocal() {
+    localStorage.setItem('tauris_gallery', JSON.stringify(galleryData));
+    alert("Draft saved!");
+}
+
+function exportHTML() {
+    if (isAdmin) toggleAdminMode();
+    
+    let htmlContent = "<!DOCTYPE html>\n" + document.documentElement.outerHTML;
+    
+    const blob = new Blob([htmlContent], { type: 'text/html' });
+    const a = document.createElement('a');
+    a.href = URL.createObjectURL(blob);
+    a.download = 'index.html';
+    a.click();
+}
+
+function openLightbox(src) {
+    document.getElementById('lightbox-img').src = src;
+    document.getElementById('lightbox').classList.add('open');
+}
+
+function closeLightbox() {
+    document.getElementById('lightbox').classList.remove('open');
+}
+
+window.addEventListener('DOMContentLoaded', initGallery);
+</script>
+
 </body>
 </html>
